@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  password     String
+  firstName    String?
+  lastName     String?
+  bio          String?
+  avatar       String?
+  cover        String?
+  phone        String?
+  city         String?
+  country      String?
+  website      String?
+  birthday     String?
+  gender       String?
+  work         String?
+  education    String?
+  languages    String?
+  isPublic     Boolean  @default(true)
+  profileViews Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  posts            Post[]
+  comments         Comment[]
+  sentMessages     Message[]      @relation("sender")
+  receivedMessages Message[]      @relation("receiver")
+  notifications    Notification[]
+  friends          User[]         @relation("Friends")
+  friendOf         User[]         @relation("Friends")
+  bookmarks        Bookmark[]
+  reports          Report[]
+
+  // Media
+  music   Music[]
+  videos  Video[]
+  stories Story[]
+}
+
+// Story model
+model Story {
+  id        String   @id @default(cuid())
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  mediaUrl  String
+  type      String // 'image' | 'video'
+  views     Int      @default(0)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+// Post model
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  image     String? // Optional image URL
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  likes     String[] // Array of usernames who liked
+  views     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Repost relation
+  originalPostId String?
+  originalPost   Post?   @relation("Reposts", fields: [originalPostId], references: [id])
+  reposts        Post[]  @relation("Reposts")
+
+  // Relations
+  comments  Comment[]
+  bookmarks Bookmark[]
+  reports   Report[]
+}
+
+// Comment model
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  likes     String[] // Array of usernames who liked
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Message model
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  sender     User     @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId   String
+  receiver   User     @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Notification model
+model Notification {
+  id        String   @id @default(cuid())
+  type      String // 'friend_request' | 'post_like' | 'comment' | 'message'
+  fromUser  String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  content   String
+  postId    String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+}
+
+model Report {
+  id         String   @id @default(cuid())
+  reporter   User     @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  reporterId String
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String
+  reason     String
+  createdAt  DateTime @default(now())
+}
+
+// Music model
+model Music {
+  id         String   @id @default(cuid())
+  title      String
+  artist     String
+  url        String
+  cover      String?
+  duration   Int? // in seconds
+  uploader   User     @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  uploaderId String
+  createdAt  DateTime @default(now())
+}
+
+// Video model
+model Video {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  url         String
+  thumbnail   String?
+  views       Int      @default(0)
+  uploader    User     @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  uploaderId  String
+  createdAt   DateTime @default(now())
+}
