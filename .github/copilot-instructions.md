@@ -2,84 +2,187 @@
 
 ## 🏗 Архитектура и Стек
 
-- **Ядро**: Next.js 16.0.3 (App Router) + TypeScript + Tailwind CSS 4.
-- **Данные**: Prisma 5 + PostgreSQL (Vercel). Все API используют Prisma через `src/lib/db.ts`.
-- **Аутентификация**: JWT (Access 15мин/Refresh 30дней) в httpOnly cookies. Функции в `src/lib/jwt.ts`.
-- **Состояние**: Polling для реального времени (Сообщения: 5с, Уведомления: 10с).
-- **Автентификация запросов**: `FetchInterceptor` компонент в `src/components/` автоматически добавляет `Authorization: Bearer {token}` ко всем fetch запросам.
+- **Ядро**: Next.js 16.0.3 (App Router) + React 19 + TypeScript + Tailwind CSS 4
+- **База данных**: Prisma 5.22 + PostgreSQL. Prisma Client генерируется в `src/generated/prisma/`
+- **Аутентификация**: 
+  - JWT (Access 15мин/Refresh 30дней) через `src/lib/jwt.ts`
+  - Access token в cookies (httpOnly: false) для доступа клиент+сервер
+  - Refresh token в httpOnly cookies для безопасности
+  - Client-side: token дублируется в localStorage для `FetchInterceptor`
+- **Real-time**: Polling интервалы (Messages: 5с, Notifications: 10с) через `useTokenRefresh`
+- **HTTP Interceptor**: `FetchInterceptor` автоматически добавляет `Authorization: Bearer {token}` ко всем fetch запросам
 
-## 🚧 КРИТИЧЕСКИЕ Рабочие процессы
+## 🚧 КРИТИЧЕСКИЕ Правила Разработки
 
-### Импорты (САМОЕ ВАЖНОЕ - ноябрь 2025)
+### 1. Импорты (САМОЕ ВАЖНОЕ!)
 
-На сервере сборки (Vercel Linux) **алиасы `@/` НЕ РАБОТАЮТ** для файлов, импортируемых из разных папок.
+**На Vercel Linux алиасы `@/` НЕ РАБОТАЮТ для server-side модулей!**
 
-- **ИСПОЛЬЗУЙТЕ ОТНОСИТЕЛЬНЫЕ ПУТИ** для Prisma и JWT:
-  - `src/app/api/**/route.ts` → `import { prisma } from "../../../../lib/db";`
-  - `src/app/[page]/page.tsx` → `import { prisma } from "../../lib/db";`
-  - `src/app/api/**/route.ts` → `import { verifyAccessToken } from "../../../../lib/jwt";`
-- Алиасы `@/lib/jwt` и `@/lib/db` **ДОЛЖНЫ БЫЛ быть заменены относительными путями везде** (это финальное решение проблемы разрешения модулей).
+**ВСЕГДА используйте относительные пути для:**
+```typescript
+// ✅ ПРАВИЛЬНО для API routes
+import { prisma } from "../../../lib/db";           // для /api/*/route.ts
+import { verifyAccessToken } from "../../../lib/jwt"; 
 
-### Динамические маршруты
+import { prisma } from "../../../../lib/db";        // для /api/*/*/route.ts
+import { verifyAccessToken } from "../../../../lib/jwt";
 
-Next.js 16 **требует `await` для `params`**:
+// ❌ НЕПРАВИЛЬНО - сломается на production
+import { prisma } from "@/lib/db";
+import { verifyAccessToken } from "@/lib/jwt";
+```
+
+**Алиасы `@/` можно использовать ТОЛЬКО в:**
+- Client Components (`"use client"`)
+- Page Components (`src/app/*/page.tsx`)
+- Shared Components (`src/components/`)
+
+### 2. Динамические Маршруты (Next.js 16)
+
+**Params теперь Promise!** Всегда используйте `await`:
 
 ```typescript
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
-  const { id } = await params; // ← ОБЯЗАТЕЛЬНО await!
+  const { userId } = await params; // ← ОБЯЗАТЕЛЬНО await!
 }
 ```
 
-### Сборка
+### 3. Cookies API (Next.js 16)
 
-- Локальная сборка: `npm run build` - может работать с алиасами, но **проверяйте с относительными путями перед пушем**.
-- На сервере: Turbopack иногда пропускает модули; если ошибка разрешения, пересоберите локально с полными относительными путями.
-
-## 🔄 Паттерны API и Данных
-
-### Prisma
-
-- Инициализируется в `src/lib/db.ts` с глобальным кэшем для dev режима.
-- **Всегда используйте `prisma.model.findMany()`, `findUnique()`, `create()`, `update()`, `delete()`**.
-- Exemplo: `const user = await prisma.user.findUnique({ where: { username } });`
-- **Все основные модели в schema**: User, Post, Comment, Message, Notification, Story, Bookmark, Report, Music, Video.
-
-### Аутентификация в API
+**Функция `cookies()` теперь async:**
 
 ```typescript
-import { cookies } from "next/headers";
-import { verifyAccessToken } from "../../../../lib/jwt"; // ← относительный путь!
-
-const cookieStore = await cookies();
-let token = cookieStore.get("token")?.value;
-if (!token && req.headers.get("authorization")) {
-  token = req.headers.get("authorization")!.substring(7); // "Bearer {token}"
-}
-const payload = verifyAccessToken(token) as { username: string };
+const cookieStore = await cookies(); // ← ОБЯЗАТЕЛЬНО await!
+const token = cookieStore.get("token")?.value;
 ```
 
-### Компоненты и Providers
+## 🔄 Паттерны и Конвенции
 
-- **`FetchInterceptor`** (`src/components/FetchInterceptor.tsx`): client-side компонент, перехватывает `window.fetch`, добавляет Authorization header.
-- **`TokenRefreshProvider`**: Периодически обновляет access token через `/api/refresh`.
-- **`ToastProvider`**: UI для уведомлений.
-- Все они подключены в `src/app/layout.tsx`.
+### Аутентификация в API Routes
 
-## 📂 Структура проекта
+Стандартный паттерн для защищенных эндпоинтов:
 
-- `/src/app/api/*`: API Route Handlers. Файлы: `route.ts` для простых, `[param]/route.ts` для динамических.
-- `/src/lib/db.ts`: Prisma Client (переименован с `prisma.ts` в Nov 2025).
-- `/src/lib/jwt.ts`: JWT функции (sign/verify).
-- `/src/components/`: React компоненты (FetchInterceptor, UserAvatar, Post, etc).
-- `/src/app/[page]/page.tsx`: Страницы приложения.
-- `/prisma/schema.prisma`: Схема БД и миграции.
+```typescript
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { prisma } from "../../../lib/db";           // относительный путь!
+import { verifyAccessToken } from "../../../lib/jwt"; // относительный путь!
 
-## 📊 Текущий статус (Ноябрь 2025)
+export async function GET(req: NextRequest) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  
+  const payload = verifyAccessToken(token) as { username: string };
+  const user = await prisma.user.findUnique({
+    where: { username: payload.username }
+  });
+  
+  // ... бизнес-логика
+}
+```
 
-- **Активно**: Login, Register, Profile, Friends, Posts (Feed/Detail), Messages (Basic), Notifications, Stories, Recommendations.
-- **Миграция Prisma**: Завершена. Все API используют `src/lib/db.ts`.
-- **Известная проблема**: Дублирующиеся динамические маршруты (`[userId]` vs `[username]`) вызывают сбои. Используйте уникальные имена параметров.
-- **Исправлено**: Ошибки разрешения модулей (`Cannot find module '@/lib/...'`) теперь решаются **относительными импортами**, а не алиасами.
+### Prisma Patterns
+
+- **Инициализация**: `src/lib/db.ts` с singleton паттерном для dev
+- **Client Path**: Генерируется в `src/generated/prisma/` (не в node_modules)
+- **Модели**: User, Post, Comment, Message, Notification, Story, Bookmark, Report, Music, Video
+
+**Типичные запросы:**
+```typescript
+// Поиск с include и фильтрацией
+const posts = await prisma.post.findMany({
+  where: { authorId: { in: friendIds } },
+  include: {
+    author: { select: { username: true, avatar: true } },
+    comments: { take: 3, orderBy: { createdAt: "asc" } },
+    _count: { select: { comments: true } }
+  },
+  orderBy: { createdAt: "desc" },
+  skip: (page - 1) * limit,
+  take: limit
+});
+
+// Batch операции
+await prisma.message.updateMany({
+  where: { receiverId: userId, read: false },
+  data: { read: true }
+});
+```
+
+### Client-Side Authentication
+
+**Ключевые компоненты** (все в `src/app/layout.tsx`):
+
+1. **`FetchInterceptor`**: Перехватывает `window.fetch`, инжектит Bearer token из localStorage
+2. **`TokenRefreshProvider`**: Каждые 5 минут обновляет access token через `/api/refresh`
+3. **`ToastProvider`**: Глобальные уведомления
+
+**Token Flow:**
+```
+1. Login → Server sets httpOnly cookies (token, refresh_token)
+2. Client также сохраняет token в localStorage
+3. FetchInterceptor читает token из localStorage для каждого fetch
+4. TokenRefreshProvider периодически вызывает /api/refresh
+5. При 401 → redirect на /login
+```
+
+## 📁 Структура Проекта
+
+```
+src/
+├── app/
+│   ├── api/              # API Route Handlers
+│   │   ├── login/route.ts
+│   │   ├── posts/route.ts
+│   │   └── messages/[userId]/route.ts  # Динамические маршруты
+│   ├── feed/page.tsx     # Страницы приложения
+│   └── layout.tsx        # Root layout с Providers
+├── components/           # React компоненты
+│   ├── FetchInterceptor.tsx
+│   └── TokenRefreshProvider.tsx
+├── lib/                  # Утилиты
+│   ├── db.ts            # Prisma Client instance
+│   ├── jwt.ts           # JWT sign/verify functions
+│   └── useTokenRefresh.ts
+└── generated/prisma/     # Prisma generated client
+
+prisma/
+└── schema.prisma         # Database schema
+```
+
+## 🛠 Команды и Workflow
+
+```bash
+# Разработка
+npm run dev              # Next.js dev server (порт 3000)
+
+# Сборка (ВАЖНО: всегда проверяйте перед деплоем!)
+npm run build            # Запускает prisma generate + next build
+npm start                # Production server
+
+# Prisma
+npx prisma generate      # Генерирует client в src/generated/prisma/
+npx prisma migrate dev   # Применяет миграции в dev
+npx prisma studio        # GUI для БД
+
+# Тестирование
+npm run test             # Jest с jsdom environment
+```
+
+**Build Pipeline:**
+1. `prisma generate` → создает клиент в `src/generated/prisma/`
+2. `next build` → компилирует с Turbopack
+3. Проверка: все относительные импорты для server modules
+
+## 🐛 Известные Проблемы
+
+- **Дублирующиеся параметры**: Используйте уникальные имена для динамических сегментов (`[userId]`, `[postId]`, НЕ оба `[id]`)
+- **Turbopack module resolution**: Может пропускать модули в hot reload; при странных ошибках импорта → перезапустите dev server
+- **Password hashing**: В `api/login/route.ts` используется plain text сравнение (TODO: bcrypt для production)
