@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import { UserAvatar } from "./UserAvatar";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -145,17 +146,7 @@ export default function Navbar() {
                       setSearch("");
                     }}
                   >
-                    <img
-                      src={
-                        s.avatar
-                          ? s.avatar.startsWith("data:")
-                            ? s.avatar
-                            : `/uploads/${s.avatar}`
-                          : "/default-avatar.png"
-                      }
-                      alt="avatar"
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
+                    <UserAvatar avatar={s.avatar} name={fullName} size={40} />
                     <div className="flex-1">
                       <div className="text-sm font-semibold text-gray-800">
                         {fullName}
@@ -203,16 +194,11 @@ export default function Navbar() {
                   className="flex items-center gap-2 hover:opacity-80 transition"
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
                 >
-                  <img
-                    src={
-                      profile.avatar
-                        ? profile.avatar.startsWith("data:")
-                          ? profile.avatar
-                          : `/uploads/${profile.avatar}`
-                        : "/default-avatar.png"
-                    }
-                    alt="avatar"
-                    className="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover"
+                  <UserAvatar
+                    avatar={profile.avatar}
+                    name={profile.username}
+                    size={40}
+                    className="border-2 border-white shadow-md"
                   />
                 </button>
 

@@ -28,6 +28,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (user.isBanned) {
+    return NextResponse.json(
+      { error: "Ваш аккаунт заблокирован администрацией." },
+      { status: 403 }
+    );
+  }
+
   // Сравнение паролей (TODO: использовать bcrypt в продакшене)
   const isMatch = user?.password === password;
 

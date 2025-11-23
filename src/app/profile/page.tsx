@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Post, PostProps } from "../../components/Post";
+import { UserAvatar } from "../../components/UserAvatar";
 
 interface UserProfile {
   id: string;
@@ -578,16 +579,10 @@ export default function MyProfilePage() {
             {/* Avatar - Overlapping */}
             <div className="-mt-16 md:-mt-20 relative z-10 mr-6">
               <div className="relative group/avatar">
-                <img
-                  src={
-                    profile.avatar
-                      ? profile.avatar.startsWith("data:")
-                        ? profile.avatar
-                        : `/uploads/${profile.avatar}`
-                      : "/default-avatar.png"
-                  }
-                  alt={fullName}
-                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover bg-white"
+                <UserAvatar
+                  avatar={profile.avatar}
+                  name={fullName}
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg text-4xl md:text-6xl"
                 />
                 {editMode && (
                   <div
@@ -891,16 +886,7 @@ export default function MyProfilePage() {
           {/* Create Post Box */}
           <div className="card p-4">
             <div className="flex gap-3">
-              <img
-                src={
-                  profile.avatar
-                    ? profile.avatar.startsWith("data:")
-                      ? profile.avatar
-                      : `/uploads/${profile.avatar}`
-                    : "/default-avatar.png"
-                }
-                className="w-8 h-8 rounded-full"
-              />
+              <UserAvatar avatar={profile.avatar} name={fullName} size={32} />
               <div className="flex-1">
                 <textarea
                   value={newPostContent}
@@ -1125,16 +1111,11 @@ export default function MyProfilePage() {
                     href={`/profile/${friend.username}`}
                     className="text-center group"
                   >
-                    <img
-                      src={
-                        friend.avatar
-                          ? friend.avatar.startsWith("data:")
-                            ? friend.avatar
-                            : `/uploads/${friend.avatar}`
-                          : "/default-avatar.png"
-                      }
-                      alt={friend.username}
-                      className="w-12 h-12 rounded-full mx-auto mb-1 object-cover border border-gray-100 group-hover:border-indigo-300 transition-colors"
+                    <UserAvatar
+                      avatar={friend.avatar}
+                      name={friend.firstName || friend.username}
+                      size={48}
+                      className="mx-auto mb-1 border border-gray-100 group-hover:border-indigo-300 transition-colors"
                     />
                     <div className="text-xs text-gray-600 truncate group-hover:text-indigo-600 transition-colors">
                       {friend.firstName || friend.username}

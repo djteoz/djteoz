@@ -4,7 +4,7 @@
 
 - **Ядро**: Next.js 16.0.3 (App Router) + React 19 + TypeScript + Tailwind CSS 4
 - **База данных**: Prisma 5.22 + PostgreSQL. Prisma Client генерируется в `src/generated/prisma/`
-- **Аутентификация**: 
+- **Аутентификация**:
   - JWT (Access 15мин/Refresh 30дней) через `src/lib/jwt.ts`
   - Access token в cookies (httpOnly: false) для доступа клиент+сервер
   - Refresh token в httpOnly cookies для безопасности
@@ -19,12 +19,13 @@
 **На Vercel Linux алиасы `@/` НЕ РАБОТАЮТ для server-side модулей!**
 
 **ВСЕГДА используйте относительные пути для:**
+
 ```typescript
 // ✅ ПРАВИЛЬНО для API routes
-import { prisma } from "../../../lib/db";           // для /api/*/route.ts
-import { verifyAccessToken } from "../../../lib/jwt"; 
+import { prisma } from "../../../lib/db"; // для /api/*/route.ts
+import { verifyAccessToken } from "../../../lib/jwt";
 
-import { prisma } from "../../../../lib/db";        // для /api/*/*/route.ts
+import { prisma } from "../../../../lib/db"; // для /api/*/*/route.ts
 import { verifyAccessToken } from "../../../../lib/jwt";
 
 // ❌ НЕПРАВИЛЬНО - сломается на production
@@ -33,6 +34,7 @@ import { verifyAccessToken } from "@/lib/jwt";
 ```
 
 **Алиасы `@/` можно использовать ТОЛЬКО в:**
+
 - Client Components (`"use client"`)
 - Page Components (`src/app/*/page.tsx`)
 - Shared Components (`src/components/`)
@@ -68,22 +70,22 @@ const token = cookieStore.get("token")?.value;
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { prisma } from "../../../lib/db";           // относительный путь!
+import { prisma } from "../../../lib/db"; // относительный путь!
 import { verifyAccessToken } from "../../../lib/jwt"; // относительный путь!
 
 export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  
+
   if (!token) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  
+
   const payload = verifyAccessToken(token) as { username: string };
   const user = await prisma.user.findUnique({
-    where: { username: payload.username }
+    where: { username: payload.username },
   });
-  
+
   // ... бизнес-логика
 }
 ```
@@ -95,6 +97,7 @@ export async function GET(req: NextRequest) {
 - **Модели**: User, Post, Comment, Message, Notification, Story, Bookmark, Report, Music, Video
 
 **Типичные запросы:**
+
 ```typescript
 // Поиск с include и фильтрацией
 const posts = await prisma.post.findMany({
@@ -102,17 +105,17 @@ const posts = await prisma.post.findMany({
   include: {
     author: { select: { username: true, avatar: true } },
     comments: { take: 3, orderBy: { createdAt: "asc" } },
-    _count: { select: { comments: true } }
+    _count: { select: { comments: true } },
   },
   orderBy: { createdAt: "desc" },
   skip: (page - 1) * limit,
-  take: limit
+  take: limit,
 });
 
 // Batch операции
 await prisma.message.updateMany({
   where: { receiverId: userId, read: false },
-  data: { read: true }
+  data: { read: true },
 });
 ```
 
@@ -125,6 +128,7 @@ await prisma.message.updateMany({
 3. **`ToastProvider`**: Глобальные уведомления
 
 **Token Flow:**
+
 ```
 1. Login → Server sets httpOnly cookies (token, refresh_token)
 2. Client также сохраняет token в localStorage
@@ -177,6 +181,7 @@ npm run test             # Jest с jsdom environment
 ```
 
 **Build Pipeline:**
+
 1. `prisma generate` → создает клиент в `src/generated/prisma/`
 2. `next build` → компилирует с Turbopack
 3. Проверка: все относительные импорты для server modules

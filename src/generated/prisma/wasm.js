@@ -143,8 +143,37 @@ exports.Prisma.UserScalarFieldEnum = {
   languages: 'languages',
   isPublic: 'isPublic',
   profileViews: 'profileViews',
+  role: 'role',
+  isBanned: 'isBanned',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommunityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  avatar: 'avatar',
+  cover: 'cover',
+  type: 'type',
+  category: 'category',
+  isVerified: 'isVerified',
+  website: 'website',
+  location: 'location',
+  membersCount: 'membersCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommunityMemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  communityId: 'communityId',
+  role: 'role',
+  joinedAt: 'joinedAt'
 };
 
 exports.Prisma.StoryScalarFieldEnum = {
@@ -166,7 +195,8 @@ exports.Prisma.PostScalarFieldEnum = {
   views: 'views',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  originalPostId: 'originalPostId'
+  originalPostId: 'originalPostId',
+  communityId: 'communityId'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
@@ -256,6 +286,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Community: 'Community',
+  CommunityMember: 'CommunityMember',
   Story: 'Story',
   Post: 'Post',
   Comment: 'Comment',

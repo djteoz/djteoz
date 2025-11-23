@@ -33,6 +33,8 @@ export async function GET(req: NextRequest) {
         isPublic: true,
         createdAt: true,
         profileViews: true, // Include profileViews in the response
+        role: true,
+        isBanned: true,
       },
     });
 

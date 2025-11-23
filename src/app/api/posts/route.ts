@@ -201,7 +201,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const { content, image } = await req.json();
+    const { content, image, communityId } = await req.json();
 
     if (!content || content.trim().length === 0) {
       return NextResponse.json(
@@ -217,11 +217,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // If posting to a community, check membership
+    if (communityId) {
+      const membership = await prisma.communityMember.findUnique({
+        where: {
+          userId_communityId: {
+            userId: user.id,
+            communityId: communityId,
+          },
+        },
+      });
+
+      if (!membership) {
+        return NextResponse.json(
+          { error: "You must be a member to post in this community" },
+          { status: 403 }
+        );
+      }
+    }
+
     const newPost = await prisma.post.create({
       data: {
         content: content.trim(),
         image: image || null,
         authorId: user.id,
+        communityId: communityId || null,
       },
       include: {
         author: {

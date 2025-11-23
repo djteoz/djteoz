@@ -50,6 +50,7 @@ export async function GET(req: NextRequest) {
       isPublic: user.isPublic,
       profileViews: user.profileViews,
       createdAt: user.createdAt,
+      role: user.role,
     });
   } catch (e) {
     return NextResponse.json(null, { status: 200 });

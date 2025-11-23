@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { UserAvatar } from "./UserAvatar";
@@ -25,6 +27,7 @@ export type PostProps = {
   commentsList?: Comment[];
   isLiked?: boolean;
   isOwner?: boolean;
+  canDelete?: boolean;
   isFriend?: boolean;
   currentUser?: string;
   onLike?: () => void;
@@ -49,6 +52,7 @@ export const Post: React.FC<PostProps> = ({
   commentsList = [],
   isLiked = false,
   isOwner = false,
+  canDelete = false,
   isFriend = false,
   currentUser,
   onLike,
@@ -179,29 +183,30 @@ export const Post: React.FC<PostProps> = ({
             </button>
             {showMenu && (
               <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-10 animate-fade-in">
-                {isOwner ? (
-                  <>
-                    <button
-                      onClick={() => {
-                        setIsEditing(true);
-                        setEditContent(content);
-                        setShowMenu(false);
-                      }}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
-                    >
-                      <span>✏️</span> Редактировать
-                    </button>
-                    <button
-                      onClick={() => {
-                        onDelete?.();
-                        setShowMenu(false);
-                      }}
-                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                    >
-                      <span>🗑️</span> Удалить
-                    </button>
-                  </>
-                ) : (
+                {isOwner && (
+                  <button
+                    onClick={() => {
+                      setIsEditing(true);
+                      setEditContent(content);
+                      setShowMenu(false);
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                  >
+                    <span>✏️</span> Редактировать
+                  </button>
+                )}
+                {(isOwner || canDelete) && (
+                  <button
+                    onClick={() => {
+                      onDelete?.();
+                      setShowMenu(false);
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                  >
+                    <span>🗑️</span> Удалить
+                  </button>
+                )}
+                {!isOwner && (
                   <>
                     <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                       <span>🔖</span> Сохранить
