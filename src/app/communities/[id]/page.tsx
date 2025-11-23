@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { prisma } from "../../../lib/db";
 import { cookies } from "next/headers";
 import { verifyAccessToken } from "../../../lib/jwt";
-import Post from "../../../components/Post";
 import CommunityClient from "./community-client";
 import CommunityFeed from "./community-feed";
 
