@@ -17,7 +17,22 @@ export function FetchInterceptor() {
     ) {
       const token = localStorage.getItem("token");
 
-      if (token) {
+      // Determine URL string
+      let urlString = "";
+      if (typeof input === "string") {
+        urlString = input;
+      } else if (input instanceof URL) {
+        urlString = input.toString();
+      } else if (input instanceof Request) {
+        urlString = input.url;
+      }
+
+      // Only add token for internal requests (relative or same origin)
+      const isInternal =
+        urlString.startsWith("/") ||
+        urlString.startsWith(window.location.origin);
+
+      if (token && isInternal) {
         const headers = new Headers(init?.headers || {});
         if (!headers.has("Authorization")) {
           headers.set("Authorization", `Bearer ${token}`);
