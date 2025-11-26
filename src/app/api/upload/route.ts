@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
           else resolve(result);
         }
       );
-      
+
       // Write buffer to stream
       const Readable = require("stream").Readable;
       const stream = new Readable();

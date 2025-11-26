@@ -136,22 +136,41 @@ export default function MusicClient({
       if (uploadMode === "file") {
         if (!file) return;
 
-        // Upload file to Cloudinary via /api/upload
-        const uploadFormData = new FormData();
-        uploadFormData.append("file", file);
-
-        const uploadRes = await fetch("/api/upload", {
+        // 1. Get signature from server
+        const signRes = await fetch("/api/cloudinary-sign", {
           method: "POST",
-          body: uploadFormData,
         });
 
+        if (!signRes.ok) {
+          throw new Error("Failed to get upload signature");
+        }
+
+        const { timestamp, folder, signature, api_key, cloud_name } =
+          await signRes.json();
+
+        // 2. Upload directly to Cloudinary
+        const uploadFormData = new FormData();
+        uploadFormData.append("file", file);
+        uploadFormData.append("api_key", api_key);
+        uploadFormData.append("timestamp", timestamp.toString());
+        uploadFormData.append("signature", signature);
+        uploadFormData.append("folder", folder);
+
+        const uploadRes = await fetch(
+          `https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`,
+          {
+            method: "POST",
+            body: uploadFormData,
+          }
+        );
+
         if (!uploadRes.ok) {
-          const errorData = await uploadRes.json();
-          throw new Error(errorData.error || "Failed to upload file");
+          const err = await uploadRes.json();
+          throw new Error(err.error?.message || "Cloudinary upload failed");
         }
 
         const uploadData = await uploadRes.json();
-        url = uploadData.url;
+        url = uploadData.secure_url;
       }
 
       // Create music entry
