@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { prisma } from "../../../lib/db";
+import { prisma } from "../../../../lib/db";
 import ArticleFeedback from "./article-feedback";
 
 export default async function ArticlePage({

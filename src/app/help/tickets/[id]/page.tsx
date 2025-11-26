@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { prisma } from "../../../lib/db";
-import { verifyAccessToken } from "../../../lib/jwt";
+import { prisma } from "../../../../lib/db";
+import { verifyAccessToken } from "../../../../lib/jwt";
 import TicketChat from "./ticket-chat";
 
 export default async function TicketPage({
