@@ -121,7 +121,10 @@ export default function RegisterPage() {
 
           <p className="text-xs text-center text-gray-500 px-4">
             Нажимая кнопку «Зарегистрироваться», вы принимаете условия{" "}
-            <Link href="/legal/terms" className="text-indigo-600 hover:underline">
+            <Link
+              href="/legal/terms"
+              className="text-indigo-600 hover:underline"
+            >
               Пользовательского соглашения
             </Link>{" "}
             и{" "}
