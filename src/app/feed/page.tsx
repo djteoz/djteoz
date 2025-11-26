@@ -287,66 +287,6 @@ export default function FeedPage() {
     return () => observer.disconnect();
   }, [hasMore, loading, fetchPosts, searchQuery, activeFilter, sortMode]);
 
-  const handleCreateStory = async () => {
-    if (!storyFile || uploadingStory) return;
-
-    setUploadingStory(true);
-    try {
-      let fileToUpload = storyFile;
-
-      // Bake overlays for images
-      if (
-        storyFile.type.startsWith("image/") &&
-        (textOverlays.length > 0 || stickers.length > 0)
-      ) {
-        try {
-          fileToUpload = await bakeOverlays(storyFile, textOverlays, stickers);
-        } catch (err) {
-          console.error("Failed to bake overlays:", err);
-          // Fallback to original file
-        }
-      }
-
-      // Upload file first
-      const formData = new FormData();
-      formData.append("file", fileToUpload);
-
-      const uploadRes = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!uploadRes.ok) throw new Error("Upload failed");
-      const { url } = await uploadRes.json();
-
-      // Create story
-      const res = await fetch("/api/stories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          mediaUrl: url,
-          type: storyFile.type.startsWith("video/") ? "video" : "image",
-        }),
-      });
-
-      if (res.ok) {
-        setShowStoryModal(false);
-        setStoryFile(null);
-        setStoryPreview(null);
-        setTextOverlays([]);
-        setStickers([]);
-        // Refresh stories
-        const storiesRes = await fetch("/api/stories");
-        const storiesData = await storiesRes.json();
-        setStories(storiesData);
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setUploadingStory(false);
-    }
-  };
-
   const handleAddText = () => {
     if (!storyText.trim()) {
       setShowTextInput(false);
