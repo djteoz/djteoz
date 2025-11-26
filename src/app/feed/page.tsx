@@ -56,9 +56,11 @@ export default function FeedPage() {
     { id: number; emoji: string; x: number; y: number }[]
   >([]);
   const [showStickerPicker, setShowStickerPicker] = useState(false);
-  
+
   // Story Viewer State
-  const [viewingStoryGroup, setViewingStoryGroup] = useState<number | null>(null);
+  const [viewingStoryGroup, setViewingStoryGroup] = useState<number | null>(
+    null
+  );
   const [viewingStoryIndex, setViewingStoryIndex] = useState(0);
   const [storyProgress, setStoryProgress] = useState(0);
   const storyTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -76,14 +78,14 @@ export default function FeedPage() {
     }
 
     const currentStory = currentGroup.items[viewingStoryIndex];
-    const duration = currentStory.type === 'video' ? 30000 : 5000; // 30s for video (or until end), 5s for image
+    const duration = currentStory.type === "video" ? 30000 : 5000; // 30s for video (or until end), 5s for image
     const interval = 50; // update every 50ms
     const step = 100 / (duration / interval);
 
     setStoryProgress(0);
 
     storyTimerRef.current = setInterval(() => {
-      setStoryProgress(prev => {
+      setStoryProgress((prev) => {
         if (prev >= 100) {
           handleNextStory();
           return 100;
@@ -103,11 +105,11 @@ export default function FeedPage() {
     const currentGroup = stories[viewingStoryGroup];
     if (viewingStoryIndex < currentGroup.items.length - 1) {
       // Next story in same group
-      setViewingStoryIndex(prev => prev + 1);
+      setViewingStoryIndex((prev) => prev + 1);
       setStoryProgress(0);
     } else if (viewingStoryGroup < stories.length - 1) {
       // Next user's stories
-      setViewingStoryGroup(prev => (prev !== null ? prev + 1 : null));
+      setViewingStoryGroup((prev) => (prev !== null ? prev + 1 : null));
       setViewingStoryIndex(0);
       setStoryProgress(0);
     } else {
@@ -121,7 +123,7 @@ export default function FeedPage() {
 
     if (viewingStoryIndex > 0) {
       // Prev story in same group
-      setViewingStoryIndex(prev => prev - 1);
+      setViewingStoryIndex((prev) => prev - 1);
       setStoryProgress(0);
     } else if (viewingStoryGroup > 0) {
       // Prev user's stories (go to last story of prev user)
@@ -144,7 +146,7 @@ export default function FeedPage() {
 
   const handleDeleteStory = async (storyId: string) => {
     if (!confirm("Удалить эту историю?")) return;
-    
+
     try {
       const res = await fetch(`/api/stories/${storyId}`, {
         method: "DELETE",
@@ -155,7 +157,7 @@ export default function FeedPage() {
         const storiesRes = await fetch("/api/stories");
         const storiesData = await storiesRes.json();
         setStories(storiesData);
-        
+
         // If we deleted the last story of the user, close viewer or move next
         // For simplicity, just close viewer to avoid index errors, user can reopen
         closeStoryViewer();
@@ -784,36 +786,57 @@ export default function FeedPage() {
       {viewingStoryGroup !== null && stories[viewingStoryGroup] && (
         <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center">
           {/* Close Button */}
-          <button 
+          <button
             onClick={closeStoryViewer}
             className="absolute top-4 right-4 text-white z-20 p-2 hover:bg-white/10 rounded-full"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
 
           {/* Main Content */}
           <div className="relative w-full max-w-md h-full md:h-[90vh] bg-black md:rounded-xl overflow-hidden flex flex-col">
             {/* Progress Bars */}
             <div className="absolute top-0 left-0 right-0 z-20 p-2 flex gap-1">
-              {stories[viewingStoryGroup].items.map((item: any, idx: number) => (
-                <div key={item.id} className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-white transition-all duration-100 ease-linear"
-                    style={{ 
-                      width: idx < viewingStoryIndex ? '100%' : 
-                             idx === viewingStoryIndex ? `${storyProgress}%` : '0%' 
-                    }}
-                  />
-                </div>
-              ))}
+              {stories[viewingStoryGroup].items.map(
+                (item: any, idx: number) => (
+                  <div
+                    key={item.id}
+                    className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden"
+                  >
+                    <div
+                      className="h-full bg-white transition-all duration-100 ease-linear"
+                      style={{
+                        width:
+                          idx < viewingStoryIndex
+                            ? "100%"
+                            : idx === viewingStoryIndex
+                            ? `${storyProgress}%`
+                            : "0%",
+                      }}
+                    />
+                  </div>
+                )
+              )}
             </div>
 
             {/* Header */}
             <div className="absolute top-4 left-0 right-0 z-20 px-4 pt-2 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <UserAvatar 
-                  avatar={stories[viewingStoryGroup].avatar} 
-                  name={stories[viewingStoryGroup].name} 
+                <UserAvatar
+                  avatar={stories[viewingStoryGroup].avatar}
+                  name={stories[viewingStoryGroup].name}
                   size={32}
                   className="border border-white/20"
                 />
@@ -822,22 +845,43 @@ export default function FeedPage() {
                     {stories[viewingStoryGroup].name}
                   </span>
                   <span className="text-white/70 text-xs shadow-black drop-shadow-md">
-                    {new Date(stories[viewingStoryGroup].items[viewingStoryIndex].createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    {new Date(
+                      stories[viewingStoryGroup].items[
+                        viewingStoryIndex
+                      ].createdAt
+                    ).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </span>
                 </div>
               </div>
-              
+
               {/* Delete Button (only for own stories) */}
               {currentUser === stories[viewingStoryGroup].username && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDeleteStory(stories[viewingStoryGroup].items[viewingStoryIndex].id);
+                    handleDeleteStory(
+                      stories[viewingStoryGroup].items[viewingStoryIndex].id
+                    );
                   }}
                   className="text-white/70 hover:text-red-500 p-2 transition-colors"
                   title="Удалить историю"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
                 </button>
               )}
             </div>
@@ -845,15 +889,19 @@ export default function FeedPage() {
             {/* Navigation Areas */}
             <div className="absolute inset-0 z-10 flex">
               <div className="w-1/3 h-full" onClick={handlePrevStory} />
-              <div className="w-1/3 h-full" onClick={handleNextStory} /> {/* Center click also goes next usually, or pauses */}
+              <div className="w-1/3 h-full" onClick={handleNextStory} />{" "}
+              {/* Center click also goes next usually, or pauses */}
               <div className="w-1/3 h-full" onClick={handleNextStory} />
             </div>
 
             {/* Media */}
             <div className="flex-1 bg-black flex items-center justify-center relative">
-              {stories[viewingStoryGroup].items[viewingStoryIndex].type === 'video' ? (
+              {stories[viewingStoryGroup].items[viewingStoryIndex].type ===
+              "video" ? (
                 <video
-                  src={stories[viewingStoryGroup].items[viewingStoryIndex].mediaUrl}
+                  src={
+                    stories[viewingStoryGroup].items[viewingStoryIndex].mediaUrl
+                  }
                   className="w-full h-full object-contain"
                   autoPlay
                   playsInline
@@ -861,7 +909,9 @@ export default function FeedPage() {
                 />
               ) : (
                 <img
-                  src={stories[viewingStoryGroup].items[viewingStoryIndex].mediaUrl}
+                  src={
+                    stories[viewingStoryGroup].items[viewingStoryIndex].mediaUrl
+                  }
                   className="w-full h-full object-contain"
                   alt="Story"
                 />
