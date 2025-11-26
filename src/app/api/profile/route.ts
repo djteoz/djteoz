@@ -92,9 +92,11 @@ export async function POST(req: NextRequest) {
       birthday,
       gender,
       cover,
+      avatar,
       work,
       education,
       languages,
+      isPublic,
     } = await req.json();
 
     const updated = await prisma.user.update({
@@ -111,9 +113,11 @@ export async function POST(req: NextRequest) {
         ...(typeof birthday === "string" && { birthday }),
         ...(typeof gender === "string" && { gender }),
         ...(typeof cover === "string" && { cover }),
+        ...(typeof avatar === "string" && { avatar }),
         ...(typeof work === "string" && { work }),
         ...(typeof education === "string" && { education }),
         ...(typeof languages === "string" && { languages }),
+        ...(typeof isPublic === "boolean" && { isPublic }),
       },
     });
 
