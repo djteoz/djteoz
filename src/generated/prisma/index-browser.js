@@ -329,6 +329,52 @@ exports.Prisma.VideoScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.HelpCategoryScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.HelpArticleScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  excerpt: 'excerpt',
+  isPublished: 'isPublished',
+  views: 'views',
+  helpful: 'helpful',
+  notHelpful: 'notHelpful',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportTicketScalarFieldEnum = {
+  id: 'id',
+  subject: 'subject',
+  status: 'status',
+  priority: 'priority',
+  category: 'category',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportMessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  isStaff: 'isStaff',
+  read: 'read',
+  ticketId: 'ticketId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -372,7 +418,11 @@ exports.Prisma.ModelName = {
   Bookmark: 'Bookmark',
   Report: 'Report',
   Music: 'Music',
-  Video: 'Video'
+  Video: 'Video',
+  HelpCategory: 'HelpCategory',
+  HelpArticle: 'HelpArticle',
+  SupportTicket: 'SupportTicket',
+  SupportMessage: 'SupportMessage'
 };
 
 /**

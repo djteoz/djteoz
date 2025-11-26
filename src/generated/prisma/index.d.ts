@@ -93,6 +93,26 @@ export type Music = $Result.DefaultSelection<Prisma.$MusicPayload>
  * 
  */
 export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
+/**
+ * Model HelpCategory
+ * 
+ */
+export type HelpCategory = $Result.DefaultSelection<Prisma.$HelpCategoryPayload>
+/**
+ * Model HelpArticle
+ * 
+ */
+export type HelpArticle = $Result.DefaultSelection<Prisma.$HelpArticlePayload>
+/**
+ * Model SupportTicket
+ * 
+ */
+export type SupportTicket = $Result.DefaultSelection<Prisma.$SupportTicketPayload>
+/**
+ * Model SupportMessage
+ * 
+ */
+export type SupportMessage = $Result.DefaultSelection<Prisma.$SupportMessagePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -376,6 +396,46 @@ export class PrismaClient<
     * ```
     */
   get video(): Prisma.VideoDelegate<ExtArgs>;
+
+  /**
+   * `prisma.helpCategory`: Exposes CRUD operations for the **HelpCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HelpCategories
+    * const helpCategories = await prisma.helpCategory.findMany()
+    * ```
+    */
+  get helpCategory(): Prisma.HelpCategoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.helpArticle`: Exposes CRUD operations for the **HelpArticle** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HelpArticles
+    * const helpArticles = await prisma.helpArticle.findMany()
+    * ```
+    */
+  get helpArticle(): Prisma.HelpArticleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.supportTicket`: Exposes CRUD operations for the **SupportTicket** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportTickets
+    * const supportTickets = await prisma.supportTicket.findMany()
+    * ```
+    */
+  get supportTicket(): Prisma.SupportTicketDelegate<ExtArgs>;
+
+  /**
+   * `prisma.supportMessage`: Exposes CRUD operations for the **SupportMessage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportMessages
+    * const supportMessages = await prisma.supportMessage.findMany()
+    * ```
+    */
+  get supportMessage(): Prisma.SupportMessageDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -832,7 +892,11 @@ export namespace Prisma {
     Bookmark: 'Bookmark',
     Report: 'Report',
     Music: 'Music',
-    Video: 'Video'
+    Video: 'Video',
+    HelpCategory: 'HelpCategory',
+    HelpArticle: 'HelpArticle',
+    SupportTicket: 'SupportTicket',
+    SupportMessage: 'SupportMessage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -848,7 +912,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "community" | "communityMember" | "story" | "post" | "comment" | "album" | "photo" | "photoTag" | "message" | "notification" | "friendRequest" | "bookmark" | "report" | "music" | "video"
+      modelProps: "user" | "community" | "communityMember" | "story" | "post" | "comment" | "album" | "photo" | "photoTag" | "message" | "notification" | "friendRequest" | "bookmark" | "report" | "music" | "video" | "helpCategory" | "helpArticle" | "supportTicket" | "supportMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1972,6 +2036,286 @@ export namespace Prisma {
           }
         }
       }
+      HelpCategory: {
+        payload: Prisma.$HelpCategoryPayload<ExtArgs>
+        fields: Prisma.HelpCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HelpCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HelpCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.HelpCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HelpCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.HelpCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.HelpCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.HelpCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HelpCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.HelpCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          update: {
+            args: Prisma.HelpCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.HelpCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HelpCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.HelpCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.HelpCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHelpCategory>
+          }
+          groupBy: {
+            args: Prisma.HelpCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HelpCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HelpCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<HelpCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      HelpArticle: {
+        payload: Prisma.$HelpArticlePayload<ExtArgs>
+        fields: Prisma.HelpArticleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HelpArticleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HelpArticleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          findFirst: {
+            args: Prisma.HelpArticleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HelpArticleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          findMany: {
+            args: Prisma.HelpArticleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>[]
+          }
+          create: {
+            args: Prisma.HelpArticleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          createMany: {
+            args: Prisma.HelpArticleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HelpArticleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>[]
+          }
+          delete: {
+            args: Prisma.HelpArticleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          update: {
+            args: Prisma.HelpArticleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          deleteMany: {
+            args: Prisma.HelpArticleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HelpArticleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.HelpArticleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HelpArticlePayload>
+          }
+          aggregate: {
+            args: Prisma.HelpArticleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHelpArticle>
+          }
+          groupBy: {
+            args: Prisma.HelpArticleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HelpArticleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HelpArticleCountArgs<ExtArgs>
+            result: $Utils.Optional<HelpArticleCountAggregateOutputType> | number
+          }
+        }
+      }
+      SupportTicket: {
+        payload: Prisma.$SupportTicketPayload<ExtArgs>
+        fields: Prisma.SupportTicketFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportTicketFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportTicketFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          findFirst: {
+            args: Prisma.SupportTicketFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportTicketFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          findMany: {
+            args: Prisma.SupportTicketFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>[]
+          }
+          create: {
+            args: Prisma.SupportTicketCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          createMany: {
+            args: Prisma.SupportTicketCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupportTicketCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>[]
+          }
+          delete: {
+            args: Prisma.SupportTicketDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          update: {
+            args: Prisma.SupportTicketUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportTicketDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportTicketUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SupportTicketUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportTicketPayload>
+          }
+          aggregate: {
+            args: Prisma.SupportTicketAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportTicket>
+          }
+          groupBy: {
+            args: Prisma.SupportTicketGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportTicketGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportTicketCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportTicketCountAggregateOutputType> | number
+          }
+        }
+      }
+      SupportMessage: {
+        payload: Prisma.$SupportMessagePayload<ExtArgs>
+        fields: Prisma.SupportMessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportMessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportMessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          findFirst: {
+            args: Prisma.SupportMessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportMessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          findMany: {
+            args: Prisma.SupportMessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>[]
+          }
+          create: {
+            args: Prisma.SupportMessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          createMany: {
+            args: Prisma.SupportMessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupportMessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>[]
+          }
+          delete: {
+            args: Prisma.SupportMessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          update: {
+            args: Prisma.SupportMessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportMessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportMessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SupportMessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportMessagePayload>
+          }
+          aggregate: {
+            args: Prisma.SupportMessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportMessage>
+          }
+          groupBy: {
+            args: Prisma.SupportMessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportMessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportMessageCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportMessageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2154,6 +2498,7 @@ export namespace Prisma {
     photos: number
     photoTags: number
     communities: number
+    supportTickets: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2178,6 +2523,7 @@ export namespace Prisma {
     photos?: boolean | UserCountOutputTypeCountPhotosArgs
     photoTags?: boolean | UserCountOutputTypeCountPhotoTagsArgs
     communities?: boolean | UserCountOutputTypeCountCommunitiesArgs
+    supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
   }
 
   // Custom InputTypes
@@ -2336,6 +2682,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCommunitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommunityMemberWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSupportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportTicketWhereInput
   }
 
 
@@ -2554,6 +2907,68 @@ export namespace Prisma {
    */
   export type VideoCountOutputTypeCountBookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BookmarkWhereInput
+  }
+
+
+  /**
+   * Count Type HelpCategoryCountOutputType
+   */
+
+  export type HelpCategoryCountOutputType = {
+    articles: number
+  }
+
+  export type HelpCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | HelpCategoryCountOutputTypeCountArticlesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * HelpCategoryCountOutputType without action
+   */
+  export type HelpCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategoryCountOutputType
+     */
+    select?: HelpCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * HelpCategoryCountOutputType without action
+   */
+  export type HelpCategoryCountOutputTypeCountArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HelpArticleWhereInput
+  }
+
+
+  /**
+   * Count Type SupportTicketCountOutputType
+   */
+
+  export type SupportTicketCountOutputType = {
+    messages: number
+  }
+
+  export type SupportTicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | SupportTicketCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SupportTicketCountOutputType without action
+   */
+  export type SupportTicketCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicketCountOutputType
+     */
+    select?: SupportTicketCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SupportTicketCountOutputType without action
+   */
+  export type SupportTicketCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportMessageWhereInput
   }
 
 
@@ -2968,6 +3383,7 @@ export namespace Prisma {
     photos?: boolean | User$photosArgs<ExtArgs>
     photoTags?: boolean | User$photoTagsArgs<ExtArgs>
     communities?: boolean | User$communitiesArgs<ExtArgs>
+    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3059,6 +3475,7 @@ export namespace Prisma {
     photos?: boolean | User$photosArgs<ExtArgs>
     photoTags?: boolean | User$photoTagsArgs<ExtArgs>
     communities?: boolean | User$communitiesArgs<ExtArgs>
+    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3087,6 +3504,7 @@ export namespace Prisma {
       photos: Prisma.$PhotoPayload<ExtArgs>[]
       photoTags: Prisma.$PhotoTagPayload<ExtArgs>[]
       communities: Prisma.$CommunityMemberPayload<ExtArgs>[]
+      supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3504,6 +3922,7 @@ export namespace Prisma {
     photos<T extends User$photosArgs<ExtArgs> = {}>(args?: Subset<T, User$photosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhotoPayload<ExtArgs>, T, "findMany"> | Null>
     photoTags<T extends User$photoTagsArgs<ExtArgs> = {}>(args?: Subset<T, User$photoTagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhotoTagPayload<ExtArgs>, T, "findMany"> | Null>
     communities<T extends User$communitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$communitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityMemberPayload<ExtArgs>, T, "findMany"> | Null>
+    supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4294,6 +4713,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommunityMemberScalarFieldEnum | CommunityMemberScalarFieldEnum[]
+  }
+
+  /**
+   * User.supportTickets
+   */
+  export type User$supportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    where?: SupportTicketWhereInput
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    cursor?: SupportTicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
   }
 
   /**
@@ -19716,6 +20155,4023 @@ export namespace Prisma {
 
 
   /**
+   * Model HelpCategory
+   */
+
+  export type AggregateHelpCategory = {
+    _count: HelpCategoryCountAggregateOutputType | null
+    _avg: HelpCategoryAvgAggregateOutputType | null
+    _sum: HelpCategorySumAggregateOutputType | null
+    _min: HelpCategoryMinAggregateOutputType | null
+    _max: HelpCategoryMaxAggregateOutputType | null
+  }
+
+  export type HelpCategoryAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type HelpCategorySumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type HelpCategoryMinAggregateOutputType = {
+    id: string | null
+    slug: string | null
+    name: string | null
+    description: string | null
+    icon: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HelpCategoryMaxAggregateOutputType = {
+    id: string | null
+    slug: string | null
+    name: string | null
+    description: string | null
+    icon: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HelpCategoryCountAggregateOutputType = {
+    id: number
+    slug: number
+    name: number
+    description: number
+    icon: number
+    order: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type HelpCategoryAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type HelpCategorySumAggregateInputType = {
+    order?: true
+  }
+
+  export type HelpCategoryMinAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    description?: true
+    icon?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HelpCategoryMaxAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    description?: true
+    icon?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HelpCategoryCountAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    description?: true
+    icon?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type HelpCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HelpCategory to aggregate.
+     */
+    where?: HelpCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpCategories to fetch.
+     */
+    orderBy?: HelpCategoryOrderByWithRelationInput | HelpCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HelpCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HelpCategories
+    **/
+    _count?: true | HelpCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HelpCategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HelpCategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HelpCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HelpCategoryMaxAggregateInputType
+  }
+
+  export type GetHelpCategoryAggregateType<T extends HelpCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateHelpCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHelpCategory[P]>
+      : GetScalarType<T[P], AggregateHelpCategory[P]>
+  }
+
+
+
+
+  export type HelpCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HelpCategoryWhereInput
+    orderBy?: HelpCategoryOrderByWithAggregationInput | HelpCategoryOrderByWithAggregationInput[]
+    by: HelpCategoryScalarFieldEnum[] | HelpCategoryScalarFieldEnum
+    having?: HelpCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HelpCategoryCountAggregateInputType | true
+    _avg?: HelpCategoryAvgAggregateInputType
+    _sum?: HelpCategorySumAggregateInputType
+    _min?: HelpCategoryMinAggregateInputType
+    _max?: HelpCategoryMaxAggregateInputType
+  }
+
+  export type HelpCategoryGroupByOutputType = {
+    id: string
+    slug: string
+    name: string
+    description: string | null
+    icon: string | null
+    order: number
+    createdAt: Date
+    updatedAt: Date
+    _count: HelpCategoryCountAggregateOutputType | null
+    _avg: HelpCategoryAvgAggregateOutputType | null
+    _sum: HelpCategorySumAggregateOutputType | null
+    _min: HelpCategoryMinAggregateOutputType | null
+    _max: HelpCategoryMaxAggregateOutputType | null
+  }
+
+  type GetHelpCategoryGroupByPayload<T extends HelpCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HelpCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HelpCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HelpCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], HelpCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HelpCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    articles?: boolean | HelpCategory$articlesArgs<ExtArgs>
+    _count?: boolean | HelpCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["helpCategory"]>
+
+  export type HelpCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["helpCategory"]>
+
+  export type HelpCategorySelectScalar = {
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type HelpCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | HelpCategory$articlesArgs<ExtArgs>
+    _count?: boolean | HelpCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type HelpCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $HelpCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HelpCategory"
+    objects: {
+      articles: Prisma.$HelpArticlePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      slug: string
+      name: string
+      description: string | null
+      icon: string | null
+      order: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["helpCategory"]>
+    composites: {}
+  }
+
+  type HelpCategoryGetPayload<S extends boolean | null | undefined | HelpCategoryDefaultArgs> = $Result.GetResult<Prisma.$HelpCategoryPayload, S>
+
+  type HelpCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<HelpCategoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: HelpCategoryCountAggregateInputType | true
+    }
+
+  export interface HelpCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HelpCategory'], meta: { name: 'HelpCategory' } }
+    /**
+     * Find zero or one HelpCategory that matches the filter.
+     * @param {HelpCategoryFindUniqueArgs} args - Arguments to find a HelpCategory
+     * @example
+     * // Get one HelpCategory
+     * const helpCategory = await prisma.helpCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HelpCategoryFindUniqueArgs>(args: SelectSubset<T, HelpCategoryFindUniqueArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one HelpCategory that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {HelpCategoryFindUniqueOrThrowArgs} args - Arguments to find a HelpCategory
+     * @example
+     * // Get one HelpCategory
+     * const helpCategory = await prisma.helpCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HelpCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, HelpCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first HelpCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryFindFirstArgs} args - Arguments to find a HelpCategory
+     * @example
+     * // Get one HelpCategory
+     * const helpCategory = await prisma.helpCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HelpCategoryFindFirstArgs>(args?: SelectSubset<T, HelpCategoryFindFirstArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first HelpCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryFindFirstOrThrowArgs} args - Arguments to find a HelpCategory
+     * @example
+     * // Get one HelpCategory
+     * const helpCategory = await prisma.helpCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HelpCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, HelpCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more HelpCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HelpCategories
+     * const helpCategories = await prisma.helpCategory.findMany()
+     * 
+     * // Get first 10 HelpCategories
+     * const helpCategories = await prisma.helpCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const helpCategoryWithIdOnly = await prisma.helpCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HelpCategoryFindManyArgs>(args?: SelectSubset<T, HelpCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a HelpCategory.
+     * @param {HelpCategoryCreateArgs} args - Arguments to create a HelpCategory.
+     * @example
+     * // Create one HelpCategory
+     * const HelpCategory = await prisma.helpCategory.create({
+     *   data: {
+     *     // ... data to create a HelpCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends HelpCategoryCreateArgs>(args: SelectSubset<T, HelpCategoryCreateArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many HelpCategories.
+     * @param {HelpCategoryCreateManyArgs} args - Arguments to create many HelpCategories.
+     * @example
+     * // Create many HelpCategories
+     * const helpCategory = await prisma.helpCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HelpCategoryCreateManyArgs>(args?: SelectSubset<T, HelpCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HelpCategories and returns the data saved in the database.
+     * @param {HelpCategoryCreateManyAndReturnArgs} args - Arguments to create many HelpCategories.
+     * @example
+     * // Create many HelpCategories
+     * const helpCategory = await prisma.helpCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HelpCategories and only return the `id`
+     * const helpCategoryWithIdOnly = await prisma.helpCategory.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HelpCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, HelpCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a HelpCategory.
+     * @param {HelpCategoryDeleteArgs} args - Arguments to delete one HelpCategory.
+     * @example
+     * // Delete one HelpCategory
+     * const HelpCategory = await prisma.helpCategory.delete({
+     *   where: {
+     *     // ... filter to delete one HelpCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HelpCategoryDeleteArgs>(args: SelectSubset<T, HelpCategoryDeleteArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one HelpCategory.
+     * @param {HelpCategoryUpdateArgs} args - Arguments to update one HelpCategory.
+     * @example
+     * // Update one HelpCategory
+     * const helpCategory = await prisma.helpCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HelpCategoryUpdateArgs>(args: SelectSubset<T, HelpCategoryUpdateArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more HelpCategories.
+     * @param {HelpCategoryDeleteManyArgs} args - Arguments to filter HelpCategories to delete.
+     * @example
+     * // Delete a few HelpCategories
+     * const { count } = await prisma.helpCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HelpCategoryDeleteManyArgs>(args?: SelectSubset<T, HelpCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HelpCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HelpCategories
+     * const helpCategory = await prisma.helpCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HelpCategoryUpdateManyArgs>(args: SelectSubset<T, HelpCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one HelpCategory.
+     * @param {HelpCategoryUpsertArgs} args - Arguments to update or create a HelpCategory.
+     * @example
+     * // Update or create a HelpCategory
+     * const helpCategory = await prisma.helpCategory.upsert({
+     *   create: {
+     *     // ... data to create a HelpCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HelpCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HelpCategoryUpsertArgs>(args: SelectSubset<T, HelpCategoryUpsertArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of HelpCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryCountArgs} args - Arguments to filter HelpCategories to count.
+     * @example
+     * // Count the number of HelpCategories
+     * const count = await prisma.helpCategory.count({
+     *   where: {
+     *     // ... the filter for the HelpCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends HelpCategoryCountArgs>(
+      args?: Subset<T, HelpCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HelpCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HelpCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HelpCategoryAggregateArgs>(args: Subset<T, HelpCategoryAggregateArgs>): Prisma.PrismaPromise<GetHelpCategoryAggregateType<T>>
+
+    /**
+     * Group by HelpCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HelpCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HelpCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: HelpCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HelpCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHelpCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HelpCategory model
+   */
+  readonly fields: HelpCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HelpCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HelpCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    articles<T extends HelpCategory$articlesArgs<ExtArgs> = {}>(args?: Subset<T, HelpCategory$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HelpCategory model
+   */ 
+  interface HelpCategoryFieldRefs {
+    readonly id: FieldRef<"HelpCategory", 'String'>
+    readonly slug: FieldRef<"HelpCategory", 'String'>
+    readonly name: FieldRef<"HelpCategory", 'String'>
+    readonly description: FieldRef<"HelpCategory", 'String'>
+    readonly icon: FieldRef<"HelpCategory", 'String'>
+    readonly order: FieldRef<"HelpCategory", 'Int'>
+    readonly createdAt: FieldRef<"HelpCategory", 'DateTime'>
+    readonly updatedAt: FieldRef<"HelpCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HelpCategory findUnique
+   */
+  export type HelpCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpCategory to fetch.
+     */
+    where: HelpCategoryWhereUniqueInput
+  }
+
+  /**
+   * HelpCategory findUniqueOrThrow
+   */
+  export type HelpCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpCategory to fetch.
+     */
+    where: HelpCategoryWhereUniqueInput
+  }
+
+  /**
+   * HelpCategory findFirst
+   */
+  export type HelpCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpCategory to fetch.
+     */
+    where?: HelpCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpCategories to fetch.
+     */
+    orderBy?: HelpCategoryOrderByWithRelationInput | HelpCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HelpCategories.
+     */
+    cursor?: HelpCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HelpCategories.
+     */
+    distinct?: HelpCategoryScalarFieldEnum | HelpCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HelpCategory findFirstOrThrow
+   */
+  export type HelpCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpCategory to fetch.
+     */
+    where?: HelpCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpCategories to fetch.
+     */
+    orderBy?: HelpCategoryOrderByWithRelationInput | HelpCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HelpCategories.
+     */
+    cursor?: HelpCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HelpCategories.
+     */
+    distinct?: HelpCategoryScalarFieldEnum | HelpCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HelpCategory findMany
+   */
+  export type HelpCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpCategories to fetch.
+     */
+    where?: HelpCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpCategories to fetch.
+     */
+    orderBy?: HelpCategoryOrderByWithRelationInput | HelpCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HelpCategories.
+     */
+    cursor?: HelpCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpCategories.
+     */
+    skip?: number
+    distinct?: HelpCategoryScalarFieldEnum | HelpCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HelpCategory create
+   */
+  export type HelpCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HelpCategory.
+     */
+    data: XOR<HelpCategoryCreateInput, HelpCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * HelpCategory createMany
+   */
+  export type HelpCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HelpCategories.
+     */
+    data: HelpCategoryCreateManyInput | HelpCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HelpCategory createManyAndReturn
+   */
+  export type HelpCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many HelpCategories.
+     */
+    data: HelpCategoryCreateManyInput | HelpCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HelpCategory update
+   */
+  export type HelpCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HelpCategory.
+     */
+    data: XOR<HelpCategoryUpdateInput, HelpCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which HelpCategory to update.
+     */
+    where: HelpCategoryWhereUniqueInput
+  }
+
+  /**
+   * HelpCategory updateMany
+   */
+  export type HelpCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HelpCategories.
+     */
+    data: XOR<HelpCategoryUpdateManyMutationInput, HelpCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which HelpCategories to update
+     */
+    where?: HelpCategoryWhereInput
+  }
+
+  /**
+   * HelpCategory upsert
+   */
+  export type HelpCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HelpCategory to update in case it exists.
+     */
+    where: HelpCategoryWhereUniqueInput
+    /**
+     * In case the HelpCategory found by the `where` argument doesn't exist, create a new HelpCategory with this data.
+     */
+    create: XOR<HelpCategoryCreateInput, HelpCategoryUncheckedCreateInput>
+    /**
+     * In case the HelpCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HelpCategoryUpdateInput, HelpCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * HelpCategory delete
+   */
+  export type HelpCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which HelpCategory to delete.
+     */
+    where: HelpCategoryWhereUniqueInput
+  }
+
+  /**
+   * HelpCategory deleteMany
+   */
+  export type HelpCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HelpCategories to delete
+     */
+    where?: HelpCategoryWhereInput
+  }
+
+  /**
+   * HelpCategory.articles
+   */
+  export type HelpCategory$articlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    where?: HelpArticleWhereInput
+    orderBy?: HelpArticleOrderByWithRelationInput | HelpArticleOrderByWithRelationInput[]
+    cursor?: HelpArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HelpArticleScalarFieldEnum | HelpArticleScalarFieldEnum[]
+  }
+
+  /**
+   * HelpCategory without action
+   */
+  export type HelpCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpCategory
+     */
+    select?: HelpCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HelpArticle
+   */
+
+  export type AggregateHelpArticle = {
+    _count: HelpArticleCountAggregateOutputType | null
+    _avg: HelpArticleAvgAggregateOutputType | null
+    _sum: HelpArticleSumAggregateOutputType | null
+    _min: HelpArticleMinAggregateOutputType | null
+    _max: HelpArticleMaxAggregateOutputType | null
+  }
+
+  export type HelpArticleAvgAggregateOutputType = {
+    views: number | null
+    helpful: number | null
+    notHelpful: number | null
+  }
+
+  export type HelpArticleSumAggregateOutputType = {
+    views: number | null
+    helpful: number | null
+    notHelpful: number | null
+  }
+
+  export type HelpArticleMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    excerpt: string | null
+    isPublished: boolean | null
+    views: number | null
+    helpful: number | null
+    notHelpful: number | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HelpArticleMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    excerpt: string | null
+    isPublished: boolean | null
+    views: number | null
+    helpful: number | null
+    notHelpful: number | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HelpArticleCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    content: number
+    excerpt: number
+    isPublished: number
+    views: number
+    helpful: number
+    notHelpful: number
+    categoryId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type HelpArticleAvgAggregateInputType = {
+    views?: true
+    helpful?: true
+    notHelpful?: true
+  }
+
+  export type HelpArticleSumAggregateInputType = {
+    views?: true
+    helpful?: true
+    notHelpful?: true
+  }
+
+  export type HelpArticleMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    excerpt?: true
+    isPublished?: true
+    views?: true
+    helpful?: true
+    notHelpful?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HelpArticleMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    excerpt?: true
+    isPublished?: true
+    views?: true
+    helpful?: true
+    notHelpful?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HelpArticleCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    excerpt?: true
+    isPublished?: true
+    views?: true
+    helpful?: true
+    notHelpful?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type HelpArticleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HelpArticle to aggregate.
+     */
+    where?: HelpArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpArticles to fetch.
+     */
+    orderBy?: HelpArticleOrderByWithRelationInput | HelpArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HelpArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HelpArticles
+    **/
+    _count?: true | HelpArticleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HelpArticleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HelpArticleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HelpArticleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HelpArticleMaxAggregateInputType
+  }
+
+  export type GetHelpArticleAggregateType<T extends HelpArticleAggregateArgs> = {
+        [P in keyof T & keyof AggregateHelpArticle]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHelpArticle[P]>
+      : GetScalarType<T[P], AggregateHelpArticle[P]>
+  }
+
+
+
+
+  export type HelpArticleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HelpArticleWhereInput
+    orderBy?: HelpArticleOrderByWithAggregationInput | HelpArticleOrderByWithAggregationInput[]
+    by: HelpArticleScalarFieldEnum[] | HelpArticleScalarFieldEnum
+    having?: HelpArticleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HelpArticleCountAggregateInputType | true
+    _avg?: HelpArticleAvgAggregateInputType
+    _sum?: HelpArticleSumAggregateInputType
+    _min?: HelpArticleMinAggregateInputType
+    _max?: HelpArticleMaxAggregateInputType
+  }
+
+  export type HelpArticleGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    content: string
+    excerpt: string | null
+    isPublished: boolean
+    views: number
+    helpful: number
+    notHelpful: number
+    categoryId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: HelpArticleCountAggregateOutputType | null
+    _avg: HelpArticleAvgAggregateOutputType | null
+    _sum: HelpArticleSumAggregateOutputType | null
+    _min: HelpArticleMinAggregateOutputType | null
+    _max: HelpArticleMaxAggregateOutputType | null
+  }
+
+  type GetHelpArticleGroupByPayload<T extends HelpArticleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HelpArticleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HelpArticleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HelpArticleGroupByOutputType[P]>
+            : GetScalarType<T[P], HelpArticleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HelpArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    excerpt?: boolean
+    isPublished?: boolean
+    views?: boolean
+    helpful?: boolean
+    notHelpful?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | HelpCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["helpArticle"]>
+
+  export type HelpArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    excerpt?: boolean
+    isPublished?: boolean
+    views?: boolean
+    helpful?: boolean
+    notHelpful?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | HelpCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["helpArticle"]>
+
+  export type HelpArticleSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    excerpt?: boolean
+    isPublished?: boolean
+    views?: boolean
+    helpful?: boolean
+    notHelpful?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type HelpArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | HelpCategoryDefaultArgs<ExtArgs>
+  }
+  export type HelpArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | HelpCategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $HelpArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HelpArticle"
+    objects: {
+      category: Prisma.$HelpCategoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      content: string
+      excerpt: string | null
+      isPublished: boolean
+      views: number
+      helpful: number
+      notHelpful: number
+      categoryId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["helpArticle"]>
+    composites: {}
+  }
+
+  type HelpArticleGetPayload<S extends boolean | null | undefined | HelpArticleDefaultArgs> = $Result.GetResult<Prisma.$HelpArticlePayload, S>
+
+  type HelpArticleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<HelpArticleFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: HelpArticleCountAggregateInputType | true
+    }
+
+  export interface HelpArticleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HelpArticle'], meta: { name: 'HelpArticle' } }
+    /**
+     * Find zero or one HelpArticle that matches the filter.
+     * @param {HelpArticleFindUniqueArgs} args - Arguments to find a HelpArticle
+     * @example
+     * // Get one HelpArticle
+     * const helpArticle = await prisma.helpArticle.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HelpArticleFindUniqueArgs>(args: SelectSubset<T, HelpArticleFindUniqueArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one HelpArticle that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {HelpArticleFindUniqueOrThrowArgs} args - Arguments to find a HelpArticle
+     * @example
+     * // Get one HelpArticle
+     * const helpArticle = await prisma.helpArticle.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HelpArticleFindUniqueOrThrowArgs>(args: SelectSubset<T, HelpArticleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first HelpArticle that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleFindFirstArgs} args - Arguments to find a HelpArticle
+     * @example
+     * // Get one HelpArticle
+     * const helpArticle = await prisma.helpArticle.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HelpArticleFindFirstArgs>(args?: SelectSubset<T, HelpArticleFindFirstArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first HelpArticle that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleFindFirstOrThrowArgs} args - Arguments to find a HelpArticle
+     * @example
+     * // Get one HelpArticle
+     * const helpArticle = await prisma.helpArticle.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HelpArticleFindFirstOrThrowArgs>(args?: SelectSubset<T, HelpArticleFindFirstOrThrowArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more HelpArticles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HelpArticles
+     * const helpArticles = await prisma.helpArticle.findMany()
+     * 
+     * // Get first 10 HelpArticles
+     * const helpArticles = await prisma.helpArticle.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const helpArticleWithIdOnly = await prisma.helpArticle.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HelpArticleFindManyArgs>(args?: SelectSubset<T, HelpArticleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a HelpArticle.
+     * @param {HelpArticleCreateArgs} args - Arguments to create a HelpArticle.
+     * @example
+     * // Create one HelpArticle
+     * const HelpArticle = await prisma.helpArticle.create({
+     *   data: {
+     *     // ... data to create a HelpArticle
+     *   }
+     * })
+     * 
+     */
+    create<T extends HelpArticleCreateArgs>(args: SelectSubset<T, HelpArticleCreateArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many HelpArticles.
+     * @param {HelpArticleCreateManyArgs} args - Arguments to create many HelpArticles.
+     * @example
+     * // Create many HelpArticles
+     * const helpArticle = await prisma.helpArticle.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HelpArticleCreateManyArgs>(args?: SelectSubset<T, HelpArticleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HelpArticles and returns the data saved in the database.
+     * @param {HelpArticleCreateManyAndReturnArgs} args - Arguments to create many HelpArticles.
+     * @example
+     * // Create many HelpArticles
+     * const helpArticle = await prisma.helpArticle.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HelpArticles and only return the `id`
+     * const helpArticleWithIdOnly = await prisma.helpArticle.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HelpArticleCreateManyAndReturnArgs>(args?: SelectSubset<T, HelpArticleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a HelpArticle.
+     * @param {HelpArticleDeleteArgs} args - Arguments to delete one HelpArticle.
+     * @example
+     * // Delete one HelpArticle
+     * const HelpArticle = await prisma.helpArticle.delete({
+     *   where: {
+     *     // ... filter to delete one HelpArticle
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HelpArticleDeleteArgs>(args: SelectSubset<T, HelpArticleDeleteArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one HelpArticle.
+     * @param {HelpArticleUpdateArgs} args - Arguments to update one HelpArticle.
+     * @example
+     * // Update one HelpArticle
+     * const helpArticle = await prisma.helpArticle.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HelpArticleUpdateArgs>(args: SelectSubset<T, HelpArticleUpdateArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more HelpArticles.
+     * @param {HelpArticleDeleteManyArgs} args - Arguments to filter HelpArticles to delete.
+     * @example
+     * // Delete a few HelpArticles
+     * const { count } = await prisma.helpArticle.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HelpArticleDeleteManyArgs>(args?: SelectSubset<T, HelpArticleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HelpArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HelpArticles
+     * const helpArticle = await prisma.helpArticle.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HelpArticleUpdateManyArgs>(args: SelectSubset<T, HelpArticleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one HelpArticle.
+     * @param {HelpArticleUpsertArgs} args - Arguments to update or create a HelpArticle.
+     * @example
+     * // Update or create a HelpArticle
+     * const helpArticle = await prisma.helpArticle.upsert({
+     *   create: {
+     *     // ... data to create a HelpArticle
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HelpArticle we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HelpArticleUpsertArgs>(args: SelectSubset<T, HelpArticleUpsertArgs<ExtArgs>>): Prisma__HelpArticleClient<$Result.GetResult<Prisma.$HelpArticlePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of HelpArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleCountArgs} args - Arguments to filter HelpArticles to count.
+     * @example
+     * // Count the number of HelpArticles
+     * const count = await prisma.helpArticle.count({
+     *   where: {
+     *     // ... the filter for the HelpArticles we want to count
+     *   }
+     * })
+    **/
+    count<T extends HelpArticleCountArgs>(
+      args?: Subset<T, HelpArticleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HelpArticleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HelpArticle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HelpArticleAggregateArgs>(args: Subset<T, HelpArticleAggregateArgs>): Prisma.PrismaPromise<GetHelpArticleAggregateType<T>>
+
+    /**
+     * Group by HelpArticle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HelpArticleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HelpArticleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HelpArticleGroupByArgs['orderBy'] }
+        : { orderBy?: HelpArticleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HelpArticleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHelpArticleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HelpArticle model
+   */
+  readonly fields: HelpArticleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HelpArticle.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HelpArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends HelpCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HelpCategoryDefaultArgs<ExtArgs>>): Prisma__HelpCategoryClient<$Result.GetResult<Prisma.$HelpCategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HelpArticle model
+   */ 
+  interface HelpArticleFieldRefs {
+    readonly id: FieldRef<"HelpArticle", 'String'>
+    readonly title: FieldRef<"HelpArticle", 'String'>
+    readonly slug: FieldRef<"HelpArticle", 'String'>
+    readonly content: FieldRef<"HelpArticle", 'String'>
+    readonly excerpt: FieldRef<"HelpArticle", 'String'>
+    readonly isPublished: FieldRef<"HelpArticle", 'Boolean'>
+    readonly views: FieldRef<"HelpArticle", 'Int'>
+    readonly helpful: FieldRef<"HelpArticle", 'Int'>
+    readonly notHelpful: FieldRef<"HelpArticle", 'Int'>
+    readonly categoryId: FieldRef<"HelpArticle", 'String'>
+    readonly createdAt: FieldRef<"HelpArticle", 'DateTime'>
+    readonly updatedAt: FieldRef<"HelpArticle", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HelpArticle findUnique
+   */
+  export type HelpArticleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpArticle to fetch.
+     */
+    where: HelpArticleWhereUniqueInput
+  }
+
+  /**
+   * HelpArticle findUniqueOrThrow
+   */
+  export type HelpArticleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpArticle to fetch.
+     */
+    where: HelpArticleWhereUniqueInput
+  }
+
+  /**
+   * HelpArticle findFirst
+   */
+  export type HelpArticleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpArticle to fetch.
+     */
+    where?: HelpArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpArticles to fetch.
+     */
+    orderBy?: HelpArticleOrderByWithRelationInput | HelpArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HelpArticles.
+     */
+    cursor?: HelpArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HelpArticles.
+     */
+    distinct?: HelpArticleScalarFieldEnum | HelpArticleScalarFieldEnum[]
+  }
+
+  /**
+   * HelpArticle findFirstOrThrow
+   */
+  export type HelpArticleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpArticle to fetch.
+     */
+    where?: HelpArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpArticles to fetch.
+     */
+    orderBy?: HelpArticleOrderByWithRelationInput | HelpArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HelpArticles.
+     */
+    cursor?: HelpArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HelpArticles.
+     */
+    distinct?: HelpArticleScalarFieldEnum | HelpArticleScalarFieldEnum[]
+  }
+
+  /**
+   * HelpArticle findMany
+   */
+  export type HelpArticleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which HelpArticles to fetch.
+     */
+    where?: HelpArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HelpArticles to fetch.
+     */
+    orderBy?: HelpArticleOrderByWithRelationInput | HelpArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HelpArticles.
+     */
+    cursor?: HelpArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HelpArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HelpArticles.
+     */
+    skip?: number
+    distinct?: HelpArticleScalarFieldEnum | HelpArticleScalarFieldEnum[]
+  }
+
+  /**
+   * HelpArticle create
+   */
+  export type HelpArticleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HelpArticle.
+     */
+    data: XOR<HelpArticleCreateInput, HelpArticleUncheckedCreateInput>
+  }
+
+  /**
+   * HelpArticle createMany
+   */
+  export type HelpArticleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HelpArticles.
+     */
+    data: HelpArticleCreateManyInput | HelpArticleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HelpArticle createManyAndReturn
+   */
+  export type HelpArticleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many HelpArticles.
+     */
+    data: HelpArticleCreateManyInput | HelpArticleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HelpArticle update
+   */
+  export type HelpArticleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HelpArticle.
+     */
+    data: XOR<HelpArticleUpdateInput, HelpArticleUncheckedUpdateInput>
+    /**
+     * Choose, which HelpArticle to update.
+     */
+    where: HelpArticleWhereUniqueInput
+  }
+
+  /**
+   * HelpArticle updateMany
+   */
+  export type HelpArticleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HelpArticles.
+     */
+    data: XOR<HelpArticleUpdateManyMutationInput, HelpArticleUncheckedUpdateManyInput>
+    /**
+     * Filter which HelpArticles to update
+     */
+    where?: HelpArticleWhereInput
+  }
+
+  /**
+   * HelpArticle upsert
+   */
+  export type HelpArticleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HelpArticle to update in case it exists.
+     */
+    where: HelpArticleWhereUniqueInput
+    /**
+     * In case the HelpArticle found by the `where` argument doesn't exist, create a new HelpArticle with this data.
+     */
+    create: XOR<HelpArticleCreateInput, HelpArticleUncheckedCreateInput>
+    /**
+     * In case the HelpArticle was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HelpArticleUpdateInput, HelpArticleUncheckedUpdateInput>
+  }
+
+  /**
+   * HelpArticle delete
+   */
+  export type HelpArticleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+    /**
+     * Filter which HelpArticle to delete.
+     */
+    where: HelpArticleWhereUniqueInput
+  }
+
+  /**
+   * HelpArticle deleteMany
+   */
+  export type HelpArticleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HelpArticles to delete
+     */
+    where?: HelpArticleWhereInput
+  }
+
+  /**
+   * HelpArticle without action
+   */
+  export type HelpArticleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HelpArticle
+     */
+    select?: HelpArticleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HelpArticleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SupportTicket
+   */
+
+  export type AggregateSupportTicket = {
+    _count: SupportTicketCountAggregateOutputType | null
+    _min: SupportTicketMinAggregateOutputType | null
+    _max: SupportTicketMaxAggregateOutputType | null
+  }
+
+  export type SupportTicketMinAggregateOutputType = {
+    id: string | null
+    subject: string | null
+    status: string | null
+    priority: string | null
+    category: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportTicketMaxAggregateOutputType = {
+    id: string | null
+    subject: string | null
+    status: string | null
+    priority: string | null
+    category: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportTicketCountAggregateOutputType = {
+    id: number
+    subject: number
+    status: number
+    priority: number
+    category: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SupportTicketMinAggregateInputType = {
+    id?: true
+    subject?: true
+    status?: true
+    priority?: true
+    category?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportTicketMaxAggregateInputType = {
+    id?: true
+    subject?: true
+    status?: true
+    priority?: true
+    category?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportTicketCountAggregateInputType = {
+    id?: true
+    subject?: true
+    status?: true
+    priority?: true
+    category?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SupportTicketAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportTicket to aggregate.
+     */
+    where?: SupportTicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportTickets to fetch.
+     */
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportTicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportTickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportTickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportTickets
+    **/
+    _count?: true | SupportTicketCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportTicketMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportTicketMaxAggregateInputType
+  }
+
+  export type GetSupportTicketAggregateType<T extends SupportTicketAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportTicket]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportTicket[P]>
+      : GetScalarType<T[P], AggregateSupportTicket[P]>
+  }
+
+
+
+
+  export type SupportTicketGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportTicketWhereInput
+    orderBy?: SupportTicketOrderByWithAggregationInput | SupportTicketOrderByWithAggregationInput[]
+    by: SupportTicketScalarFieldEnum[] | SupportTicketScalarFieldEnum
+    having?: SupportTicketScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportTicketCountAggregateInputType | true
+    _min?: SupportTicketMinAggregateInputType
+    _max?: SupportTicketMaxAggregateInputType
+  }
+
+  export type SupportTicketGroupByOutputType = {
+    id: string
+    subject: string
+    status: string
+    priority: string
+    category: string | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: SupportTicketCountAggregateOutputType | null
+    _min: SupportTicketMinAggregateOutputType | null
+    _max: SupportTicketMaxAggregateOutputType | null
+  }
+
+  type GetSupportTicketGroupByPayload<T extends SupportTicketGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportTicketGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportTicketGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportTicketGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportTicketGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportTicketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subject?: boolean
+    status?: boolean
+    priority?: boolean
+    category?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    messages?: boolean | SupportTicket$messagesArgs<ExtArgs>
+    _count?: boolean | SupportTicketCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportTicket"]>
+
+  export type SupportTicketSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subject?: boolean
+    status?: boolean
+    priority?: boolean
+    category?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportTicket"]>
+
+  export type SupportTicketSelectScalar = {
+    id?: boolean
+    subject?: boolean
+    status?: boolean
+    priority?: boolean
+    category?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SupportTicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    messages?: boolean | SupportTicket$messagesArgs<ExtArgs>
+    _count?: boolean | SupportTicketCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SupportTicketIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SupportTicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportTicket"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      messages: Prisma.$SupportMessagePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      subject: string
+      status: string
+      priority: string
+      category: string | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["supportTicket"]>
+    composites: {}
+  }
+
+  type SupportTicketGetPayload<S extends boolean | null | undefined | SupportTicketDefaultArgs> = $Result.GetResult<Prisma.$SupportTicketPayload, S>
+
+  type SupportTicketCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SupportTicketFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SupportTicketCountAggregateInputType | true
+    }
+
+  export interface SupportTicketDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportTicket'], meta: { name: 'SupportTicket' } }
+    /**
+     * Find zero or one SupportTicket that matches the filter.
+     * @param {SupportTicketFindUniqueArgs} args - Arguments to find a SupportTicket
+     * @example
+     * // Get one SupportTicket
+     * const supportTicket = await prisma.supportTicket.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportTicketFindUniqueArgs>(args: SelectSubset<T, SupportTicketFindUniqueArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SupportTicket that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SupportTicketFindUniqueOrThrowArgs} args - Arguments to find a SupportTicket
+     * @example
+     * // Get one SupportTicket
+     * const supportTicket = await prisma.supportTicket.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportTicketFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportTicketFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SupportTicket that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketFindFirstArgs} args - Arguments to find a SupportTicket
+     * @example
+     * // Get one SupportTicket
+     * const supportTicket = await prisma.supportTicket.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportTicketFindFirstArgs>(args?: SelectSubset<T, SupportTicketFindFirstArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SupportTicket that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketFindFirstOrThrowArgs} args - Arguments to find a SupportTicket
+     * @example
+     * // Get one SupportTicket
+     * const supportTicket = await prisma.supportTicket.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportTicketFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportTicketFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SupportTickets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportTickets
+     * const supportTickets = await prisma.supportTicket.findMany()
+     * 
+     * // Get first 10 SupportTickets
+     * const supportTickets = await prisma.supportTicket.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportTicketWithIdOnly = await prisma.supportTicket.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportTicketFindManyArgs>(args?: SelectSubset<T, SupportTicketFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SupportTicket.
+     * @param {SupportTicketCreateArgs} args - Arguments to create a SupportTicket.
+     * @example
+     * // Create one SupportTicket
+     * const SupportTicket = await prisma.supportTicket.create({
+     *   data: {
+     *     // ... data to create a SupportTicket
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportTicketCreateArgs>(args: SelectSubset<T, SupportTicketCreateArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SupportTickets.
+     * @param {SupportTicketCreateManyArgs} args - Arguments to create many SupportTickets.
+     * @example
+     * // Create many SupportTickets
+     * const supportTicket = await prisma.supportTicket.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportTicketCreateManyArgs>(args?: SelectSubset<T, SupportTicketCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportTickets and returns the data saved in the database.
+     * @param {SupportTicketCreateManyAndReturnArgs} args - Arguments to create many SupportTickets.
+     * @example
+     * // Create many SupportTickets
+     * const supportTicket = await prisma.supportTicket.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportTickets and only return the `id`
+     * const supportTicketWithIdOnly = await prisma.supportTicket.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportTicketCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportTicketCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SupportTicket.
+     * @param {SupportTicketDeleteArgs} args - Arguments to delete one SupportTicket.
+     * @example
+     * // Delete one SupportTicket
+     * const SupportTicket = await prisma.supportTicket.delete({
+     *   where: {
+     *     // ... filter to delete one SupportTicket
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportTicketDeleteArgs>(args: SelectSubset<T, SupportTicketDeleteArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SupportTicket.
+     * @param {SupportTicketUpdateArgs} args - Arguments to update one SupportTicket.
+     * @example
+     * // Update one SupportTicket
+     * const supportTicket = await prisma.supportTicket.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportTicketUpdateArgs>(args: SelectSubset<T, SupportTicketUpdateArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SupportTickets.
+     * @param {SupportTicketDeleteManyArgs} args - Arguments to filter SupportTickets to delete.
+     * @example
+     * // Delete a few SupportTickets
+     * const { count } = await prisma.supportTicket.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportTicketDeleteManyArgs>(args?: SelectSubset<T, SupportTicketDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportTickets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportTickets
+     * const supportTicket = await prisma.supportTicket.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportTicketUpdateManyArgs>(args: SelectSubset<T, SupportTicketUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SupportTicket.
+     * @param {SupportTicketUpsertArgs} args - Arguments to update or create a SupportTicket.
+     * @example
+     * // Update or create a SupportTicket
+     * const supportTicket = await prisma.supportTicket.upsert({
+     *   create: {
+     *     // ... data to create a SupportTicket
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportTicket we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportTicketUpsertArgs>(args: SelectSubset<T, SupportTicketUpsertArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SupportTickets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketCountArgs} args - Arguments to filter SupportTickets to count.
+     * @example
+     * // Count the number of SupportTickets
+     * const count = await prisma.supportTicket.count({
+     *   where: {
+     *     // ... the filter for the SupportTickets we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportTicketCountArgs>(
+      args?: Subset<T, SupportTicketCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportTicketCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportTicket.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportTicketAggregateArgs>(args: Subset<T, SupportTicketAggregateArgs>): Prisma.PrismaPromise<GetSupportTicketAggregateType<T>>
+
+    /**
+     * Group by SupportTicket.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportTicketGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportTicketGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportTicketGroupByArgs['orderBy'] }
+        : { orderBy?: SupportTicketGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportTicketGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportTicketGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportTicket model
+   */
+  readonly fields: SupportTicketFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportTicket.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportTicketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    messages<T extends SupportTicket$messagesArgs<ExtArgs> = {}>(args?: Subset<T, SupportTicket$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportTicket model
+   */ 
+  interface SupportTicketFieldRefs {
+    readonly id: FieldRef<"SupportTicket", 'String'>
+    readonly subject: FieldRef<"SupportTicket", 'String'>
+    readonly status: FieldRef<"SupportTicket", 'String'>
+    readonly priority: FieldRef<"SupportTicket", 'String'>
+    readonly category: FieldRef<"SupportTicket", 'String'>
+    readonly userId: FieldRef<"SupportTicket", 'String'>
+    readonly createdAt: FieldRef<"SupportTicket", 'DateTime'>
+    readonly updatedAt: FieldRef<"SupportTicket", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportTicket findUnique
+   */
+  export type SupportTicketFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportTicket to fetch.
+     */
+    where: SupportTicketWhereUniqueInput
+  }
+
+  /**
+   * SupportTicket findUniqueOrThrow
+   */
+  export type SupportTicketFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportTicket to fetch.
+     */
+    where: SupportTicketWhereUniqueInput
+  }
+
+  /**
+   * SupportTicket findFirst
+   */
+  export type SupportTicketFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportTicket to fetch.
+     */
+    where?: SupportTicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportTickets to fetch.
+     */
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportTickets.
+     */
+    cursor?: SupportTicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportTickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportTickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportTickets.
+     */
+    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
+  }
+
+  /**
+   * SupportTicket findFirstOrThrow
+   */
+  export type SupportTicketFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportTicket to fetch.
+     */
+    where?: SupportTicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportTickets to fetch.
+     */
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportTickets.
+     */
+    cursor?: SupportTicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportTickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportTickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportTickets.
+     */
+    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
+  }
+
+  /**
+   * SupportTicket findMany
+   */
+  export type SupportTicketFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportTickets to fetch.
+     */
+    where?: SupportTicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportTickets to fetch.
+     */
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportTickets.
+     */
+    cursor?: SupportTicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportTickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportTickets.
+     */
+    skip?: number
+    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
+  }
+
+  /**
+   * SupportTicket create
+   */
+  export type SupportTicketCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportTicket.
+     */
+    data: XOR<SupportTicketCreateInput, SupportTicketUncheckedCreateInput>
+  }
+
+  /**
+   * SupportTicket createMany
+   */
+  export type SupportTicketCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportTickets.
+     */
+    data: SupportTicketCreateManyInput | SupportTicketCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportTicket createManyAndReturn
+   */
+  export type SupportTicketCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SupportTickets.
+     */
+    data: SupportTicketCreateManyInput | SupportTicketCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportTicket update
+   */
+  export type SupportTicketUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportTicket.
+     */
+    data: XOR<SupportTicketUpdateInput, SupportTicketUncheckedUpdateInput>
+    /**
+     * Choose, which SupportTicket to update.
+     */
+    where: SupportTicketWhereUniqueInput
+  }
+
+  /**
+   * SupportTicket updateMany
+   */
+  export type SupportTicketUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportTickets.
+     */
+    data: XOR<SupportTicketUpdateManyMutationInput, SupportTicketUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportTickets to update
+     */
+    where?: SupportTicketWhereInput
+  }
+
+  /**
+   * SupportTicket upsert
+   */
+  export type SupportTicketUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportTicket to update in case it exists.
+     */
+    where: SupportTicketWhereUniqueInput
+    /**
+     * In case the SupportTicket found by the `where` argument doesn't exist, create a new SupportTicket with this data.
+     */
+    create: XOR<SupportTicketCreateInput, SupportTicketUncheckedCreateInput>
+    /**
+     * In case the SupportTicket was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportTicketUpdateInput, SupportTicketUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportTicket delete
+   */
+  export type SupportTicketDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    /**
+     * Filter which SupportTicket to delete.
+     */
+    where: SupportTicketWhereUniqueInput
+  }
+
+  /**
+   * SupportTicket deleteMany
+   */
+  export type SupportTicketDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportTickets to delete
+     */
+    where?: SupportTicketWhereInput
+  }
+
+  /**
+   * SupportTicket.messages
+   */
+  export type SupportTicket$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    where?: SupportMessageWhereInput
+    orderBy?: SupportMessageOrderByWithRelationInput | SupportMessageOrderByWithRelationInput[]
+    cursor?: SupportMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportMessageScalarFieldEnum | SupportMessageScalarFieldEnum[]
+  }
+
+  /**
+   * SupportTicket without action
+   */
+  export type SupportTicketDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SupportMessage
+   */
+
+  export type AggregateSupportMessage = {
+    _count: SupportMessageCountAggregateOutputType | null
+    _min: SupportMessageMinAggregateOutputType | null
+    _max: SupportMessageMaxAggregateOutputType | null
+  }
+
+  export type SupportMessageMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    isStaff: boolean | null
+    read: boolean | null
+    ticketId: string | null
+    createdAt: Date | null
+  }
+
+  export type SupportMessageMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    isStaff: boolean | null
+    read: boolean | null
+    ticketId: string | null
+    createdAt: Date | null
+  }
+
+  export type SupportMessageCountAggregateOutputType = {
+    id: number
+    content: number
+    isStaff: number
+    read: number
+    ticketId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SupportMessageMinAggregateInputType = {
+    id?: true
+    content?: true
+    isStaff?: true
+    read?: true
+    ticketId?: true
+    createdAt?: true
+  }
+
+  export type SupportMessageMaxAggregateInputType = {
+    id?: true
+    content?: true
+    isStaff?: true
+    read?: true
+    ticketId?: true
+    createdAt?: true
+  }
+
+  export type SupportMessageCountAggregateInputType = {
+    id?: true
+    content?: true
+    isStaff?: true
+    read?: true
+    ticketId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SupportMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportMessage to aggregate.
+     */
+    where?: SupportMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportMessages to fetch.
+     */
+    orderBy?: SupportMessageOrderByWithRelationInput | SupportMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportMessages
+    **/
+    _count?: true | SupportMessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportMessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportMessageMaxAggregateInputType
+  }
+
+  export type GetSupportMessageAggregateType<T extends SupportMessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportMessage[P]>
+      : GetScalarType<T[P], AggregateSupportMessage[P]>
+  }
+
+
+
+
+  export type SupportMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportMessageWhereInput
+    orderBy?: SupportMessageOrderByWithAggregationInput | SupportMessageOrderByWithAggregationInput[]
+    by: SupportMessageScalarFieldEnum[] | SupportMessageScalarFieldEnum
+    having?: SupportMessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportMessageCountAggregateInputType | true
+    _min?: SupportMessageMinAggregateInputType
+    _max?: SupportMessageMaxAggregateInputType
+  }
+
+  export type SupportMessageGroupByOutputType = {
+    id: string
+    content: string
+    isStaff: boolean
+    read: boolean
+    ticketId: string
+    createdAt: Date
+    _count: SupportMessageCountAggregateOutputType | null
+    _min: SupportMessageMinAggregateOutputType | null
+    _max: SupportMessageMaxAggregateOutputType | null
+  }
+
+  type GetSupportMessageGroupByPayload<T extends SupportMessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportMessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportMessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportMessageGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportMessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    isStaff?: boolean
+    read?: boolean
+    ticketId?: boolean
+    createdAt?: boolean
+    ticket?: boolean | SupportTicketDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportMessage"]>
+
+  export type SupportMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    isStaff?: boolean
+    read?: boolean
+    ticketId?: boolean
+    createdAt?: boolean
+    ticket?: boolean | SupportTicketDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportMessage"]>
+
+  export type SupportMessageSelectScalar = {
+    id?: boolean
+    content?: boolean
+    isStaff?: boolean
+    read?: boolean
+    ticketId?: boolean
+    createdAt?: boolean
+  }
+
+  export type SupportMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticket?: boolean | SupportTicketDefaultArgs<ExtArgs>
+  }
+  export type SupportMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticket?: boolean | SupportTicketDefaultArgs<ExtArgs>
+  }
+
+  export type $SupportMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportMessage"
+    objects: {
+      ticket: Prisma.$SupportTicketPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      isStaff: boolean
+      read: boolean
+      ticketId: string
+      createdAt: Date
+    }, ExtArgs["result"]["supportMessage"]>
+    composites: {}
+  }
+
+  type SupportMessageGetPayload<S extends boolean | null | undefined | SupportMessageDefaultArgs> = $Result.GetResult<Prisma.$SupportMessagePayload, S>
+
+  type SupportMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SupportMessageFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SupportMessageCountAggregateInputType | true
+    }
+
+  export interface SupportMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportMessage'], meta: { name: 'SupportMessage' } }
+    /**
+     * Find zero or one SupportMessage that matches the filter.
+     * @param {SupportMessageFindUniqueArgs} args - Arguments to find a SupportMessage
+     * @example
+     * // Get one SupportMessage
+     * const supportMessage = await prisma.supportMessage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportMessageFindUniqueArgs>(args: SelectSubset<T, SupportMessageFindUniqueArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SupportMessage that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SupportMessageFindUniqueOrThrowArgs} args - Arguments to find a SupportMessage
+     * @example
+     * // Get one SupportMessage
+     * const supportMessage = await prisma.supportMessage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SupportMessage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageFindFirstArgs} args - Arguments to find a SupportMessage
+     * @example
+     * // Get one SupportMessage
+     * const supportMessage = await prisma.supportMessage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportMessageFindFirstArgs>(args?: SelectSubset<T, SupportMessageFindFirstArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SupportMessage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageFindFirstOrThrowArgs} args - Arguments to find a SupportMessage
+     * @example
+     * // Get one SupportMessage
+     * const supportMessage = await prisma.supportMessage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SupportMessages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportMessages
+     * const supportMessages = await prisma.supportMessage.findMany()
+     * 
+     * // Get first 10 SupportMessages
+     * const supportMessages = await prisma.supportMessage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportMessageWithIdOnly = await prisma.supportMessage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportMessageFindManyArgs>(args?: SelectSubset<T, SupportMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SupportMessage.
+     * @param {SupportMessageCreateArgs} args - Arguments to create a SupportMessage.
+     * @example
+     * // Create one SupportMessage
+     * const SupportMessage = await prisma.supportMessage.create({
+     *   data: {
+     *     // ... data to create a SupportMessage
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportMessageCreateArgs>(args: SelectSubset<T, SupportMessageCreateArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SupportMessages.
+     * @param {SupportMessageCreateManyArgs} args - Arguments to create many SupportMessages.
+     * @example
+     * // Create many SupportMessages
+     * const supportMessage = await prisma.supportMessage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportMessageCreateManyArgs>(args?: SelectSubset<T, SupportMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportMessages and returns the data saved in the database.
+     * @param {SupportMessageCreateManyAndReturnArgs} args - Arguments to create many SupportMessages.
+     * @example
+     * // Create many SupportMessages
+     * const supportMessage = await prisma.supportMessage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportMessages and only return the `id`
+     * const supportMessageWithIdOnly = await prisma.supportMessage.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SupportMessage.
+     * @param {SupportMessageDeleteArgs} args - Arguments to delete one SupportMessage.
+     * @example
+     * // Delete one SupportMessage
+     * const SupportMessage = await prisma.supportMessage.delete({
+     *   where: {
+     *     // ... filter to delete one SupportMessage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportMessageDeleteArgs>(args: SelectSubset<T, SupportMessageDeleteArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SupportMessage.
+     * @param {SupportMessageUpdateArgs} args - Arguments to update one SupportMessage.
+     * @example
+     * // Update one SupportMessage
+     * const supportMessage = await prisma.supportMessage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportMessageUpdateArgs>(args: SelectSubset<T, SupportMessageUpdateArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SupportMessages.
+     * @param {SupportMessageDeleteManyArgs} args - Arguments to filter SupportMessages to delete.
+     * @example
+     * // Delete a few SupportMessages
+     * const { count } = await prisma.supportMessage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportMessageDeleteManyArgs>(args?: SelectSubset<T, SupportMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportMessages
+     * const supportMessage = await prisma.supportMessage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportMessageUpdateManyArgs>(args: SelectSubset<T, SupportMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SupportMessage.
+     * @param {SupportMessageUpsertArgs} args - Arguments to update or create a SupportMessage.
+     * @example
+     * // Update or create a SupportMessage
+     * const supportMessage = await prisma.supportMessage.upsert({
+     *   create: {
+     *     // ... data to create a SupportMessage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportMessage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportMessageUpsertArgs>(args: SelectSubset<T, SupportMessageUpsertArgs<ExtArgs>>): Prisma__SupportMessageClient<$Result.GetResult<Prisma.$SupportMessagePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SupportMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageCountArgs} args - Arguments to filter SupportMessages to count.
+     * @example
+     * // Count the number of SupportMessages
+     * const count = await prisma.supportMessage.count({
+     *   where: {
+     *     // ... the filter for the SupportMessages we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportMessageCountArgs>(
+      args?: Subset<T, SupportMessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportMessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportMessageAggregateArgs>(args: Subset<T, SupportMessageAggregateArgs>): Prisma.PrismaPromise<GetSupportMessageAggregateType<T>>
+
+    /**
+     * Group by SupportMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportMessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportMessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportMessageGroupByArgs['orderBy'] }
+        : { orderBy?: SupportMessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportMessage model
+   */
+  readonly fields: SupportMessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportMessage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ticket<T extends SupportTicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupportTicketDefaultArgs<ExtArgs>>): Prisma__SupportTicketClient<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportMessage model
+   */ 
+  interface SupportMessageFieldRefs {
+    readonly id: FieldRef<"SupportMessage", 'String'>
+    readonly content: FieldRef<"SupportMessage", 'String'>
+    readonly isStaff: FieldRef<"SupportMessage", 'Boolean'>
+    readonly read: FieldRef<"SupportMessage", 'Boolean'>
+    readonly ticketId: FieldRef<"SupportMessage", 'String'>
+    readonly createdAt: FieldRef<"SupportMessage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportMessage findUnique
+   */
+  export type SupportMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportMessage to fetch.
+     */
+    where: SupportMessageWhereUniqueInput
+  }
+
+  /**
+   * SupportMessage findUniqueOrThrow
+   */
+  export type SupportMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportMessage to fetch.
+     */
+    where: SupportMessageWhereUniqueInput
+  }
+
+  /**
+   * SupportMessage findFirst
+   */
+  export type SupportMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportMessage to fetch.
+     */
+    where?: SupportMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportMessages to fetch.
+     */
+    orderBy?: SupportMessageOrderByWithRelationInput | SupportMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportMessages.
+     */
+    cursor?: SupportMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportMessages.
+     */
+    distinct?: SupportMessageScalarFieldEnum | SupportMessageScalarFieldEnum[]
+  }
+
+  /**
+   * SupportMessage findFirstOrThrow
+   */
+  export type SupportMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportMessage to fetch.
+     */
+    where?: SupportMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportMessages to fetch.
+     */
+    orderBy?: SupportMessageOrderByWithRelationInput | SupportMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportMessages.
+     */
+    cursor?: SupportMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportMessages.
+     */
+    distinct?: SupportMessageScalarFieldEnum | SupportMessageScalarFieldEnum[]
+  }
+
+  /**
+   * SupportMessage findMany
+   */
+  export type SupportMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportMessages to fetch.
+     */
+    where?: SupportMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportMessages to fetch.
+     */
+    orderBy?: SupportMessageOrderByWithRelationInput | SupportMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportMessages.
+     */
+    cursor?: SupportMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportMessages.
+     */
+    skip?: number
+    distinct?: SupportMessageScalarFieldEnum | SupportMessageScalarFieldEnum[]
+  }
+
+  /**
+   * SupportMessage create
+   */
+  export type SupportMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportMessage.
+     */
+    data: XOR<SupportMessageCreateInput, SupportMessageUncheckedCreateInput>
+  }
+
+  /**
+   * SupportMessage createMany
+   */
+  export type SupportMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportMessages.
+     */
+    data: SupportMessageCreateManyInput | SupportMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportMessage createManyAndReturn
+   */
+  export type SupportMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SupportMessages.
+     */
+    data: SupportMessageCreateManyInput | SupportMessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportMessage update
+   */
+  export type SupportMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportMessage.
+     */
+    data: XOR<SupportMessageUpdateInput, SupportMessageUncheckedUpdateInput>
+    /**
+     * Choose, which SupportMessage to update.
+     */
+    where: SupportMessageWhereUniqueInput
+  }
+
+  /**
+   * SupportMessage updateMany
+   */
+  export type SupportMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportMessages.
+     */
+    data: XOR<SupportMessageUpdateManyMutationInput, SupportMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportMessages to update
+     */
+    where?: SupportMessageWhereInput
+  }
+
+  /**
+   * SupportMessage upsert
+   */
+  export type SupportMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportMessage to update in case it exists.
+     */
+    where: SupportMessageWhereUniqueInput
+    /**
+     * In case the SupportMessage found by the `where` argument doesn't exist, create a new SupportMessage with this data.
+     */
+    create: XOR<SupportMessageCreateInput, SupportMessageUncheckedCreateInput>
+    /**
+     * In case the SupportMessage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportMessageUpdateInput, SupportMessageUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportMessage delete
+   */
+  export type SupportMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+    /**
+     * Filter which SupportMessage to delete.
+     */
+    where: SupportMessageWhereUniqueInput
+  }
+
+  /**
+   * SupportMessage deleteMany
+   */
+  export type SupportMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportMessages to delete
+     */
+    where?: SupportMessageWhereInput
+  }
+
+  /**
+   * SupportMessage without action
+   */
+  export type SupportMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportMessage
+     */
+    select?: SupportMessageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportMessageInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19984,6 +24440,64 @@ export namespace Prisma {
   export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
+  export const HelpCategoryScalarFieldEnum: {
+    id: 'id',
+    slug: 'slug',
+    name: 'name',
+    description: 'description',
+    icon: 'icon',
+    order: 'order',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type HelpCategoryScalarFieldEnum = (typeof HelpCategoryScalarFieldEnum)[keyof typeof HelpCategoryScalarFieldEnum]
+
+
+  export const HelpArticleScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    content: 'content',
+    excerpt: 'excerpt',
+    isPublished: 'isPublished',
+    views: 'views',
+    helpful: 'helpful',
+    notHelpful: 'notHelpful',
+    categoryId: 'categoryId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type HelpArticleScalarFieldEnum = (typeof HelpArticleScalarFieldEnum)[keyof typeof HelpArticleScalarFieldEnum]
+
+
+  export const SupportTicketScalarFieldEnum: {
+    id: 'id',
+    subject: 'subject',
+    status: 'status',
+    priority: 'priority',
+    category: 'category',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SupportTicketScalarFieldEnum = (typeof SupportTicketScalarFieldEnum)[keyof typeof SupportTicketScalarFieldEnum]
+
+
+  export const SupportMessageScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    isStaff: 'isStaff',
+    read: 'read',
+    ticketId: 'ticketId',
+    createdAt: 'createdAt'
+  };
+
+  export type SupportMessageScalarFieldEnum = (typeof SupportMessageScalarFieldEnum)[keyof typeof SupportMessageScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20158,6 +24672,7 @@ export namespace Prisma {
     photos?: PhotoListRelationFilter
     photoTags?: PhotoTagListRelationFilter
     communities?: CommunityMemberListRelationFilter
+    supportTickets?: SupportTicketListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -20212,6 +24727,7 @@ export namespace Prisma {
     photos?: PhotoOrderByRelationAggregateInput
     photoTags?: PhotoTagOrderByRelationAggregateInput
     communities?: CommunityMemberOrderByRelationAggregateInput
+    supportTickets?: SupportTicketOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -20269,6 +24785,7 @@ export namespace Prisma {
     photos?: PhotoListRelationFilter
     photoTags?: PhotoTagListRelationFilter
     communities?: CommunityMemberListRelationFilter
+    supportTickets?: SupportTicketListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -21540,6 +26057,303 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Video"> | Date | string
   }
 
+  export type HelpCategoryWhereInput = {
+    AND?: HelpCategoryWhereInput | HelpCategoryWhereInput[]
+    OR?: HelpCategoryWhereInput[]
+    NOT?: HelpCategoryWhereInput | HelpCategoryWhereInput[]
+    id?: StringFilter<"HelpCategory"> | string
+    slug?: StringFilter<"HelpCategory"> | string
+    name?: StringFilter<"HelpCategory"> | string
+    description?: StringNullableFilter<"HelpCategory"> | string | null
+    icon?: StringNullableFilter<"HelpCategory"> | string | null
+    order?: IntFilter<"HelpCategory"> | number
+    createdAt?: DateTimeFilter<"HelpCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"HelpCategory"> | Date | string
+    articles?: HelpArticleListRelationFilter
+  }
+
+  export type HelpCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    articles?: HelpArticleOrderByRelationAggregateInput
+  }
+
+  export type HelpCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: HelpCategoryWhereInput | HelpCategoryWhereInput[]
+    OR?: HelpCategoryWhereInput[]
+    NOT?: HelpCategoryWhereInput | HelpCategoryWhereInput[]
+    name?: StringFilter<"HelpCategory"> | string
+    description?: StringNullableFilter<"HelpCategory"> | string | null
+    icon?: StringNullableFilter<"HelpCategory"> | string | null
+    order?: IntFilter<"HelpCategory"> | number
+    createdAt?: DateTimeFilter<"HelpCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"HelpCategory"> | Date | string
+    articles?: HelpArticleListRelationFilter
+  }, "id" | "slug">
+
+  export type HelpCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: HelpCategoryCountOrderByAggregateInput
+    _avg?: HelpCategoryAvgOrderByAggregateInput
+    _max?: HelpCategoryMaxOrderByAggregateInput
+    _min?: HelpCategoryMinOrderByAggregateInput
+    _sum?: HelpCategorySumOrderByAggregateInput
+  }
+
+  export type HelpCategoryScalarWhereWithAggregatesInput = {
+    AND?: HelpCategoryScalarWhereWithAggregatesInput | HelpCategoryScalarWhereWithAggregatesInput[]
+    OR?: HelpCategoryScalarWhereWithAggregatesInput[]
+    NOT?: HelpCategoryScalarWhereWithAggregatesInput | HelpCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HelpCategory"> | string
+    slug?: StringWithAggregatesFilter<"HelpCategory"> | string
+    name?: StringWithAggregatesFilter<"HelpCategory"> | string
+    description?: StringNullableWithAggregatesFilter<"HelpCategory"> | string | null
+    icon?: StringNullableWithAggregatesFilter<"HelpCategory"> | string | null
+    order?: IntWithAggregatesFilter<"HelpCategory"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"HelpCategory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HelpCategory"> | Date | string
+  }
+
+  export type HelpArticleWhereInput = {
+    AND?: HelpArticleWhereInput | HelpArticleWhereInput[]
+    OR?: HelpArticleWhereInput[]
+    NOT?: HelpArticleWhereInput | HelpArticleWhereInput[]
+    id?: StringFilter<"HelpArticle"> | string
+    title?: StringFilter<"HelpArticle"> | string
+    slug?: StringFilter<"HelpArticle"> | string
+    content?: StringFilter<"HelpArticle"> | string
+    excerpt?: StringNullableFilter<"HelpArticle"> | string | null
+    isPublished?: BoolFilter<"HelpArticle"> | boolean
+    views?: IntFilter<"HelpArticle"> | number
+    helpful?: IntFilter<"HelpArticle"> | number
+    notHelpful?: IntFilter<"HelpArticle"> | number
+    categoryId?: StringFilter<"HelpArticle"> | string
+    createdAt?: DateTimeFilter<"HelpArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"HelpArticle"> | Date | string
+    category?: XOR<HelpCategoryRelationFilter, HelpCategoryWhereInput>
+  }
+
+  export type HelpArticleOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    isPublished?: SortOrder
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    category?: HelpCategoryOrderByWithRelationInput
+  }
+
+  export type HelpArticleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: HelpArticleWhereInput | HelpArticleWhereInput[]
+    OR?: HelpArticleWhereInput[]
+    NOT?: HelpArticleWhereInput | HelpArticleWhereInput[]
+    title?: StringFilter<"HelpArticle"> | string
+    content?: StringFilter<"HelpArticle"> | string
+    excerpt?: StringNullableFilter<"HelpArticle"> | string | null
+    isPublished?: BoolFilter<"HelpArticle"> | boolean
+    views?: IntFilter<"HelpArticle"> | number
+    helpful?: IntFilter<"HelpArticle"> | number
+    notHelpful?: IntFilter<"HelpArticle"> | number
+    categoryId?: StringFilter<"HelpArticle"> | string
+    createdAt?: DateTimeFilter<"HelpArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"HelpArticle"> | Date | string
+    category?: XOR<HelpCategoryRelationFilter, HelpCategoryWhereInput>
+  }, "id" | "slug">
+
+  export type HelpArticleOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    isPublished?: SortOrder
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: HelpArticleCountOrderByAggregateInput
+    _avg?: HelpArticleAvgOrderByAggregateInput
+    _max?: HelpArticleMaxOrderByAggregateInput
+    _min?: HelpArticleMinOrderByAggregateInput
+    _sum?: HelpArticleSumOrderByAggregateInput
+  }
+
+  export type HelpArticleScalarWhereWithAggregatesInput = {
+    AND?: HelpArticleScalarWhereWithAggregatesInput | HelpArticleScalarWhereWithAggregatesInput[]
+    OR?: HelpArticleScalarWhereWithAggregatesInput[]
+    NOT?: HelpArticleScalarWhereWithAggregatesInput | HelpArticleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HelpArticle"> | string
+    title?: StringWithAggregatesFilter<"HelpArticle"> | string
+    slug?: StringWithAggregatesFilter<"HelpArticle"> | string
+    content?: StringWithAggregatesFilter<"HelpArticle"> | string
+    excerpt?: StringNullableWithAggregatesFilter<"HelpArticle"> | string | null
+    isPublished?: BoolWithAggregatesFilter<"HelpArticle"> | boolean
+    views?: IntWithAggregatesFilter<"HelpArticle"> | number
+    helpful?: IntWithAggregatesFilter<"HelpArticle"> | number
+    notHelpful?: IntWithAggregatesFilter<"HelpArticle"> | number
+    categoryId?: StringWithAggregatesFilter<"HelpArticle"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"HelpArticle"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HelpArticle"> | Date | string
+  }
+
+  export type SupportTicketWhereInput = {
+    AND?: SupportTicketWhereInput | SupportTicketWhereInput[]
+    OR?: SupportTicketWhereInput[]
+    NOT?: SupportTicketWhereInput | SupportTicketWhereInput[]
+    id?: StringFilter<"SupportTicket"> | string
+    subject?: StringFilter<"SupportTicket"> | string
+    status?: StringFilter<"SupportTicket"> | string
+    priority?: StringFilter<"SupportTicket"> | string
+    category?: StringNullableFilter<"SupportTicket"> | string | null
+    userId?: StringFilter<"SupportTicket"> | string
+    createdAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    messages?: SupportMessageListRelationFilter
+  }
+
+  export type SupportTicketOrderByWithRelationInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    category?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    messages?: SupportMessageOrderByRelationAggregateInput
+  }
+
+  export type SupportTicketWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SupportTicketWhereInput | SupportTicketWhereInput[]
+    OR?: SupportTicketWhereInput[]
+    NOT?: SupportTicketWhereInput | SupportTicketWhereInput[]
+    subject?: StringFilter<"SupportTicket"> | string
+    status?: StringFilter<"SupportTicket"> | string
+    priority?: StringFilter<"SupportTicket"> | string
+    category?: StringNullableFilter<"SupportTicket"> | string | null
+    userId?: StringFilter<"SupportTicket"> | string
+    createdAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    messages?: SupportMessageListRelationFilter
+  }, "id">
+
+  export type SupportTicketOrderByWithAggregationInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    category?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SupportTicketCountOrderByAggregateInput
+    _max?: SupportTicketMaxOrderByAggregateInput
+    _min?: SupportTicketMinOrderByAggregateInput
+  }
+
+  export type SupportTicketScalarWhereWithAggregatesInput = {
+    AND?: SupportTicketScalarWhereWithAggregatesInput | SupportTicketScalarWhereWithAggregatesInput[]
+    OR?: SupportTicketScalarWhereWithAggregatesInput[]
+    NOT?: SupportTicketScalarWhereWithAggregatesInput | SupportTicketScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportTicket"> | string
+    subject?: StringWithAggregatesFilter<"SupportTicket"> | string
+    status?: StringWithAggregatesFilter<"SupportTicket"> | string
+    priority?: StringWithAggregatesFilter<"SupportTicket"> | string
+    category?: StringNullableWithAggregatesFilter<"SupportTicket"> | string | null
+    userId?: StringWithAggregatesFilter<"SupportTicket"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SupportTicket"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SupportTicket"> | Date | string
+  }
+
+  export type SupportMessageWhereInput = {
+    AND?: SupportMessageWhereInput | SupportMessageWhereInput[]
+    OR?: SupportMessageWhereInput[]
+    NOT?: SupportMessageWhereInput | SupportMessageWhereInput[]
+    id?: StringFilter<"SupportMessage"> | string
+    content?: StringFilter<"SupportMessage"> | string
+    isStaff?: BoolFilter<"SupportMessage"> | boolean
+    read?: BoolFilter<"SupportMessage"> | boolean
+    ticketId?: StringFilter<"SupportMessage"> | string
+    createdAt?: DateTimeFilter<"SupportMessage"> | Date | string
+    ticket?: XOR<SupportTicketRelationFilter, SupportTicketWhereInput>
+  }
+
+  export type SupportMessageOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    isStaff?: SortOrder
+    read?: SortOrder
+    ticketId?: SortOrder
+    createdAt?: SortOrder
+    ticket?: SupportTicketOrderByWithRelationInput
+  }
+
+  export type SupportMessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SupportMessageWhereInput | SupportMessageWhereInput[]
+    OR?: SupportMessageWhereInput[]
+    NOT?: SupportMessageWhereInput | SupportMessageWhereInput[]
+    content?: StringFilter<"SupportMessage"> | string
+    isStaff?: BoolFilter<"SupportMessage"> | boolean
+    read?: BoolFilter<"SupportMessage"> | boolean
+    ticketId?: StringFilter<"SupportMessage"> | string
+    createdAt?: DateTimeFilter<"SupportMessage"> | Date | string
+    ticket?: XOR<SupportTicketRelationFilter, SupportTicketWhereInput>
+  }, "id">
+
+  export type SupportMessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    isStaff?: SortOrder
+    read?: SortOrder
+    ticketId?: SortOrder
+    createdAt?: SortOrder
+    _count?: SupportMessageCountOrderByAggregateInput
+    _max?: SupportMessageMaxOrderByAggregateInput
+    _min?: SupportMessageMinOrderByAggregateInput
+  }
+
+  export type SupportMessageScalarWhereWithAggregatesInput = {
+    AND?: SupportMessageScalarWhereWithAggregatesInput | SupportMessageScalarWhereWithAggregatesInput[]
+    OR?: SupportMessageScalarWhereWithAggregatesInput[]
+    NOT?: SupportMessageScalarWhereWithAggregatesInput | SupportMessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportMessage"> | string
+    content?: StringWithAggregatesFilter<"SupportMessage"> | string
+    isStaff?: BoolWithAggregatesFilter<"SupportMessage"> | boolean
+    read?: BoolWithAggregatesFilter<"SupportMessage"> | boolean
+    ticketId?: StringWithAggregatesFilter<"SupportMessage"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SupportMessage"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     username: string
@@ -21592,6 +26406,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -21646,6 +26461,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -21700,6 +26516,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21754,6 +26571,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23092,6 +27910,333 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HelpCategoryCreateInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    articles?: HelpArticleCreateNestedManyWithoutCategoryInput
+  }
+
+  export type HelpCategoryUncheckedCreateInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    articles?: HelpArticleUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type HelpCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    articles?: HelpArticleUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type HelpCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    articles?: HelpArticleUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type HelpCategoryCreateManyInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpArticleCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: HelpCategoryCreateNestedOneWithoutArticlesInput
+  }
+
+  export type HelpArticleUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpArticleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: HelpCategoryUpdateOneRequiredWithoutArticlesNestedInput
+  }
+
+  export type HelpArticleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpArticleCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpArticleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpArticleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportTicketCreateInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSupportTicketsInput
+    messages?: SupportMessageCreateNestedManyWithoutTicketInput
+  }
+
+  export type SupportTicketUncheckedCreateInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: SupportMessageUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type SupportTicketUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSupportTicketsNestedInput
+    messages?: SupportMessageUpdateManyWithoutTicketNestedInput
+  }
+
+  export type SupportTicketUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: SupportMessageUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type SupportTicketCreateManyInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportTicketUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportTicketUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageCreateInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    createdAt?: Date | string
+    ticket: SupportTicketCreateNestedOneWithoutMessagesInput
+  }
+
+  export type SupportMessageUncheckedCreateInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    ticketId: string
+    createdAt?: Date | string
+  }
+
+  export type SupportMessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticket?: SupportTicketUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type SupportMessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    ticketId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageCreateManyInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    ticketId: string
+    createdAt?: Date | string
+  }
+
+  export type SupportMessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    ticketId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -23272,6 +28417,12 @@ export namespace Prisma {
     none?: CommunityMemberWhereInput
   }
 
+  export type SupportTicketListRelationFilter = {
+    every?: SupportTicketWhereInput
+    some?: SupportTicketWhereInput
+    none?: SupportTicketWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -23334,6 +28485,10 @@ export namespace Prisma {
   }
 
   export type CommunityMemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportTicketOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24279,6 +29434,194 @@ export namespace Prisma {
     views?: SortOrder
   }
 
+  export type HelpArticleListRelationFilter = {
+    every?: HelpArticleWhereInput
+    some?: HelpArticleWhereInput
+    none?: HelpArticleWhereInput
+  }
+
+  export type HelpArticleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HelpCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpCategoryAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type HelpCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpCategorySumOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type HelpCategoryRelationFilter = {
+    is?: HelpCategoryWhereInput
+    isNot?: HelpCategoryWhereInput
+  }
+
+  export type HelpArticleCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    excerpt?: SortOrder
+    isPublished?: SortOrder
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpArticleAvgOrderByAggregateInput = {
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+  }
+
+  export type HelpArticleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    excerpt?: SortOrder
+    isPublished?: SortOrder
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpArticleMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    excerpt?: SortOrder
+    isPublished?: SortOrder
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HelpArticleSumOrderByAggregateInput = {
+    views?: SortOrder
+    helpful?: SortOrder
+    notHelpful?: SortOrder
+  }
+
+  export type SupportMessageListRelationFilter = {
+    every?: SupportMessageWhereInput
+    some?: SupportMessageWhereInput
+    none?: SupportMessageWhereInput
+  }
+
+  export type SupportMessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportTicketCountOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    category?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportTicketMaxOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    category?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportTicketMinOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    category?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportTicketRelationFilter = {
+    is?: SupportTicketWhereInput
+    isNot?: SupportTicketWhereInput
+  }
+
+  export type SupportMessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    isStaff?: SortOrder
+    read?: SortOrder
+    ticketId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SupportMessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    isStaff?: SortOrder
+    read?: SortOrder
+    ticketId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SupportMessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    isStaff?: SortOrder
+    read?: SortOrder
+    ticketId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type PostCreateNestedManyWithoutAuthorInput = {
     create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
@@ -24422,6 +29765,13 @@ export namespace Prisma {
     connect?: CommunityMemberWhereUniqueInput | CommunityMemberWhereUniqueInput[]
   }
 
+  export type SupportTicketCreateNestedManyWithoutUserInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+  }
+
   export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
@@ -24563,6 +29913,13 @@ export namespace Prisma {
     connectOrCreate?: CommunityMemberCreateOrConnectWithoutUserInput | CommunityMemberCreateOrConnectWithoutUserInput[]
     createMany?: CommunityMemberCreateManyUserInputEnvelope
     connect?: CommunityMemberWhereUniqueInput | CommunityMemberWhereUniqueInput[]
+  }
+
+  export type SupportTicketUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -24883,6 +30240,20 @@ export namespace Prisma {
     deleteMany?: CommunityMemberScalarWhereInput | CommunityMemberScalarWhereInput[]
   }
 
+  export type SupportTicketUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+  }
+
   export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
@@ -25171,6 +30542,20 @@ export namespace Prisma {
     update?: CommunityMemberUpdateWithWhereUniqueWithoutUserInput | CommunityMemberUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommunityMemberUpdateManyWithWhereWithoutUserInput | CommunityMemberUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommunityMemberScalarWhereInput | CommunityMemberScalarWhereInput[]
+  }
+
+  export type SupportTicketUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
   }
 
   export type CommunityMemberCreateNestedManyWithoutCommunityInput = {
@@ -26155,6 +31540,132 @@ export namespace Prisma {
     deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
+  export type HelpArticleCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput> | HelpArticleCreateWithoutCategoryInput[] | HelpArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HelpArticleCreateOrConnectWithoutCategoryInput | HelpArticleCreateOrConnectWithoutCategoryInput[]
+    createMany?: HelpArticleCreateManyCategoryInputEnvelope
+    connect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+  }
+
+  export type HelpArticleUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput> | HelpArticleCreateWithoutCategoryInput[] | HelpArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HelpArticleCreateOrConnectWithoutCategoryInput | HelpArticleCreateOrConnectWithoutCategoryInput[]
+    createMany?: HelpArticleCreateManyCategoryInputEnvelope
+    connect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+  }
+
+  export type HelpArticleUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput> | HelpArticleCreateWithoutCategoryInput[] | HelpArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HelpArticleCreateOrConnectWithoutCategoryInput | HelpArticleCreateOrConnectWithoutCategoryInput[]
+    upsert?: HelpArticleUpsertWithWhereUniqueWithoutCategoryInput | HelpArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: HelpArticleCreateManyCategoryInputEnvelope
+    set?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    disconnect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    delete?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    connect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    update?: HelpArticleUpdateWithWhereUniqueWithoutCategoryInput | HelpArticleUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: HelpArticleUpdateManyWithWhereWithoutCategoryInput | HelpArticleUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: HelpArticleScalarWhereInput | HelpArticleScalarWhereInput[]
+  }
+
+  export type HelpArticleUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput> | HelpArticleCreateWithoutCategoryInput[] | HelpArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HelpArticleCreateOrConnectWithoutCategoryInput | HelpArticleCreateOrConnectWithoutCategoryInput[]
+    upsert?: HelpArticleUpsertWithWhereUniqueWithoutCategoryInput | HelpArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: HelpArticleCreateManyCategoryInputEnvelope
+    set?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    disconnect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    delete?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    connect?: HelpArticleWhereUniqueInput | HelpArticleWhereUniqueInput[]
+    update?: HelpArticleUpdateWithWhereUniqueWithoutCategoryInput | HelpArticleUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: HelpArticleUpdateManyWithWhereWithoutCategoryInput | HelpArticleUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: HelpArticleScalarWhereInput | HelpArticleScalarWhereInput[]
+  }
+
+  export type HelpCategoryCreateNestedOneWithoutArticlesInput = {
+    create?: XOR<HelpCategoryCreateWithoutArticlesInput, HelpCategoryUncheckedCreateWithoutArticlesInput>
+    connectOrCreate?: HelpCategoryCreateOrConnectWithoutArticlesInput
+    connect?: HelpCategoryWhereUniqueInput
+  }
+
+  export type HelpCategoryUpdateOneRequiredWithoutArticlesNestedInput = {
+    create?: XOR<HelpCategoryCreateWithoutArticlesInput, HelpCategoryUncheckedCreateWithoutArticlesInput>
+    connectOrCreate?: HelpCategoryCreateOrConnectWithoutArticlesInput
+    upsert?: HelpCategoryUpsertWithoutArticlesInput
+    connect?: HelpCategoryWhereUniqueInput
+    update?: XOR<XOR<HelpCategoryUpdateToOneWithWhereWithoutArticlesInput, HelpCategoryUpdateWithoutArticlesInput>, HelpCategoryUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type UserCreateNestedOneWithoutSupportTicketsInput = {
+    create?: XOR<UserCreateWithoutSupportTicketsInput, UserUncheckedCreateWithoutSupportTicketsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSupportTicketsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SupportMessageCreateNestedManyWithoutTicketInput = {
+    create?: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput> | SupportMessageCreateWithoutTicketInput[] | SupportMessageUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: SupportMessageCreateOrConnectWithoutTicketInput | SupportMessageCreateOrConnectWithoutTicketInput[]
+    createMany?: SupportMessageCreateManyTicketInputEnvelope
+    connect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+  }
+
+  export type SupportMessageUncheckedCreateNestedManyWithoutTicketInput = {
+    create?: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput> | SupportMessageCreateWithoutTicketInput[] | SupportMessageUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: SupportMessageCreateOrConnectWithoutTicketInput | SupportMessageCreateOrConnectWithoutTicketInput[]
+    createMany?: SupportMessageCreateManyTicketInputEnvelope
+    connect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutSupportTicketsNestedInput = {
+    create?: XOR<UserCreateWithoutSupportTicketsInput, UserUncheckedCreateWithoutSupportTicketsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSupportTicketsInput
+    upsert?: UserUpsertWithoutSupportTicketsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSupportTicketsInput, UserUpdateWithoutSupportTicketsInput>, UserUncheckedUpdateWithoutSupportTicketsInput>
+  }
+
+  export type SupportMessageUpdateManyWithoutTicketNestedInput = {
+    create?: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput> | SupportMessageCreateWithoutTicketInput[] | SupportMessageUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: SupportMessageCreateOrConnectWithoutTicketInput | SupportMessageCreateOrConnectWithoutTicketInput[]
+    upsert?: SupportMessageUpsertWithWhereUniqueWithoutTicketInput | SupportMessageUpsertWithWhereUniqueWithoutTicketInput[]
+    createMany?: SupportMessageCreateManyTicketInputEnvelope
+    set?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    disconnect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    delete?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    connect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    update?: SupportMessageUpdateWithWhereUniqueWithoutTicketInput | SupportMessageUpdateWithWhereUniqueWithoutTicketInput[]
+    updateMany?: SupportMessageUpdateManyWithWhereWithoutTicketInput | SupportMessageUpdateManyWithWhereWithoutTicketInput[]
+    deleteMany?: SupportMessageScalarWhereInput | SupportMessageScalarWhereInput[]
+  }
+
+  export type SupportMessageUncheckedUpdateManyWithoutTicketNestedInput = {
+    create?: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput> | SupportMessageCreateWithoutTicketInput[] | SupportMessageUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: SupportMessageCreateOrConnectWithoutTicketInput | SupportMessageCreateOrConnectWithoutTicketInput[]
+    upsert?: SupportMessageUpsertWithWhereUniqueWithoutTicketInput | SupportMessageUpsertWithWhereUniqueWithoutTicketInput[]
+    createMany?: SupportMessageCreateManyTicketInputEnvelope
+    set?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    disconnect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    delete?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    connect?: SupportMessageWhereUniqueInput | SupportMessageWhereUniqueInput[]
+    update?: SupportMessageUpdateWithWhereUniqueWithoutTicketInput | SupportMessageUpdateWithWhereUniqueWithoutTicketInput[]
+    updateMany?: SupportMessageUpdateManyWithWhereWithoutTicketInput | SupportMessageUpdateManyWithWhereWithoutTicketInput[]
+    deleteMany?: SupportMessageScalarWhereInput | SupportMessageScalarWhereInput[]
+  }
+
+  export type SupportTicketCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<SupportTicketCreateWithoutMessagesInput, SupportTicketUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutMessagesInput
+    connect?: SupportTicketWhereUniqueInput
+  }
+
+  export type SupportTicketUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<SupportTicketCreateWithoutMessagesInput, SupportTicketUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutMessagesInput
+    upsert?: SupportTicketUpsertWithoutMessagesInput
+    connect?: SupportTicketWhereUniqueInput
+    update?: XOR<XOR<SupportTicketUpdateToOneWithWhereWithoutMessagesInput, SupportTicketUpdateWithoutMessagesInput>, SupportTicketUncheckedUpdateWithoutMessagesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -26617,6 +32128,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFriendOfInput = {
@@ -26670,6 +32182,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFriendOfInput = {
@@ -26728,6 +32241,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFriendsInput = {
@@ -26781,6 +32295,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFriendsInput = {
@@ -26839,6 +32354,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlockedByInput = {
@@ -26892,6 +32408,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlockedByInput = {
@@ -26950,6 +32467,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlockedUsersInput = {
@@ -27003,6 +32521,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlockedUsersInput = {
@@ -27373,6 +32892,38 @@ export namespace Prisma {
 
   export type CommunityMemberCreateManyUserInputEnvelope = {
     data: CommunityMemberCreateManyUserInput | CommunityMemberCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SupportTicketCreateWithoutUserInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: SupportMessageCreateNestedManyWithoutTicketInput
+  }
+
+  export type SupportTicketUncheckedCreateWithoutUserInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: SupportMessageUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type SupportTicketCreateOrConnectWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
+  }
+
+  export type SupportTicketCreateManyUserInputEnvelope = {
+    data: SupportTicketCreateManyUserInput | SupportTicketCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -27947,6 +33498,36 @@ export namespace Prisma {
     joinedAt?: DateTimeFilter<"CommunityMember"> | Date | string
   }
 
+  export type SupportTicketUpsertWithWhereUniqueWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    update: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
+    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
+  }
+
+  export type SupportTicketUpdateWithWhereUniqueWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    data: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SupportTicketUpdateManyWithWhereWithoutUserInput = {
+    where: SupportTicketScalarWhereInput
+    data: XOR<SupportTicketUpdateManyMutationInput, SupportTicketUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SupportTicketScalarWhereInput = {
+    AND?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+    OR?: SupportTicketScalarWhereInput[]
+    NOT?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+    id?: StringFilter<"SupportTicket"> | string
+    subject?: StringFilter<"SupportTicket"> | string
+    status?: StringFilter<"SupportTicket"> | string
+    priority?: StringFilter<"SupportTicket"> | string
+    category?: StringNullableFilter<"SupportTicket"> | string | null
+    userId?: StringFilter<"SupportTicket"> | string
+    createdAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
+  }
+
   export type CommunityMemberCreateWithoutCommunityInput = {
     id?: string
     role?: string
@@ -28146,6 +33727,7 @@ export namespace Prisma {
     albums?: AlbumCreateNestedManyWithoutCreatorInput
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunitiesInput = {
@@ -28199,6 +33781,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunitiesInput = {
@@ -28311,6 +33894,7 @@ export namespace Prisma {
     albums?: AlbumUpdateManyWithoutCreatorNestedInput
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunitiesInput = {
@@ -28364,6 +33948,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommunityUpsertWithoutMembersInput = {
@@ -28466,6 +34051,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStoriesInput = {
@@ -28519,6 +34105,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStoriesInput = {
@@ -28588,6 +34175,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStoriesInput = {
@@ -28641,6 +34229,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -28694,6 +34283,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -28747,6 +34337,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -29026,6 +34617,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -29079,6 +34671,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutRepostsInput = {
@@ -29288,6 +34881,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -29341,6 +34935,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -29490,6 +35085,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -29543,6 +35139,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentsInput = {
@@ -29688,6 +35285,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAlbumsInput = {
@@ -29741,6 +35339,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAlbumsInput = {
@@ -29858,6 +35457,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAlbumsInput = {
@@ -29911,6 +35511,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PhotoUpsertWithWhereUniqueWithoutAlbumInput = {
@@ -29980,6 +35581,7 @@ export namespace Prisma {
     albums?: AlbumCreateNestedManyWithoutCreatorInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPhotosInput = {
@@ -30033,6 +35635,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPhotosInput = {
@@ -30221,6 +35824,7 @@ export namespace Prisma {
     albums?: AlbumUpdateManyWithoutCreatorNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPhotosInput = {
@@ -30274,6 +35878,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AlbumUpsertWithoutPhotosInput = {
@@ -30453,6 +36058,7 @@ export namespace Prisma {
     albums?: AlbumCreateNestedManyWithoutCreatorInput
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPhotoTagsInput = {
@@ -30506,6 +36112,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPhotoTagsInput = {
@@ -30624,6 +36231,7 @@ export namespace Prisma {
     albums?: AlbumUpdateManyWithoutCreatorNestedInput
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPhotoTagsInput = {
@@ -30677,6 +36285,7 @@ export namespace Prisma {
     albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSentMessagesInput = {
@@ -30730,6 +36339,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -30783,6 +36393,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -30841,6 +36452,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedMessagesInput = {
@@ -30894,6 +36506,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -30963,6 +36576,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -31016,6 +36630,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedMessagesInput = {
@@ -31080,6 +36695,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
@@ -31133,6 +36749,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -31186,6 +36803,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -31239,6 +36857,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -31308,6 +36927,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -31361,6 +36981,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSentFriendRequestsInput = {
@@ -31414,6 +37035,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
@@ -31467,6 +37089,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentFriendRequestsInput = {
@@ -31525,6 +37148,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
@@ -31578,6 +37202,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedFriendRequestsInput = {
@@ -31647,6 +37272,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
@@ -31700,6 +37326,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedFriendRequestsInput = {
@@ -31764,6 +37391,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
@@ -31817,6 +37445,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBookmarksInput = {
@@ -31870,6 +37499,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -31923,6 +37553,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -32061,6 +37692,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarkedByInput = {
@@ -32114,6 +37746,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarkedByInput = {
@@ -32253,6 +37886,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -32306,6 +37940,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutBookmarksInput = {
@@ -32462,6 +38097,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarkedByInput = {
@@ -32515,6 +38151,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PhotoUpsertWithoutBookmarksInput = {
@@ -32650,6 +38287,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportsInput = {
@@ -32703,6 +38341,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportsInput = {
@@ -32809,6 +38448,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportsInput = {
@@ -32862,6 +38502,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutReportsInput = {
@@ -32958,6 +38599,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMusicInput = {
@@ -33011,6 +38653,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMusicInput = {
@@ -33080,6 +38723,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMusicInput = {
@@ -33133,6 +38777,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutVideosInput = {
@@ -33186,6 +38831,7 @@ export namespace Prisma {
     photos?: PhotoCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagCreateNestedManyWithoutUserInput
     communities?: CommunityMemberCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -33239,6 +38885,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
     photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
     communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -33342,6 +38989,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -33395,6 +39043,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BookmarkUpsertWithWhereUniqueWithoutVideoInput = {
@@ -33411,6 +39060,484 @@ export namespace Prisma {
   export type BookmarkUpdateManyWithWhereWithoutVideoInput = {
     where: BookmarkScalarWhereInput
     data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutVideoInput>
+  }
+
+  export type HelpArticleCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpArticleUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpArticleCreateOrConnectWithoutCategoryInput = {
+    where: HelpArticleWhereUniqueInput
+    create: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type HelpArticleCreateManyCategoryInputEnvelope = {
+    data: HelpArticleCreateManyCategoryInput | HelpArticleCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HelpArticleUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: HelpArticleWhereUniqueInput
+    update: XOR<HelpArticleUpdateWithoutCategoryInput, HelpArticleUncheckedUpdateWithoutCategoryInput>
+    create: XOR<HelpArticleCreateWithoutCategoryInput, HelpArticleUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type HelpArticleUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: HelpArticleWhereUniqueInput
+    data: XOR<HelpArticleUpdateWithoutCategoryInput, HelpArticleUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type HelpArticleUpdateManyWithWhereWithoutCategoryInput = {
+    where: HelpArticleScalarWhereInput
+    data: XOR<HelpArticleUpdateManyMutationInput, HelpArticleUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type HelpArticleScalarWhereInput = {
+    AND?: HelpArticleScalarWhereInput | HelpArticleScalarWhereInput[]
+    OR?: HelpArticleScalarWhereInput[]
+    NOT?: HelpArticleScalarWhereInput | HelpArticleScalarWhereInput[]
+    id?: StringFilter<"HelpArticle"> | string
+    title?: StringFilter<"HelpArticle"> | string
+    slug?: StringFilter<"HelpArticle"> | string
+    content?: StringFilter<"HelpArticle"> | string
+    excerpt?: StringNullableFilter<"HelpArticle"> | string | null
+    isPublished?: BoolFilter<"HelpArticle"> | boolean
+    views?: IntFilter<"HelpArticle"> | number
+    helpful?: IntFilter<"HelpArticle"> | number
+    notHelpful?: IntFilter<"HelpArticle"> | number
+    categoryId?: StringFilter<"HelpArticle"> | string
+    createdAt?: DateTimeFilter<"HelpArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"HelpArticle"> | Date | string
+  }
+
+  export type HelpCategoryCreateWithoutArticlesInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpCategoryUncheckedCreateWithoutArticlesInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpCategoryCreateOrConnectWithoutArticlesInput = {
+    where: HelpCategoryWhereUniqueInput
+    create: XOR<HelpCategoryCreateWithoutArticlesInput, HelpCategoryUncheckedCreateWithoutArticlesInput>
+  }
+
+  export type HelpCategoryUpsertWithoutArticlesInput = {
+    update: XOR<HelpCategoryUpdateWithoutArticlesInput, HelpCategoryUncheckedUpdateWithoutArticlesInput>
+    create: XOR<HelpCategoryCreateWithoutArticlesInput, HelpCategoryUncheckedCreateWithoutArticlesInput>
+    where?: HelpCategoryWhereInput
+  }
+
+  export type HelpCategoryUpdateToOneWithWhereWithoutArticlesInput = {
+    where?: HelpCategoryWhereInput
+    data: XOR<HelpCategoryUpdateWithoutArticlesInput, HelpCategoryUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type HelpCategoryUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpCategoryUncheckedUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutSupportTicketsInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    friends?: UserCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
+    sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    music?: MusicCreateNestedManyWithoutUploaderInput
+    videos?: VideoCreateNestedManyWithoutUploaderInput
+    stories?: StoryCreateNestedManyWithoutAuthorInput
+    albums?: AlbumCreateNestedManyWithoutCreatorInput
+    photos?: PhotoCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSupportTicketsInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
+    sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
+    stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
+    albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
+    photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSupportTicketsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSupportTicketsInput, UserUncheckedCreateWithoutSupportTicketsInput>
+  }
+
+  export type SupportMessageCreateWithoutTicketInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type SupportMessageUncheckedCreateWithoutTicketInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type SupportMessageCreateOrConnectWithoutTicketInput = {
+    where: SupportMessageWhereUniqueInput
+    create: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput>
+  }
+
+  export type SupportMessageCreateManyTicketInputEnvelope = {
+    data: SupportMessageCreateManyTicketInput | SupportMessageCreateManyTicketInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutSupportTicketsInput = {
+    update: XOR<UserUpdateWithoutSupportTicketsInput, UserUncheckedUpdateWithoutSupportTicketsInput>
+    create: XOR<UserCreateWithoutSupportTicketsInput, UserUncheckedCreateWithoutSupportTicketsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSupportTicketsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSupportTicketsInput, UserUncheckedUpdateWithoutSupportTicketsInput>
+  }
+
+  export type UserUpdateWithoutSupportTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    friends?: UserUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
+    sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    music?: MusicUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSupportTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
+    sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SupportMessageUpsertWithWhereUniqueWithoutTicketInput = {
+    where: SupportMessageWhereUniqueInput
+    update: XOR<SupportMessageUpdateWithoutTicketInput, SupportMessageUncheckedUpdateWithoutTicketInput>
+    create: XOR<SupportMessageCreateWithoutTicketInput, SupportMessageUncheckedCreateWithoutTicketInput>
+  }
+
+  export type SupportMessageUpdateWithWhereUniqueWithoutTicketInput = {
+    where: SupportMessageWhereUniqueInput
+    data: XOR<SupportMessageUpdateWithoutTicketInput, SupportMessageUncheckedUpdateWithoutTicketInput>
+  }
+
+  export type SupportMessageUpdateManyWithWhereWithoutTicketInput = {
+    where: SupportMessageScalarWhereInput
+    data: XOR<SupportMessageUpdateManyMutationInput, SupportMessageUncheckedUpdateManyWithoutTicketInput>
+  }
+
+  export type SupportMessageScalarWhereInput = {
+    AND?: SupportMessageScalarWhereInput | SupportMessageScalarWhereInput[]
+    OR?: SupportMessageScalarWhereInput[]
+    NOT?: SupportMessageScalarWhereInput | SupportMessageScalarWhereInput[]
+    id?: StringFilter<"SupportMessage"> | string
+    content?: StringFilter<"SupportMessage"> | string
+    isStaff?: BoolFilter<"SupportMessage"> | boolean
+    read?: BoolFilter<"SupportMessage"> | boolean
+    ticketId?: StringFilter<"SupportMessage"> | string
+    createdAt?: DateTimeFilter<"SupportMessage"> | Date | string
+  }
+
+  export type SupportTicketCreateWithoutMessagesInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSupportTicketsInput
+  }
+
+  export type SupportTicketUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportTicketCreateOrConnectWithoutMessagesInput = {
+    where: SupportTicketWhereUniqueInput
+    create: XOR<SupportTicketCreateWithoutMessagesInput, SupportTicketUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type SupportTicketUpsertWithoutMessagesInput = {
+    update: XOR<SupportTicketUpdateWithoutMessagesInput, SupportTicketUncheckedUpdateWithoutMessagesInput>
+    create: XOR<SupportTicketCreateWithoutMessagesInput, SupportTicketUncheckedCreateWithoutMessagesInput>
+    where?: SupportTicketWhereInput
+  }
+
+  export type SupportTicketUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: SupportTicketWhereInput
+    data: XOR<SupportTicketUpdateWithoutMessagesInput, SupportTicketUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type SupportTicketUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSupportTicketsNestedInput
+  }
+
+  export type SupportTicketUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostCreateManyAuthorInput = {
@@ -33586,6 +39713,16 @@ export namespace Prisma {
     communityId: string
     role?: string
     joinedAt?: Date | string
+  }
+
+  export type SupportTicketCreateManyUserInput = {
+    id?: string
+    subject: string
+    status?: string
+    priority?: string
+    category?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PostUpdateWithoutAuthorInput = {
@@ -33818,6 +39955,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendOfInput = {
@@ -33871,6 +40009,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutFriendOfInput = {
@@ -33957,6 +40096,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendsInput = {
@@ -34010,6 +40150,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutFriendsInput = {
@@ -34096,6 +40237,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedByInput = {
@@ -34149,6 +40291,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutBlockedByInput = {
@@ -34235,6 +40378,7 @@ export namespace Prisma {
     photos?: PhotoUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockedUsersInput = {
@@ -34288,6 +40432,7 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutBlockedUsersInput = {
@@ -34685,6 +40830,38 @@ export namespace Prisma {
     communityId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportTicketUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: SupportMessageUpdateManyWithoutTicketNestedInput
+  }
+
+  export type SupportTicketUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: SupportMessageUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type SupportTicketUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommunityMemberCreateManyCommunityInput = {
@@ -35229,6 +41406,94 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HelpArticleCreateManyCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    isPublished?: boolean
+    views?: number
+    helpful?: number
+    notHelpful?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HelpArticleUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpArticleUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HelpArticleUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    helpful?: IntFieldUpdateOperationsInput | number
+    notHelpful?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageCreateManyTicketInput = {
+    id?: string
+    content: string
+    isStaff?: boolean
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type SupportMessageUpdateWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageUncheckedUpdateWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportMessageUncheckedUpdateManyWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isStaff?: BoolFieldUpdateOperationsInput | boolean
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -35258,6 +41523,14 @@ export namespace Prisma {
      * @deprecated Use VideoCountOutputTypeDefaultArgs instead
      */
     export type VideoCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VideoCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use HelpCategoryCountOutputTypeDefaultArgs instead
+     */
+    export type HelpCategoryCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = HelpCategoryCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SupportTicketCountOutputTypeDefaultArgs instead
+     */
+    export type SupportTicketCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupportTicketCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -35322,6 +41595,22 @@ export namespace Prisma {
      * @deprecated Use VideoDefaultArgs instead
      */
     export type VideoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VideoDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use HelpCategoryDefaultArgs instead
+     */
+    export type HelpCategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = HelpCategoryDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use HelpArticleDefaultArgs instead
+     */
+    export type HelpArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = HelpArticleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SupportTicketDefaultArgs instead
+     */
+    export type SupportTicketArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupportTicketDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SupportMessageDefaultArgs instead
+     */
+    export type SupportMessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupportMessageDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

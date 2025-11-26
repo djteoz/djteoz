@@ -79,6 +79,9 @@ model User {
 
   // Communities
   communities CommunityMember[]
+
+  // Support
+  supportTickets SupportTicket[]
 }
 
 // Community model
@@ -345,4 +348,64 @@ model Video {
   uploaderId  String
   bookmarks   Bookmark[]
   createdAt   DateTime   @default(now())
+}
+
+// Help Center Models
+
+model HelpCategory {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  name        String
+  description String?
+  icon        String? // Emoji or icon name
+  order       Int           @default(0)
+  articles    HelpArticle[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model HelpArticle {
+  id          String  @id @default(cuid())
+  title       String
+  slug        String  @unique
+  content     String // HTML or Markdown
+  excerpt     String?
+  isPublished Boolean @default(true)
+  views       Int     @default(0)
+  helpful     Int     @default(0)
+  notHelpful  Int     @default(0)
+
+  category   HelpCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupportTicket {
+  id       String  @id @default(cuid())
+  subject  String
+  status   String  @default("OPEN") // OPEN, IN_PROGRESS, CLOSED, RESOLVED
+  priority String  @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  category String? // e.g. "Account", "Billing"
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  messages SupportMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupportMessage {
+  id      String  @id @default(cuid())
+  content String
+  isStaff Boolean @default(false) // true if sent by support agent
+  read    Boolean @default(false)
+
+  ticket   SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId String
+
+  createdAt DateTime @default(now())
 }
