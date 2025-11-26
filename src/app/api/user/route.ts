@@ -86,7 +86,11 @@ export async function PUT(req: NextRequest) {
       phone,
       gender,
       isPublic,
-      email, // Allow email update if needed, but be careful with uniqueness
+      email,
+      language,
+      privacySettings,
+      notificationSettings,
+      themeSettings,
     } = body;
 
     const updatedUser = await prisma.user.update({
@@ -103,6 +107,10 @@ export async function PUT(req: NextRequest) {
         gender,
         isPublic,
         email,
+        language,
+        privacySettings,
+        notificationSettings,
+        themeSettings,
       },
       select: {
         username: true,
@@ -117,6 +125,10 @@ export async function PUT(req: NextRequest) {
         phone: true,
         gender: true,
         isPublic: true,
+        language: true,
+        privacySettings: true,
+        notificationSettings: true,
+        themeSettings: true,
       },
     });
 

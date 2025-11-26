@@ -34,11 +34,17 @@ model User {
   work      String?
   education String?
   languages String?
+  language  String   @default("ru") // Interface language
   isPublic  Boolean  @default(true)
   profileViews Int @default(0)
   
   role      String   @default("USER") // 'USER', 'ADMIN', 'MODERATOR'
   isBanned  Boolean  @default(false)
+
+  // Settings
+  privacySettings      Json? // { profileVisibility: 'public'|'friends'|'private', messagePermission: 'all'|'friends', ... }
+  notificationSettings Json? // { email: boolean, push: boolean, sms: boolean, types: { likes: boolean, ... } }
+  themeSettings        Json? // { theme: 'light'|'dark', color: 'blue', ... }
   
   // Password Reset
   resetToken       String?
@@ -55,6 +61,8 @@ model User {
   notifications  Notification[]
   friends        User[]   @relation("Friends")
   friendOf       User[]   @relation("Friends")
+  blockedUsers   User[]   @relation("BlockedUsers")
+  blockedBy      User[]   @relation("BlockedUsers")
   sentFriendRequests     FriendRequest[] @relation("SentFriendRequests")
   receivedFriendRequests FriendRequest[] @relation("ReceivedFriendRequests")
   bookmarks      Bookmark[]

@@ -2140,6 +2140,8 @@ export namespace Prisma {
     notifications: number
     friends: number
     friendOf: number
+    blockedUsers: number
+    blockedBy: number
     sentFriendRequests: number
     receivedFriendRequests: number
     bookmarks: number
@@ -2162,6 +2164,8 @@ export namespace Prisma {
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     friends?: boolean | UserCountOutputTypeCountFriendsArgs
     friendOf?: boolean | UserCountOutputTypeCountFriendOfArgs
+    blockedUsers?: boolean | UserCountOutputTypeCountBlockedUsersArgs
+    blockedBy?: boolean | UserCountOutputTypeCountBlockedByArgs
     sentFriendRequests?: boolean | UserCountOutputTypeCountSentFriendRequestsArgs
     receivedFriendRequests?: boolean | UserCountOutputTypeCountReceivedFriendRequestsArgs
     bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
@@ -2233,6 +2237,20 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountFriendOfArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlockedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlockedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
   }
 
@@ -2582,6 +2600,7 @@ export namespace Prisma {
     work: string | null
     education: string | null
     languages: string | null
+    language: string | null
     isPublic: boolean | null
     profileViews: number | null
     role: string | null
@@ -2611,6 +2630,7 @@ export namespace Prisma {
     work: string | null
     education: string | null
     languages: string | null
+    language: string | null
     isPublic: boolean | null
     profileViews: number | null
     role: string | null
@@ -2640,10 +2660,14 @@ export namespace Prisma {
     work: number
     education: number
     languages: number
+    language: number
     isPublic: number
     profileViews: number
     role: number
     isBanned: number
+    privacySettings: number
+    notificationSettings: number
+    themeSettings: number
     resetToken: number
     resetTokenExpiry: number
     createdAt: number
@@ -2679,6 +2703,7 @@ export namespace Prisma {
     work?: true
     education?: true
     languages?: true
+    language?: true
     isPublic?: true
     profileViews?: true
     role?: true
@@ -2708,6 +2733,7 @@ export namespace Prisma {
     work?: true
     education?: true
     languages?: true
+    language?: true
     isPublic?: true
     profileViews?: true
     role?: true
@@ -2737,10 +2763,14 @@ export namespace Prisma {
     work?: true
     education?: true
     languages?: true
+    language?: true
     isPublic?: true
     profileViews?: true
     role?: true
     isBanned?: true
+    privacySettings?: true
+    notificationSettings?: true
+    themeSettings?: true
     resetToken?: true
     resetTokenExpiry?: true
     createdAt?: true
@@ -2853,10 +2883,14 @@ export namespace Prisma {
     work: string | null
     education: string | null
     languages: string | null
+    language: string
     isPublic: boolean
     profileViews: number
     role: string
     isBanned: boolean
+    privacySettings: JsonValue | null
+    notificationSettings: JsonValue | null
+    themeSettings: JsonValue | null
     resetToken: string | null
     resetTokenExpiry: Date | null
     createdAt: Date
@@ -2901,10 +2935,14 @@ export namespace Prisma {
     work?: boolean
     education?: boolean
     languages?: boolean
+    language?: boolean
     isPublic?: boolean
     profileViews?: boolean
     role?: boolean
     isBanned?: boolean
+    privacySettings?: boolean
+    notificationSettings?: boolean
+    themeSettings?: boolean
     resetToken?: boolean
     resetTokenExpiry?: boolean
     createdAt?: boolean
@@ -2916,6 +2954,8 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     friends?: boolean | User$friendsArgs<ExtArgs>
     friendOf?: boolean | User$friendOfArgs<ExtArgs>
+    blockedUsers?: boolean | User$blockedUsersArgs<ExtArgs>
+    blockedBy?: boolean | User$blockedByArgs<ExtArgs>
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
@@ -2950,10 +2990,14 @@ export namespace Prisma {
     work?: boolean
     education?: boolean
     languages?: boolean
+    language?: boolean
     isPublic?: boolean
     profileViews?: boolean
     role?: boolean
     isBanned?: boolean
+    privacySettings?: boolean
+    notificationSettings?: boolean
+    themeSettings?: boolean
     resetToken?: boolean
     resetTokenExpiry?: boolean
     createdAt?: boolean
@@ -2979,10 +3023,14 @@ export namespace Prisma {
     work?: boolean
     education?: boolean
     languages?: boolean
+    language?: boolean
     isPublic?: boolean
     profileViews?: boolean
     role?: boolean
     isBanned?: boolean
+    privacySettings?: boolean
+    notificationSettings?: boolean
+    themeSettings?: boolean
     resetToken?: boolean
     resetTokenExpiry?: boolean
     createdAt?: boolean
@@ -2997,6 +3045,8 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     friends?: boolean | User$friendsArgs<ExtArgs>
     friendOf?: boolean | User$friendOfArgs<ExtArgs>
+    blockedUsers?: boolean | User$blockedUsersArgs<ExtArgs>
+    blockedBy?: boolean | User$blockedByArgs<ExtArgs>
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
@@ -3023,6 +3073,8 @@ export namespace Prisma {
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       friends: Prisma.$UserPayload<ExtArgs>[]
       friendOf: Prisma.$UserPayload<ExtArgs>[]
+      blockedUsers: Prisma.$UserPayload<ExtArgs>[]
+      blockedBy: Prisma.$UserPayload<ExtArgs>[]
       sentFriendRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
       receivedFriendRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
       bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
@@ -3055,10 +3107,14 @@ export namespace Prisma {
       work: string | null
       education: string | null
       languages: string | null
+      language: string
       isPublic: boolean
       profileViews: number
       role: string
       isBanned: boolean
+      privacySettings: Prisma.JsonValue | null
+      notificationSettings: Prisma.JsonValue | null
+      themeSettings: Prisma.JsonValue | null
       resetToken: string | null
       resetTokenExpiry: Date | null
       createdAt: Date
@@ -3434,6 +3490,8 @@ export namespace Prisma {
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany"> | Null>
     friends<T extends User$friendsArgs<ExtArgs> = {}>(args?: Subset<T, User$friendsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
     friendOf<T extends User$friendOfArgs<ExtArgs> = {}>(args?: Subset<T, User$friendOfArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    blockedUsers<T extends User$blockedUsersArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    blockedBy<T extends User$blockedByArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
     sentFriendRequests<T extends User$sentFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany"> | Null>
     receivedFriendRequests<T extends User$receivedFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany"> | Null>
     bookmarks<T extends User$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
@@ -3493,10 +3551,14 @@ export namespace Prisma {
     readonly work: FieldRef<"User", 'String'>
     readonly education: FieldRef<"User", 'String'>
     readonly languages: FieldRef<"User", 'String'>
+    readonly language: FieldRef<"User", 'String'>
     readonly isPublic: FieldRef<"User", 'Boolean'>
     readonly profileViews: FieldRef<"User", 'Int'>
     readonly role: FieldRef<"User", 'String'>
     readonly isBanned: FieldRef<"User", 'Boolean'>
+    readonly privacySettings: FieldRef<"User", 'Json'>
+    readonly notificationSettings: FieldRef<"User", 'Json'>
+    readonly themeSettings: FieldRef<"User", 'Json'>
     readonly resetToken: FieldRef<"User", 'String'>
     readonly resetTokenExpiry: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -3938,6 +4000,46 @@ export namespace Prisma {
    * User.friendOf
    */
   export type User$friendOfArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User.blockedUsers
+   */
+  export type User$blockedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User.blockedBy
+   */
+  export type User$blockedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -19646,10 +19748,14 @@ export namespace Prisma {
     work: 'work',
     education: 'education',
     languages: 'languages',
+    language: 'language',
     isPublic: 'isPublic',
     profileViews: 'profileViews',
     role: 'role',
     isBanned: 'isBanned',
+    privacySettings: 'privacySettings',
+    notificationSettings: 'notificationSettings',
+    themeSettings: 'themeSettings',
     resetToken: 'resetToken',
     resetTokenExpiry: 'resetTokenExpiry',
     createdAt: 'createdAt',
@@ -19886,12 +19992,29 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -19939,6 +20062,13 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -19995,10 +20125,14 @@ export namespace Prisma {
     work?: StringNullableFilter<"User"> | string | null
     education?: StringNullableFilter<"User"> | string | null
     languages?: StringNullableFilter<"User"> | string | null
+    language?: StringFilter<"User"> | string
     isPublic?: BoolFilter<"User"> | boolean
     profileViews?: IntFilter<"User"> | number
     role?: StringFilter<"User"> | string
     isBanned?: BoolFilter<"User"> | boolean
+    privacySettings?: JsonNullableFilter<"User">
+    notificationSettings?: JsonNullableFilter<"User">
+    themeSettings?: JsonNullableFilter<"User">
     resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -20010,6 +20144,8 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     friends?: UserListRelationFilter
     friendOf?: UserListRelationFilter
+    blockedUsers?: UserListRelationFilter
+    blockedBy?: UserListRelationFilter
     sentFriendRequests?: FriendRequestListRelationFilter
     receivedFriendRequests?: FriendRequestListRelationFilter
     bookmarks?: BookmarkListRelationFilter
@@ -20043,10 +20179,14 @@ export namespace Prisma {
     work?: SortOrderInput | SortOrder
     education?: SortOrderInput | SortOrder
     languages?: SortOrderInput | SortOrder
+    language?: SortOrder
     isPublic?: SortOrder
     profileViews?: SortOrder
     role?: SortOrder
     isBanned?: SortOrder
+    privacySettings?: SortOrderInput | SortOrder
+    notificationSettings?: SortOrderInput | SortOrder
+    themeSettings?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
     resetTokenExpiry?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -20058,6 +20198,8 @@ export namespace Prisma {
     notifications?: NotificationOrderByRelationAggregateInput
     friends?: UserOrderByRelationAggregateInput
     friendOf?: UserOrderByRelationAggregateInput
+    blockedUsers?: UserOrderByRelationAggregateInput
+    blockedBy?: UserOrderByRelationAggregateInput
     sentFriendRequests?: FriendRequestOrderByRelationAggregateInput
     receivedFriendRequests?: FriendRequestOrderByRelationAggregateInput
     bookmarks?: BookmarkOrderByRelationAggregateInput
@@ -20094,10 +20236,14 @@ export namespace Prisma {
     work?: StringNullableFilter<"User"> | string | null
     education?: StringNullableFilter<"User"> | string | null
     languages?: StringNullableFilter<"User"> | string | null
+    language?: StringFilter<"User"> | string
     isPublic?: BoolFilter<"User"> | boolean
     profileViews?: IntFilter<"User"> | number
     role?: StringFilter<"User"> | string
     isBanned?: BoolFilter<"User"> | boolean
+    privacySettings?: JsonNullableFilter<"User">
+    notificationSettings?: JsonNullableFilter<"User">
+    themeSettings?: JsonNullableFilter<"User">
     resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -20109,6 +20255,8 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     friends?: UserListRelationFilter
     friendOf?: UserListRelationFilter
+    blockedUsers?: UserListRelationFilter
+    blockedBy?: UserListRelationFilter
     sentFriendRequests?: FriendRequestListRelationFilter
     receivedFriendRequests?: FriendRequestListRelationFilter
     bookmarks?: BookmarkListRelationFilter
@@ -20142,10 +20290,14 @@ export namespace Prisma {
     work?: SortOrderInput | SortOrder
     education?: SortOrderInput | SortOrder
     languages?: SortOrderInput | SortOrder
+    language?: SortOrder
     isPublic?: SortOrder
     profileViews?: SortOrder
     role?: SortOrder
     isBanned?: SortOrder
+    privacySettings?: SortOrderInput | SortOrder
+    notificationSettings?: SortOrderInput | SortOrder
+    themeSettings?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
     resetTokenExpiry?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -20179,10 +20331,14 @@ export namespace Prisma {
     work?: StringNullableWithAggregatesFilter<"User"> | string | null
     education?: StringNullableWithAggregatesFilter<"User"> | string | null
     languages?: StringNullableWithAggregatesFilter<"User"> | string | null
+    language?: StringWithAggregatesFilter<"User"> | string
     isPublic?: BoolWithAggregatesFilter<"User"> | boolean
     profileViews?: IntWithAggregatesFilter<"User"> | number
     role?: StringWithAggregatesFilter<"User"> | string
     isBanned?: BoolWithAggregatesFilter<"User"> | boolean
+    privacySettings?: JsonNullableWithAggregatesFilter<"User">
+    notificationSettings?: JsonNullableWithAggregatesFilter<"User">
+    themeSettings?: JsonNullableWithAggregatesFilter<"User">
     resetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -21403,10 +21559,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -21418,6 +21578,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -21451,10 +21613,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -21466,6 +21632,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -21499,10 +21667,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21514,6 +21686,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -21547,10 +21721,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21562,6 +21740,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -21595,10 +21775,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -21624,10 +21808,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21653,10 +21841,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22945,6 +23137,28 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
   }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
@@ -23142,10 +23356,14 @@ export namespace Prisma {
     work?: SortOrder
     education?: SortOrder
     languages?: SortOrder
+    language?: SortOrder
     isPublic?: SortOrder
     profileViews?: SortOrder
     role?: SortOrder
     isBanned?: SortOrder
+    privacySettings?: SortOrder
+    notificationSettings?: SortOrder
+    themeSettings?: SortOrder
     resetToken?: SortOrder
     resetTokenExpiry?: SortOrder
     createdAt?: SortOrder
@@ -23175,6 +23393,7 @@ export namespace Prisma {
     work?: SortOrder
     education?: SortOrder
     languages?: SortOrder
+    language?: SortOrder
     isPublic?: SortOrder
     profileViews?: SortOrder
     role?: SortOrder
@@ -23204,6 +23423,7 @@ export namespace Prisma {
     work?: SortOrder
     education?: SortOrder
     languages?: SortOrder
+    language?: SortOrder
     isPublic?: SortOrder
     profileViews?: SortOrder
     role?: SortOrder
@@ -23276,6 +23496,31 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -24081,6 +24326,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type UserCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutBlockedUsersInput = {
+    create?: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput> | UserCreateWithoutBlockedUsersInput[] | UserUncheckedCreateWithoutBlockedUsersInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedUsersInput | UserCreateOrConnectWithoutBlockedUsersInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type FriendRequestCreateNestedManyWithoutSenderInput = {
     create?: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput> | FriendRequestCreateWithoutSenderInput[] | FriendRequestUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: FriendRequestCreateOrConnectWithoutSenderInput | FriendRequestCreateOrConnectWithoutSenderInput[]
@@ -24209,6 +24466,18 @@ export namespace Prisma {
   export type UserUncheckedCreateNestedManyWithoutFriendsInput = {
     create?: XOR<UserCreateWithoutFriendsInput, UserUncheckedCreateWithoutFriendsInput> | UserCreateWithoutFriendsInput[] | UserUncheckedCreateWithoutFriendsInput[]
     connectOrCreate?: UserCreateOrConnectWithoutFriendsInput | UserCreateOrConnectWithoutFriendsInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutBlockedUsersInput = {
+    create?: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput> | UserCreateWithoutBlockedUsersInput[] | UserUncheckedCreateWithoutBlockedUsersInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedUsersInput | UserCreateOrConnectWithoutBlockedUsersInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
@@ -24417,6 +24686,32 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
     update?: UserUpdateWithWhereUniqueWithoutFriendsInput | UserUpdateWithWhereUniqueWithoutFriendsInput[]
     updateMany?: UserUpdateManyWithWhereWithoutFriendsInput | UserUpdateManyWithWhereWithoutFriendsInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedByInput | UserUpsertWithWhereUniqueWithoutBlockedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedByInput | UserUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedByInput | UserUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutBlockedUsersNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput> | UserCreateWithoutBlockedUsersInput[] | UserUncheckedCreateWithoutBlockedUsersInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedUsersInput | UserCreateOrConnectWithoutBlockedUsersInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedUsersInput | UserUpsertWithWhereUniqueWithoutBlockedUsersInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedUsersInput | UserUpdateWithWhereUniqueWithoutBlockedUsersInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedUsersInput | UserUpdateManyWithWhereWithoutBlockedUsersInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
@@ -24681,6 +24976,32 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
     update?: UserUpdateWithWhereUniqueWithoutFriendsInput | UserUpdateWithWhereUniqueWithoutFriendsInput[]
     updateMany?: UserUpdateManyWithWhereWithoutFriendsInput | UserUpdateManyWithWhereWithoutFriendsInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedByInput | UserUpsertWithWhereUniqueWithoutBlockedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedByInput | UserUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedByInput | UserUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedUsersNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput> | UserCreateWithoutBlockedUsersInput[] | UserUncheckedCreateWithoutBlockedUsersInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedUsersInput | UserCreateOrConnectWithoutBlockedUsersInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedUsersInput | UserUpsertWithWhereUniqueWithoutBlockedUsersInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedUsersInput | UserUpdateWithWhereUniqueWithoutBlockedUsersInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedUsersInput | UserUpdateManyWithWhereWithoutBlockedUsersInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
@@ -25979,6 +26300,28 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
@@ -26242,10 +26585,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -26256,6 +26603,8 @@ export namespace Prisma {
     receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -26289,10 +26638,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -26303,6 +26656,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -26341,10 +26696,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -26355,6 +26714,8 @@ export namespace Prisma {
     receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -26388,10 +26749,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -26402,6 +26767,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -26419,6 +26786,228 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutFriendsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutFriendsInput, UserUncheckedCreateWithoutFriendsInput>
+  }
+
+  export type UserCreateWithoutBlockedByInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    friends?: UserCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    music?: MusicCreateNestedManyWithoutUploaderInput
+    videos?: VideoCreateNestedManyWithoutUploaderInput
+    stories?: StoryCreateNestedManyWithoutAuthorInput
+    albums?: AlbumCreateNestedManyWithoutCreatorInput
+    photos?: PhotoCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBlockedByInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
+    stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
+    albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
+    photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type UserCreateWithoutBlockedUsersInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    friends?: UserCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
+    sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    music?: MusicCreateNestedManyWithoutUploaderInput
+    videos?: VideoCreateNestedManyWithoutUploaderInput
+    stories?: StoryCreateNestedManyWithoutAuthorInput
+    albums?: AlbumCreateNestedManyWithoutCreatorInput
+    photos?: PhotoCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBlockedUsersInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    language?: string
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
+    sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
+    stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
+    albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
+    photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBlockedUsersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput>
   }
 
   export type FriendRequestCreateWithoutSenderInput = {
@@ -26966,10 +27555,14 @@ export namespace Prisma {
     work?: StringNullableFilter<"User"> | string | null
     education?: StringNullableFilter<"User"> | string | null
     languages?: StringNullableFilter<"User"> | string | null
+    language?: StringFilter<"User"> | string
     isPublic?: BoolFilter<"User"> | boolean
     profileViews?: IntFilter<"User"> | number
     role?: StringFilter<"User"> | string
     isBanned?: BoolFilter<"User"> | boolean
+    privacySettings?: JsonNullableFilter<"User">
+    notificationSettings?: JsonNullableFilter<"User">
+    themeSettings?: JsonNullableFilter<"User">
     resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -26990,6 +27583,38 @@ export namespace Prisma {
   export type UserUpdateManyWithWhereWithoutFriendsInput = {
     where: UserScalarWhereInput
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutFriendsInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutBlockedByInput, UserUncheckedUpdateWithoutBlockedByInput>
+    create: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutBlockedByInput, UserUncheckedUpdateWithoutBlockedByInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutBlockedByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutBlockedByInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutBlockedUsersInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutBlockedUsersInput, UserUncheckedUpdateWithoutBlockedUsersInput>
+    create: XOR<UserCreateWithoutBlockedUsersInput, UserUncheckedCreateWithoutBlockedUsersInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutBlockedUsersInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutBlockedUsersInput, UserUncheckedUpdateWithoutBlockedUsersInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutBlockedUsersInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutBlockedUsersInput>
   }
 
   export type FriendRequestUpsertWithWhereUniqueWithoutSenderInput = {
@@ -27489,10 +28114,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -27504,6 +28133,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -27536,10 +28167,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -27551,6 +28186,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -27642,10 +28279,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27657,6 +28298,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -27689,10 +28332,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27704,6 +28351,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -27785,10 +28434,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -27800,6 +28453,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -27832,10 +28487,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -27847,6 +28506,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -27895,10 +28556,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27910,6 +28575,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -27942,10 +28609,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27957,6 +28628,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -27989,10 +28662,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28003,6 +28680,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -28036,10 +28715,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28050,6 +28733,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -28309,10 +28994,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28323,6 +29012,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -28356,10 +29047,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28370,6 +29065,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -28559,10 +29256,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28573,6 +29274,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -28606,10 +29309,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28620,6 +29327,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -28749,10 +29458,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28763,6 +29476,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -28796,10 +29511,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28810,6 +29529,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -28935,10 +29656,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28950,6 +29675,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -28982,10 +29709,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -28997,6 +29728,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -29093,10 +29826,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29108,6 +29845,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -29140,10 +29879,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29155,6 +29898,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -29203,10 +29948,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29218,6 +29967,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -29250,10 +30001,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29265,6 +30020,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -29432,10 +30189,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29447,6 +30208,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -29479,10 +30242,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29494,6 +30261,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -29652,10 +30421,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29667,6 +30440,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -29699,10 +30474,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29714,6 +30493,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -29811,10 +30592,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29826,6 +30611,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -29858,10 +30645,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29873,6 +30664,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -29905,10 +30698,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29919,6 +30716,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -29952,10 +30751,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -29966,6 +30769,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -30004,10 +30809,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30018,6 +30827,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -30051,10 +30862,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30065,6 +30880,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -30114,10 +30931,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30128,6 +30949,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -30161,10 +30984,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30175,6 +31002,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -30219,10 +31048,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30233,6 +31066,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -30266,10 +31101,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30280,6 +31119,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -30313,10 +31154,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30327,6 +31172,8 @@ export namespace Prisma {
     receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -30360,10 +31207,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30374,6 +31225,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -30423,10 +31276,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30437,6 +31294,8 @@ export namespace Prisma {
     receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -30470,10 +31329,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30484,6 +31347,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -30517,10 +31382,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30532,6 +31401,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
@@ -30564,10 +31435,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30579,6 +31454,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
@@ -30616,10 +31493,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30631,6 +31512,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
@@ -30663,10 +31546,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30678,6 +31565,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
@@ -30726,10 +31615,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30741,6 +31634,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
@@ -30773,10 +31668,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30788,6 +31687,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
@@ -30831,10 +31732,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30846,6 +31751,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
@@ -30878,10 +31785,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30893,6 +31804,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
@@ -30925,10 +31838,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30940,6 +31857,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
@@ -30972,10 +31891,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -30987,6 +31910,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
@@ -31104,10 +32029,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -31119,6 +32048,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -31151,10 +32082,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -31166,6 +32101,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -31284,10 +32221,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31299,6 +32240,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
@@ -31331,10 +32274,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31346,6 +32293,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
@@ -31481,10 +32430,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31496,6 +32449,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -31528,10 +32483,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31543,6 +32502,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -31657,10 +32618,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -31672,6 +32637,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -31704,10 +32671,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -31719,6 +32690,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -31804,10 +32777,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31819,6 +32796,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -31851,10 +32830,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31866,6 +32849,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -31941,10 +32926,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -31956,6 +32945,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -31988,10 +32979,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -32003,6 +32998,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -32051,10 +33048,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32066,6 +33067,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -32098,10 +33101,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32113,6 +33120,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -32145,10 +33154,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -32160,6 +33173,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     friends?: UserCreateNestedManyWithoutFriendOfInput
     friendOf?: UserCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
@@ -32192,10 +33207,14 @@ export namespace Prisma {
     work?: string | null
     education?: string | null
     languages?: string | null
+    language?: string
     isPublic?: boolean
     profileViews?: number
     role?: string
     isBanned?: boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     createdAt?: Date | string
@@ -32207,6 +33226,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    blockedUsers?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockedBy?: UserUncheckedCreateNestedManyWithoutBlockedUsersInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
@@ -32289,10 +33310,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32304,6 +33329,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -32336,10 +33363,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32351,6 +33382,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -32753,10 +33786,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32767,6 +33804,8 @@ export namespace Prisma {
     receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friends?: UserUpdateManyWithoutFriendOfNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -32800,10 +33839,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32814,6 +33857,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -32847,10 +33892,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32876,10 +33925,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32890,6 +33943,8 @@ export namespace Prisma {
     receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
@@ -32923,10 +33978,14 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32937,6 +33996,8 @@ export namespace Prisma {
     receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
@@ -32970,10 +34031,292 @@ export namespace Prisma {
     work?: NullableStringFieldUpdateOperationsInput | string | null
     education?: NullableStringFieldUpdateOperationsInput | string | null
     languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     profileViews?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    friends?: UserUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUpdateManyWithoutBlockedByNestedInput
+    sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    music?: MusicUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedUsers?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpdateWithoutBlockedUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    friends?: UserUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    blockedBy?: UserUpdateManyWithoutBlockedUsersNestedInput
+    sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    music?: MusicUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlockedUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    blockedBy?: UserUncheckedUpdateManyWithoutBlockedUsersNestedInput
+    sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    privacySettings?: NullableJsonNullValueInput | InputJsonValue
+    notificationSettings?: NullableJsonNullValueInput | InputJsonValue
+    themeSettings?: NullableJsonNullValueInput | InputJsonValue
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

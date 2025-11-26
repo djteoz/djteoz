@@ -26,6 +26,22 @@ export default async function SettingsPage() {
         city: true,
         country: true,
         website: true,
+        phone: true,
+        gender: true,
+        birthday: true,
+        language: true,
+        privacySettings: true,
+        notificationSettings: true,
+        themeSettings: true,
+        blockedUsers: {
+          select: {
+            id: true,
+            username: true,
+            firstName: true,
+            lastName: true,
+            avatar: true,
+          },
+        },
       },
     });
   } catch (err) {
