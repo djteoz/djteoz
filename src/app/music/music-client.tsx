@@ -136,22 +136,22 @@ export default function MusicClient({
       if (uploadMode === "file") {
         if (!file) return;
 
-        // Check file size (limit to 3.5MB for Vercel Serverless)
-        if (file.size > 3.5 * 1024 * 1024) {
-          alert(
-            "Файл слишком большой! Ограничение демо-сервера: 3.5 МБ.\nПожалуйста, используйте вкладку 'Ссылка' для добавления треков с внешних ресурсов."
-          );
-          setIsUploading(false);
-          return;
+        // Upload file to Cloudinary via /api/upload
+        const uploadFormData = new FormData();
+        uploadFormData.append("file", file);
+
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadFormData,
+        });
+
+        if (!uploadRes.ok) {
+          const errorData = await uploadRes.json();
+          throw new Error(errorData.error || "Failed to upload file");
         }
 
-        // Convert to Base64 client-side to save one request
-        url = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = (error) => reject(error);
-        });
+        const uploadData = await uploadRes.json();
+        url = uploadData.url;
       }
 
       // Create music entry
@@ -249,7 +249,7 @@ export default function MusicClient({
             {uploadMode === "file" ? (
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Файл (MP3, макс. 3.5 МБ)
+                  Файл (MP3)
                 </label>
                 <input
                   type="file"
@@ -258,9 +258,6 @@ export default function MusicClient({
                   required
                   className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                 />
-                <p className="text-xs text-gray-500 mt-1">
-                  * Для больших файлов используйте вкладку "Внешняя ссылка"
-                </p>
               </div>
             ) : (
               <div>

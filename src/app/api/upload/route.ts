@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
 import { verifyAccessToken } from "../../../lib/jwt";
 import { cookies } from "next/headers";
+import cloudinary from "../../../lib/cloudinary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,12 +27,28 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Convert to Base64 for Vercel deployment (since local filesystem is read-only/ephemeral)
-    const base64 = buffer.toString("base64");
-    const mimeType = file.type || "application/octet-stream";
-    const dataUrl = `data:${mimeType};base64,${base64}`;
+    // Upload to Cloudinary using a stream
+    const result = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          resource_type: "auto", // Automatically detect image/video/audio
+          folder: "lumina_uploads",
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      
+      // Write buffer to stream
+      const Readable = require("stream").Readable;
+      const stream = new Readable();
+      stream.push(buffer);
+      stream.push(null);
+      stream.pipe(uploadStream);
+    });
 
-    return NextResponse.json({ url: dataUrl });
+    return NextResponse.json({ url: result.secure_url });
   } catch (error) {
     console.error("Upload failed:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
