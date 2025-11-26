@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
   });
   response.cookies.set("token", accessToken, {
     httpOnly: false, // чтобы был доступен клиенту и серверу
-    maxAge: 60 * 15,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
     path: "/",
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",

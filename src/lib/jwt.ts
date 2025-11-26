@@ -7,7 +7,7 @@ import type { SignOptions } from "jsonwebtoken";
 
 export function signAccessToken(
   payload: string | object | Buffer,
-  expiresIn: string = "15m"
+  expiresIn: string = "30d"
 ) {
   return jwt.sign(
     payload,
