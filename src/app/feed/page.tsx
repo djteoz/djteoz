@@ -47,6 +47,7 @@ export default function FeedPage() {
   const [storyPreview, setStoryPreview] = useState<string | null>(null);
   const [uploadingStory, setUploadingStory] = useState(false);
   const [storyText, setStoryText] = useState("");
+  const [textColor, setTextColor] = useState("#ffffff");
   const [showTextInput, setShowTextInput] = useState(false);
   const [textOverlays, setTextOverlays] = useState<
     { id: number; text: string; x: number; y: number; color: string }[]
@@ -299,7 +300,7 @@ export default function FeedPage() {
         text: storyText,
         x: 50,
         y: 50,
-        color: "white",
+        color: textColor,
       },
     ]);
     setStoryText("");
@@ -433,17 +434,28 @@ export default function FeedPage() {
                   {textOverlays.map((overlay) => (
                     <div
                       key={overlay.id}
-                      className="absolute text-2xl font-bold drop-shadow-md cursor-move select-none"
+                      className="absolute text-2xl font-bold drop-shadow-md cursor-move select-none z-10"
                       style={{
                         left: `${overlay.x}%`,
                         top: `${overlay.y}%`,
                         color: overlay.color,
                         transform: "translate(-50%, -50%)",
+                        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
                       }}
                       draggable
                       onDragEnd={(e) => {
-                        // Simple drag implementation (would need better logic for real app)
-                        // For now just static
+                        // Calculate new position in percentages relative to the container
+                        const container = e.currentTarget.parentElement;
+                        if (container) {
+                          const rect = container.getBoundingClientRect();
+                          const x = ((e.clientX - rect.left) / rect.width) * 100;
+                          const y = ((e.clientY - rect.top) / rect.height) * 100;
+                          
+                          // Update overlay position
+                          setTextOverlays(prev => prev.map(o => 
+                            o.id === overlay.id ? { ...o, x, y } : o
+                          ));
+                        }
                       }}
                     >
                       {overlay.text}
@@ -452,11 +464,24 @@ export default function FeedPage() {
                   {stickers.map((sticker) => (
                     <div
                       key={sticker.id}
-                      className="absolute text-4xl cursor-move select-none"
+                      className="absolute text-4xl cursor-move select-none z-10"
                       style={{
                         left: `${sticker.x}%`,
                         top: `${sticker.y}%`,
                         transform: "translate(-50%, -50%)",
+                      }}
+                      draggable
+                      onDragEnd={(e) => {
+                        const container = e.currentTarget.parentElement;
+                        if (container) {
+                          const rect = container.getBoundingClientRect();
+                          const x = ((e.clientX - rect.left) / rect.width) * 100;
+                          const y = ((e.clientY - rect.top) / rect.height) * 100;
+                          
+                          setStickers(prev => prev.map(s => 
+                            s.id === sticker.id ? { ...s, x, y } : s
+                          ));
+                        }
                       }}
                     >
                       {sticker.emoji}
@@ -477,9 +502,36 @@ export default function FeedPage() {
                             if (e.key === "Escape") setShowTextInput(false);
                           }}
                           placeholder="Введите текст..."
-                          className="w-full bg-transparent text-white text-center text-3xl font-bold border-b-2 border-white/50 focus:border-white outline-none placeholder-white/50 pb-2"
+                          style={{ color: textColor, borderColor: textColor }}
+                          className="w-full bg-transparent text-center text-3xl font-bold border-b-2 outline-none placeholder-white/50 pb-2"
                         />
-                        <div className="flex justify-center gap-2 mt-4">
+                        
+                        {/* Color Picker */}
+                        <div className="flex justify-center gap-3 mt-6">
+                          {[
+                            "#ffffff", // White
+                            "#000000", // Black
+                            "#ef4444", // Red
+                            "#f59e0b", // Yellow
+                            "#10b981", // Green
+                            "#3b82f6", // Blue
+                            "#8b5cf6", // Purple
+                            "#ec4899", // Pink
+                          ].map((color) => (
+                            <button
+                              key={color}
+                              onClick={() => setTextColor(color)}
+                              className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${
+                                textColor === color
+                                  ? "border-white scale-110 ring-2 ring-white/50"
+                                  : "border-transparent"
+                              }`}
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </div>
+
+                        <div className="flex justify-center gap-2 mt-6">
                           <button
                             onClick={handleAddText}
                             className="px-4 py-2 bg-white text-black rounded-full font-bold"
