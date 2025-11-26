@@ -231,6 +231,15 @@ exports.Prisma.NotificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FriendRequestScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.BookmarkScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -293,6 +302,7 @@ exports.Prisma.ModelName = {
   Comment: 'Comment',
   Message: 'Message',
   Notification: 'Notification',
+  FriendRequest: 'FriendRequest',
   Bookmark: 'Bookmark',
   Report: 'Report',
   Music: 'Music',

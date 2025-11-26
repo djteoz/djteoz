@@ -32,7 +32,9 @@ export default function UserProfilePage() {
     username: string;
     role: string;
   } | null>(null);
-  const [isFriend, setIsFriend] = useState(false);
+  const [friendStatus, setFriendStatus] = useState<
+    "none" | "friends" | "request_sent" | "request_received"
+  >("none");
   const [loadingFriend, setLoadingFriend] = useState(false);
   const [loadingBan, setLoadingBan] = useState(false);
 
@@ -48,21 +50,22 @@ export default function UserProfilePage() {
         if (data?.username) setCurrentUser(data);
       });
 
-    // Получить список друзей
-    fetch("/api/friends", { credentials: "include" })
-      .then((res) => {
-        const ct = res.headers.get("content-type") || "";
-        if (!ct.includes("application/json")) return null;
-        return res.json();
+    // Получить статус дружбы
+    if (username) {
+      fetch(`/api/friends/check?username=${encodeURIComponent(username)}`, {
+        credentials: "include",
       })
-      .then((data) => {
-        if (data?.friends) {
-          const friendUsernames = data.friends.map((f: any) => f.username);
-          if (friendUsernames.includes(username)) {
-            setIsFriend(true);
+        .then((res) => {
+          const ct = res.headers.get("content-type") || "";
+          if (!ct.includes("application/json")) return null;
+          return res.json();
+        })
+        .then((data) => {
+          if (data?.status) {
+            setFriendStatus(data.status);
           }
-        }
-      });
+        });
+    }
 
     // Получить профиль пользователя
     if (!username) {
@@ -91,7 +94,7 @@ export default function UserProfilePage() {
       });
   }, [username]);
 
-  const handleToggleFriend = async () => {
+  const handleFriendAction = async (action: string) => {
     setLoadingFriend(true);
     try {
       const res = await fetch("/api/friends", {
@@ -99,16 +102,20 @@ export default function UserProfilePage() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          action: isFriend ? "remove" : "add",
+          action,
           username: username,
         }),
       });
 
       if (res.ok) {
-        setIsFriend(!isFriend);
+        const data = await res.json();
+        if (data.action === "request_sent") setFriendStatus("request_sent");
+        else if (data.action === "accepted") setFriendStatus("friends");
+        else if (data.action === "removed") setFriendStatus("none");
+        else if (data.action === "cancelled") setFriendStatus("none");
       }
     } catch (err) {
-      console.error("Failed to toggle friend:", err);
+      console.error("Failed to update friend status:", err);
     } finally {
       setLoadingFriend(false);
     }
@@ -271,21 +278,51 @@ export default function UserProfilePage() {
                 </Link>
               ) : (
                 <>
-                  <button
-                    onClick={handleToggleFriend}
-                    disabled={loadingFriend}
-                    className={`px-6 py-2 rounded-lg font-semibold transition ${
-                      isFriend
-                        ? "bg-gray-300 text-gray-700 hover:bg-gray-400"
-                        : "bg-blue-600 text-white hover:bg-blue-700"
-                    } ${loadingFriend ? "opacity-50 cursor-not-allowed" : ""}`}
-                  >
-                    {loadingFriend
-                      ? "Обработка..."
-                      : isFriend
-                      ? "✓ В друзьях"
-                      : "Добавить в друзья"}
-                  </button>
+                  {friendStatus === "none" && (
+                    <button
+                      onClick={() => handleFriendAction("add")}
+                      disabled={loadingFriend}
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+                    >
+                      {loadingFriend ? "..." : "Добавить в друзья"}
+                    </button>
+                  )}
+                  {friendStatus === "request_sent" && (
+                    <button
+                      onClick={() => handleFriendAction("cancel")}
+                      disabled={loadingFriend}
+                      className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-400 transition disabled:opacity-50"
+                    >
+                      {loadingFriend ? "..." : "Заявка отправлена"}
+                    </button>
+                  )}
+                  {friendStatus === "request_received" && (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleFriendAction("accept")}
+                        disabled={loadingFriend}
+                        className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+                      >
+                        {loadingFriend ? "..." : "Принять заявку"}
+                      </button>
+                      <button
+                        onClick={() => handleFriendAction("reject")}
+                        disabled={loadingFriend}
+                        className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition disabled:opacity-50"
+                      >
+                        Отклонить
+                      </button>
+                    </div>
+                  )}
+                  {friendStatus === "friends" && (
+                    <button
+                      onClick={() => handleFriendAction("remove")}
+                      disabled={loadingFriend}
+                      className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-400 transition disabled:opacity-50"
+                    >
+                      {loadingFriend ? "..." : "✓ В друзьях"}
+                    </button>
+                  )}
                   <button
                     onClick={handleSendMessage}
                     className="px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"

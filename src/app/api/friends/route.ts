@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === "add") {
-      // Проверяем, уже ли в друзьях
+      // Check if already friends
       const alreadyFriends = await prisma.user.findFirst({
         where: {
           username: currentUsername,
@@ -135,7 +135,74 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Already friends" }, { status: 400 });
       }
 
-      // Добавляем двусторонней дружбу
+      // Check if request already exists
+      const existingRequest = await prisma.friendRequest.findFirst({
+        where: {
+          OR: [
+            {
+              sender: { username: currentUsername },
+              receiver: { username: targetUsername },
+            },
+            {
+              sender: { username: targetUsername },
+              receiver: { username: currentUsername },
+            },
+          ],
+          status: "PENDING",
+        },
+      });
+
+      if (existingRequest) {
+        return NextResponse.json(
+          { error: "Request already pending" },
+          { status: 400 }
+        );
+      }
+
+      // Create friend request
+      await prisma.friendRequest.create({
+        data: {
+          sender: { connect: { username: currentUsername } },
+          receiver: { connect: { username: targetUsername } },
+        },
+      });
+
+      // Create notification
+      await prisma.notification.create({
+        data: {
+          type: "friend_request",
+          fromUser: currentUsername,
+          userId: targetUser.id,
+          content: `${currentUsername} отправил вам заявку в друзья`,
+          read: false,
+        },
+      });
+
+      return NextResponse.json({ ok: true, action: "request_sent" });
+    } else if (action === "accept") {
+      // Find pending request
+      const request = await prisma.friendRequest.findFirst({
+        where: {
+          sender: { username: targetUsername },
+          receiver: { username: currentUsername },
+          status: "PENDING",
+        },
+      });
+
+      if (!request) {
+        return NextResponse.json(
+          { error: "No pending request found" },
+          { status: 404 }
+        );
+      }
+
+      // Update request status
+      await prisma.friendRequest.update({
+        where: { id: request.id },
+        data: { status: "ACCEPTED" },
+      });
+
+      // Add to friends (bidirectional)
       await prisma.user.update({
         where: { username: currentUsername },
         data: {
@@ -154,18 +221,43 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Создаём уведомление
+      // Create notification
       await prisma.notification.create({
         data: {
-          type: "friend_request",
+          type: "friend_request_accepted",
           fromUser: currentUsername,
           userId: targetUser.id,
-          content: `${currentUsername} добавил вас в друзья`,
+          content: `${currentUsername} принял вашу заявку в друзья`,
           read: false,
         },
       });
 
-      return NextResponse.json({ ok: true, action: "added" });
+      return NextResponse.json({ ok: true, action: "accepted" });
+    } else if (action === "reject" || action === "cancel") {
+      // Find pending request (either direction depending on action)
+      const request = await prisma.friendRequest.findFirst({
+        where: {
+          OR: [
+            {
+              sender: { username: currentUsername },
+              receiver: { username: targetUsername },
+            },
+            {
+              sender: { username: targetUsername },
+              receiver: { username: currentUsername },
+            },
+          ],
+          status: "PENDING",
+        },
+      });
+
+      if (request) {
+        await prisma.friendRequest.delete({
+          where: { id: request.id },
+        });
+      }
+
+      return NextResponse.json({ ok: true, action: "cancelled" });
     } else if (action === "remove") {
       await prisma.user.update({
         where: { username: currentUsername },
@@ -182,6 +274,22 @@ export async function POST(req: NextRequest) {
           friends: {
             disconnect: { username: currentUsername },
           },
+        },
+      });
+
+      // Also remove any friend requests if they exist (cleanup)
+      await prisma.friendRequest.deleteMany({
+        where: {
+          OR: [
+            {
+              sender: { username: currentUsername },
+              receiver: { username: targetUsername },
+            },
+            {
+              sender: { username: targetUsername },
+              receiver: { username: currentUsername },
+            },
+          ],
         },
       });
 
