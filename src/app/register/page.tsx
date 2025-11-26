@@ -119,7 +119,21 @@ export default function RegisterPage() {
             {submitting ? "Регистрация..." : "Зарегистрироваться"}
           </button>
 
-          <div className="text-center mt-4">
+          <p className="text-xs text-center text-gray-500 px-4">
+            Нажимая кнопку «Зарегистрироваться», вы принимаете условия{" "}
+            <Link href="/legal/terms" className="text-indigo-600 hover:underline">
+              Пользовательского соглашения
+            </Link>{" "}
+            и{" "}
+            <Link
+              href="/legal/privacy"
+              className="text-indigo-600 hover:underline"
+            >
+              Политики конфиденциальности
+            </Link>
+          </p>
+
+          <div className="text-center mt-2">
             <span className="text-gray-500 text-sm">Уже есть аккаунт? </span>
             <Link
               href="/login"

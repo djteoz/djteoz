@@ -73,11 +73,11 @@ export default function Sidebar() {
         <div className="px-4 text-xs text-gray-400 text-center">
           © 2025 Lumina Social
           <br />
-          <Link href="/terms" className="hover:underline">
+          <Link href="/legal/terms" className="hover:underline">
             Правила
           </Link>{" "}
           •{" "}
-          <Link href="/privacy" className="hover:underline">
+          <Link href="/legal/privacy" className="hover:underline">
             Конфиденциальность
           </Link>
         </div>
