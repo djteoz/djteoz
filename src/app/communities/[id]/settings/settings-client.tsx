@@ -85,20 +85,35 @@ export default function SettingsClient({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const uploadData = new FormData();
-    uploadData.append("file", file);
-
     try {
       setIsLoading(true);
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: uploadData,
-      });
 
-      if (!res.ok) throw new Error("Upload failed");
+      // 1. Get signature
+      const signRes = await fetch("/api/cloudinary-sign", { method: "POST" });
+      if (!signRes.ok) throw new Error("Failed to get signature");
+      const { timestamp, folder, signature, api_key, cloud_name } =
+        await signRes.json();
 
-      const data = await res.json();
-      setFormData((prev) => ({ ...prev, [field]: data.url }));
+      // 2. Upload to Cloudinary
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("api_key", api_key);
+      formData.append("timestamp", timestamp.toString());
+      formData.append("signature", signature);
+      formData.append("folder", folder);
+
+      const uploadRes = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!uploadRes.ok) throw new Error("Cloudinary upload failed");
+      const data = await uploadRes.json();
+
+      setFormData((prev) => ({ ...prev, [field]: data.secure_url }));
     } catch (error) {
       setMessage({ type: "error", text: "Ошибка загрузки файла" });
     } finally {
