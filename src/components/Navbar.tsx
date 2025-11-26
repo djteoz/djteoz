@@ -232,6 +232,13 @@ export default function Navbar() {
                     >
                       ⚙️ Настройки
                     </Link>
+                    <Link
+                      href="/help"
+                      className="block px-4 py-2.5 hover:bg-indigo-50 text-gray-700 text-sm transition-colors"
+                      onClick={() => setShowProfileMenu(false)}
+                    >
+                      ❓ Помощь
+                    </Link>
                     <div className="h-px bg-gray-100 my-1"></div>
                     <button
                       className="w-full text-left px-4 py-2.5 hover:bg-red-50 text-red-600 text-sm font-medium transition-colors"

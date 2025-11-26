@@ -15,6 +15,7 @@ const sidebar = [
   { href: "/market", label: "Маркет", icon: "🛒" },
   { href: "/bookmarks", label: "Закладки", icon: "🔖" },
   { href: "/settings", label: "Настройки", icon: "⚙️" },
+  { href: "/help", label: "Помощь", icon: "❓" },
 ];
 
 export default function Sidebar() {
