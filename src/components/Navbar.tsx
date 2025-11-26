@@ -236,6 +236,11 @@ export default function Navbar() {
                     <button
                       className="w-full text-left px-4 py-2.5 hover:bg-red-50 text-red-600 text-sm font-medium transition-colors"
                       onClick={async () => {
+                        // Clear local storage
+                        if (typeof window !== "undefined") {
+                          localStorage.removeItem("token");
+                        }
+                        // Call API to clear cookies
                         await fetch("/api/logout", {
                           method: "POST",
                           credentials: "include",

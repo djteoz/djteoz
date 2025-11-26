@@ -60,11 +60,16 @@ export default function FeedPage() {
         if (data?.username) {
           setCurrentUser(data.username);
           setCurrentUserAvatar(data.avatar);
+          setLoading(false);
         } else {
           setLoading(false);
+          router.push("/login");
         }
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setLoading(false);
+        router.push("/login");
+      });
 
     // Fetch stories
     fetch("/api/stories", { credentials: "include" })
@@ -263,12 +268,16 @@ export default function FeedPage() {
     }
   };
 
-  if (!currentUser) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
       </div>
     );
+  }
+
+  if (!currentUser) {
+    return null; // Will redirect in useEffect
   }
 
   return (
