@@ -31,6 +31,7 @@ export default function MusicClient({
 
   const [isUploading, setIsUploading] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
+  const [uploadMode, setUploadMode] = useState<"file" | "url">("file");
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -124,26 +125,36 @@ export default function MusicClient({
     setIsUploading(true);
 
     const formData = new FormData(e.currentTarget);
-    const file = formData.get("file") as File;
     const title = formData.get("title") as string;
     const artist = formData.get("artist") as string;
+    let url = formData.get("url") as string;
+    const file = formData.get("file") as File;
 
-    if (!file || !title || !artist) return;
+    if (!title || !artist) return;
 
     try {
-      // 1. Upload file
-      const uploadData = new FormData();
-      uploadData.append("file", file);
+      if (uploadMode === "file") {
+        if (!file) return;
 
-      const uploadRes = await fetch("/api/upload", {
-        method: "POST",
-        body: uploadData,
-      });
+        // Check file size (limit to 3.5MB for Vercel Serverless)
+        if (file.size > 3.5 * 1024 * 1024) {
+          alert(
+            "Файл слишком большой! Ограничение демо-сервера: 3.5 МБ.\nПожалуйста, используйте вкладку 'Ссылка' для добавления треков с внешних ресурсов."
+          );
+          setIsUploading(false);
+          return;
+        }
 
-      if (!uploadRes.ok) throw new Error("Upload failed");
-      const { url } = await uploadRes.json();
+        // Convert to Base64 client-side to save one request
+        url = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+      }
 
-      // 2. Create music entry
+      // Create music entry
       const res = await fetch("/api/music", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -151,18 +162,22 @@ export default function MusicClient({
           title,
           artist,
           url,
-          cover: null, // Optional cover upload could be added later
+          cover: null,
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to save music");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to save music");
+      }
 
       const newTrack = await res.json();
       setTracks([newTrack, ...tracks]);
       setShowUpload(false);
       router.refresh();
-    } catch (error) {
-      alert("Ошибка при загрузке");
+    } catch (error: any) {
+      console.error(error);
+      alert(`Ошибка при загрузке: ${error.message}`);
     } finally {
       setIsUploading(false);
     }
@@ -182,6 +197,31 @@ export default function MusicClient({
 
       {showUpload && (
         <div className="card p-4 bg-indigo-50 border border-indigo-100 animate-fade-in">
+          <div className="flex gap-4 mb-4 border-b border-indigo-200 pb-2">
+            <button
+              type="button"
+              onClick={() => setUploadMode("file")}
+              className={`text-sm font-medium pb-1 transition-colors ${
+                uploadMode === "file"
+                  ? "text-indigo-600 border-b-2 border-indigo-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              Файл (MP3)
+            </button>
+            <button
+              type="button"
+              onClick={() => setUploadMode("url")}
+              className={`text-sm font-medium pb-1 transition-colors ${
+                uploadMode === "url"
+                  ? "text-indigo-600 border-b-2 border-indigo-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              Внешняя ссылка
+            </button>
+          </div>
+
           <form onSubmit={handleUpload} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -205,18 +245,38 @@ export default function MusicClient({
                 placeholder="Исполнитель"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Файл (MP3)
-              </label>
-              <input
-                type="file"
-                name="file"
-                accept="audio/*"
-                required
-                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-              />
-            </div>
+
+            {uploadMode === "file" ? (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Файл (MP3, макс. 3.5 МБ)
+                </label>
+                <input
+                  type="file"
+                  name="file"
+                  accept="audio/*"
+                  required
+                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  * Для больших файлов используйте вкладку "Внешняя ссылка"
+                </p>
+              </div>
+            ) : (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Ссылка на MP3
+                </label>
+                <input
+                  name="url"
+                  type="url"
+                  required
+                  className="input mt-1"
+                  placeholder="https://example.com/music.mp3"
+                />
+              </div>
+            )}
+
             <button
               disabled={isUploading}
               type="submit"
