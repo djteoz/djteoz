@@ -31,6 +31,7 @@ export async function DELETE(
       include: {
         author: { select: { username: true } },
         post: { include: { author: { select: { username: true } } } },
+        photo: { include: { uploader: { select: { username: true } } } },
       },
     });
 
@@ -38,11 +39,12 @@ export async function DELETE(
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
-    // Автор комментария или автор поста могут удалить комментарий
-    if (
-      comment.author.username !== username &&
-      comment.post.author.username !== username
-    ) {
+    // Автор комментария, автор поста или автор фото могут удалить комментарий
+    const isCommentAuthor = comment.author.username === username;
+    const isPostAuthor = comment.post?.author.username === username;
+    const isPhotoAuthor = comment.photo?.uploader.username === username;
+
+    if (!isCommentAuthor && !isPostAuthor && !isPhotoAuthor) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

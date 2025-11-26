@@ -234,6 +234,7 @@ exports.Prisma.PhotoScalarFieldEnum = {
   privacy: 'privacy',
   width: 'width',
   height: 'height',
+  order: 'order',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

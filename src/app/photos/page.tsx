@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PhotoLightbox } from "../../components/PhotoLightbox";
 
 interface Album {
   id: string;
@@ -27,12 +28,14 @@ export default function PhotosPage() {
   const [albums, setAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [lightboxPhotoId, setLightboxPhotoId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // New Album Modal
   const [showNewAlbumModal, setShowNewAlbumModal] = useState(false);
   const [newAlbumTitle, setNewAlbumTitle] = useState("");
   const [newAlbumDesc, setNewAlbumDesc] = useState("");
+  const [newAlbumPrivacy, setNewAlbumPrivacy] = useState("PUBLIC");
 
   useEffect(() => {
     fetchData();
@@ -117,6 +120,7 @@ export default function PhotosPage() {
         body: JSON.stringify({
           title: newAlbumTitle,
           description: newAlbumDesc,
+          privacy: newAlbumPrivacy,
         }),
       });
 
@@ -124,10 +128,35 @@ export default function PhotosPage() {
         setShowNewAlbumModal(false);
         setNewAlbumTitle("");
         setNewAlbumDesc("");
+        setNewAlbumPrivacy("PUBLIC");
         fetchData(); // Refresh albums
       }
     } catch (error) {
       console.error("Failed to create album", error);
+    }
+  };
+
+  const openLightbox = (photoId: string) => {
+    setLightboxPhotoId(photoId);
+  };
+
+  const closeLightbox = () => {
+    setLightboxPhotoId(null);
+  };
+
+  const handleNextPhoto = () => {
+    if (!lightboxPhotoId) return;
+    const currentIndex = photos.findIndex((p) => p.id === lightboxPhotoId);
+    if (currentIndex < photos.length - 1) {
+      setLightboxPhotoId(photos[currentIndex + 1].id);
+    }
+  };
+
+  const handlePrevPhoto = () => {
+    if (!lightboxPhotoId) return;
+    const currentIndex = photos.findIndex((p) => p.id === lightboxPhotoId);
+    if (currentIndex > 0) {
+      setLightboxPhotoId(photos[currentIndex - 1].id);
     }
   };
 
@@ -211,6 +240,7 @@ export default function PhotosPage() {
             <div
               key={photo.id}
               className="break-inside-avoid group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100"
+              onClick={() => openLightbox(photo.id)}
             >
               <img
                 src={photo.url}
@@ -311,6 +341,20 @@ export default function PhotosPage() {
                   placeholder="Пару слов об этом альбоме..."
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Приватность
+                </label>
+                <select
+                  value={newAlbumPrivacy}
+                  onChange={(e) => setNewAlbumPrivacy(e.target.value)}
+                  className="input w-full"
+                >
+                  <option value="PUBLIC">Всем</option>
+                  <option value="FRIENDS">Только друзьям</option>
+                  <option value="ONLY_ME">Только мне</option>
+                </select>
+              </div>
             </div>
             <div className="flex justify-end gap-3 mt-6">
               <button
@@ -329,6 +373,25 @@ export default function PhotosPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Lightbox */}
+      {lightboxPhotoId && (
+        <PhotoLightbox
+          photoId={lightboxPhotoId}
+          onClose={closeLightbox}
+          onNext={
+            photos.findIndex((p) => p.id === lightboxPhotoId) <
+            photos.length - 1
+              ? handleNextPhoto
+              : undefined
+          }
+          onPrev={
+            photos.findIndex((p) => p.id === lightboxPhotoId) > 0
+              ? handlePrevPhoto
+              : undefined
+          }
+        />
       )}
     </main>
   );

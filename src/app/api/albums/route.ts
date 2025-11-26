@@ -84,10 +84,7 @@ export async function POST(req: NextRequest) {
     const { title, description, privacy } = await req.json();
 
     if (!title) {
-      return NextResponse.json(
-        { error: "Title is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Title is required" }, { status: 400 });
     }
 
     const album = await prisma.album.create({

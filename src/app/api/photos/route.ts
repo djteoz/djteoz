@@ -42,9 +42,11 @@ export async function GET(req: NextRequest) {
       where.albumId = albumId;
     }
 
+    const orderBy: any = albumId ? { order: "asc" } : { createdAt: "desc" };
+
     const photos = await prisma.photo.findMany({
       where,
-      orderBy: { createdAt: "desc" },
+      orderBy,
       take: limit,
       skip: offset,
       include: {

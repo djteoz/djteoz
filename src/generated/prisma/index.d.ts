@@ -10363,11 +10363,13 @@ export namespace Prisma {
   export type PhotoAvgAggregateOutputType = {
     width: number | null
     height: number | null
+    order: number | null
   }
 
   export type PhotoSumAggregateOutputType = {
     width: number | null
     height: number | null
+    order: number | null
   }
 
   export type PhotoMinAggregateOutputType = {
@@ -10381,6 +10383,7 @@ export namespace Prisma {
     privacy: string | null
     width: number | null
     height: number | null
+    order: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10396,6 +10399,7 @@ export namespace Prisma {
     privacy: string | null
     width: number | null
     height: number | null
+    order: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10412,6 +10416,7 @@ export namespace Prisma {
     privacy: number
     width: number
     height: number
+    order: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10421,11 +10426,13 @@ export namespace Prisma {
   export type PhotoAvgAggregateInputType = {
     width?: true
     height?: true
+    order?: true
   }
 
   export type PhotoSumAggregateInputType = {
     width?: true
     height?: true
+    order?: true
   }
 
   export type PhotoMinAggregateInputType = {
@@ -10439,6 +10446,7 @@ export namespace Prisma {
     privacy?: true
     width?: true
     height?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10454,6 +10462,7 @@ export namespace Prisma {
     privacy?: true
     width?: true
     height?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10470,6 +10479,7 @@ export namespace Prisma {
     privacy?: true
     width?: true
     height?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10573,6 +10583,7 @@ export namespace Prisma {
     privacy: string
     width: number | null
     height: number | null
+    order: number
     createdAt: Date
     updatedAt: Date
     _count: PhotoCountAggregateOutputType | null
@@ -10608,6 +10619,7 @@ export namespace Prisma {
     privacy?: boolean
     width?: boolean
     height?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
@@ -10629,6 +10641,7 @@ export namespace Prisma {
     privacy?: boolean
     width?: boolean
     height?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
@@ -10647,6 +10660,7 @@ export namespace Prisma {
     privacy?: boolean
     width?: boolean
     height?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -10683,6 +10697,7 @@ export namespace Prisma {
       privacy: string
       width: number | null
       height: number | null
+      order: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["photo"]>
@@ -11093,6 +11108,7 @@ export namespace Prisma {
     readonly privacy: FieldRef<"Photo", 'String'>
     readonly width: FieldRef<"Photo", 'Int'>
     readonly height: FieldRef<"Photo", 'Int'>
+    readonly order: FieldRef<"Photo", 'Int'>
     readonly createdAt: FieldRef<"Photo", 'DateTime'>
     readonly updatedAt: FieldRef<"Photo", 'DateTime'>
   }
@@ -19385,6 +19401,7 @@ export namespace Prisma {
     privacy: 'privacy',
     width: 'width',
     height: 'height',
+    order: 'order',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -20301,6 +20318,7 @@ export namespace Prisma {
     privacy?: StringFilter<"Photo"> | string
     width?: IntNullableFilter<"Photo"> | number | null
     height?: IntNullableFilter<"Photo"> | number | null
+    order?: IntFilter<"Photo"> | number
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
     uploader?: XOR<UserRelationFilter, UserWhereInput>
@@ -20321,6 +20339,7 @@ export namespace Prisma {
     privacy?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     uploader?: UserOrderByWithRelationInput
@@ -20344,6 +20363,7 @@ export namespace Prisma {
     privacy?: StringFilter<"Photo"> | string
     width?: IntNullableFilter<"Photo"> | number | null
     height?: IntNullableFilter<"Photo"> | number | null
+    order?: IntFilter<"Photo"> | number
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
     uploader?: XOR<UserRelationFilter, UserWhereInput>
@@ -20364,6 +20384,7 @@ export namespace Prisma {
     privacy?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PhotoCountOrderByAggregateInput
@@ -20388,6 +20409,7 @@ export namespace Prisma {
     privacy?: StringWithAggregatesFilter<"Photo"> | string
     width?: IntNullableWithAggregatesFilter<"Photo"> | number | null
     height?: IntNullableWithAggregatesFilter<"Photo"> | number | null
+    order?: IntWithAggregatesFilter<"Photo"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
   }
@@ -21721,6 +21743,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     uploader: UserCreateNestedOneWithoutPhotosInput
@@ -21741,6 +21764,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
@@ -21757,6 +21781,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
@@ -21777,6 +21802,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
@@ -21795,6 +21821,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21809,6 +21836,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21825,6 +21853,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23060,6 +23089,7 @@ export namespace Prisma {
     privacy?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23067,6 +23097,7 @@ export namespace Prisma {
   export type PhotoAvgOrderByAggregateInput = {
     width?: SortOrder
     height?: SortOrder
+    order?: SortOrder
   }
 
   export type PhotoMaxOrderByAggregateInput = {
@@ -23080,6 +23111,7 @@ export namespace Prisma {
     privacy?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23095,6 +23127,7 @@ export namespace Prisma {
     privacy?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23102,6 +23135,7 @@ export namespace Prisma {
   export type PhotoSumOrderByAggregateInput = {
     width?: SortOrder
     height?: SortOrder
+    order?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -25787,6 +25821,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     album?: AlbumCreateNestedOneWithoutPhotosInput
@@ -25805,6 +25840,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
@@ -26321,6 +26357,7 @@ export namespace Prisma {
     privacy?: StringFilter<"Photo"> | string
     width?: IntNullableFilter<"Photo"> | number | null
     height?: IntNullableFilter<"Photo"> | number | null
+    order?: IntFilter<"Photo"> | number
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
   }
@@ -27660,6 +27697,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     uploader: UserCreateNestedOneWithoutPhotosInput
@@ -27679,6 +27717,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
@@ -27856,6 +27895,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
@@ -27875,6 +27915,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
@@ -27987,6 +28028,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     uploader: UserCreateNestedOneWithoutPhotosInput
@@ -28005,6 +28047,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
@@ -28502,6 +28545,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     uploader: UserCreateNestedOneWithoutPhotosInput
@@ -28521,6 +28565,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
@@ -28649,6 +28694,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
@@ -28668,6 +28714,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
@@ -30867,6 +30914,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31508,6 +31556,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     album?: AlbumUpdateOneWithoutPhotosNestedInput
@@ -31526,6 +31575,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
@@ -31543,6 +31593,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31835,6 +31886,7 @@ export namespace Prisma {
     privacy?: string
     width?: number | null
     height?: number | null
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31849,6 +31901,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
@@ -31867,6 +31920,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
@@ -31884,6 +31938,7 @@ export namespace Prisma {
     privacy?: StringFieldUpdateOperationsInput | string
     width?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
