@@ -529,9 +529,9 @@ export default function SettingsForm({ initialData }: SettingsFormProps) {
                     >
                       <div className="flex items-center gap-3">
                         <UserAvatar
-                          src={user.avatar}
-                          alt={user.username}
-                          size="sm"
+                          avatar={user.avatar}
+                          name={user.username}
+                          size={40}
                         />
                         <div>
                           <p className="font-medium text-gray-900">
