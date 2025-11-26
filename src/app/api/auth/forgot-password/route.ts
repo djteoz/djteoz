@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/db";
+import { sendPasswordResetEmail } from "../../../../lib/mail";
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,13 +41,26 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // In production: Send Email/SMS here
-    console.log(`[Password Reset] Code for ${user.email}: ${code}`);
+    // Send Email
+    const emailSent = await sendPasswordResetEmail(user.email, code);
+
+    if (!emailSent) {
+      console.error(
+        `[Password Reset] Failed to send email to ${user.email}. Code was: ${code}`
+      );
+      // Fallback for dev if email fails (e.g. env vars not set)
+      return NextResponse.json({
+        success: true,
+        message: "Code generated but email failed (check console)",
+        code: code, // Returning code for DEV convenience if email fails
+      });
+    }
+
+    console.log(`[Password Reset] Email sent to ${user.email}`);
 
     return NextResponse.json({
       success: true,
-      message: "Code sent",
-      code: code, // Returning code for DEV convenience only!
+      message: "Code sent to email",
     });
   } catch (error) {
     console.error(error);
