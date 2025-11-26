@@ -53,12 +53,18 @@ export async function PUT(
     // For simplicity, let's allow multiple owners or just role change.
     // If strict single owner:
     if (role === "OWNER" && currentUser.id !== id) {
-       // Transaction: Promote target to OWNER, Demote current to ADMIN
-       await prisma.$transaction([
-         prisma.user.update({ where: { id }, data: { role: "OWNER" } }),
-         prisma.user.update({ where: { id: currentUser.id }, data: { role: "ADMIN" } })
-       ]);
-       return NextResponse.json({ success: true, message: "Ownership transferred" });
+      // Transaction: Promote target to OWNER, Demote current to ADMIN
+      await prisma.$transaction([
+        prisma.user.update({ where: { id }, data: { role: "OWNER" } }),
+        prisma.user.update({
+          where: { id: currentUser.id },
+          data: { role: "ADMIN" },
+        }),
+      ]);
+      return NextResponse.json({
+        success: true,
+        message: "Ownership transferred",
+      });
     }
 
     await prisma.user.update({

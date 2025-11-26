@@ -31,7 +31,10 @@ export default function AdminLayout({
               Lumina Admin
             </span>
           </div>
-          <Link href="/" className="text-sm text-gray-600 hover:text-indigo-600">
+          <Link
+            href="/"
+            className="text-sm text-gray-600 hover:text-indigo-600"
+          >
             Вернуться на сайт
           </Link>
         </div>

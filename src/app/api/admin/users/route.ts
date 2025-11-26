@@ -17,7 +17,10 @@ export async function GET(req: NextRequest) {
       where: { username: payload.username },
     });
 
-    if (!currentUser || (currentUser.role !== "ADMIN" && currentUser.role !== "OWNER")) {
+    if (
+      !currentUser ||
+      (currentUser.role !== "ADMIN" && currentUser.role !== "OWNER")
+    ) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

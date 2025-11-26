@@ -20,7 +20,10 @@ export async function PUT(
       where: { username: payload.username },
     });
 
-    if (!currentUser || (currentUser.role !== "ADMIN" && currentUser.role !== "OWNER")) {
+    if (
+      !currentUser ||
+      (currentUser.role !== "ADMIN" && currentUser.role !== "OWNER")
+    ) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -34,11 +37,17 @@ export async function PUT(
 
     // Protection: Admin cannot ban Owner. Admin cannot ban other Admin (optional, but good practice).
     if (targetUser.role === "OWNER") {
-      return NextResponse.json({ error: "Cannot ban the Owner" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Cannot ban the Owner" },
+        { status: 403 }
+      );
     }
 
     if (targetUser.role === "ADMIN" && currentUser.role !== "OWNER") {
-      return NextResponse.json({ error: "Admins cannot ban other Admins" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Admins cannot ban other Admins" },
+        { status: 403 }
+      );
     }
 
     await prisma.user.update({

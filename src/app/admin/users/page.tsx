@@ -50,14 +50,14 @@ export default function AdminUsersPage() {
 
   const handleRoleChange = async (userId: string, newRole: string) => {
     if (!confirm(`Вы уверены, что хотите назначить роль ${newRole}?`)) return;
-    
+
     try {
       const res = await fetch(`/api/admin/users/${userId}/role`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role: newRole }),
       });
-      
+
       if (res.ok) {
         fetchUsers(search);
       } else {
@@ -70,7 +70,14 @@ export default function AdminUsersPage() {
   };
 
   const handleBan = async (userId: string, isBanned: boolean) => {
-    if (!confirm(isBanned ? "Заблокировать пользователя?" : "Разблокировать пользователя?")) return;
+    if (
+      !confirm(
+        isBanned
+          ? "Заблокировать пользователя?"
+          : "Разблокировать пользователя?"
+      )
+    )
+      return;
 
     try {
       const res = await fetch(`/api/admin/users/${userId}/ban`, {
@@ -80,7 +87,7 @@ export default function AdminUsersPage() {
       });
 
       if (res.ok) {
-        setUsers(users.map(u => u.id === userId ? { ...u, isBanned } : u));
+        setUsers(users.map((u) => (u.id === userId ? { ...u, isBanned } : u)));
       } else {
         const data = await res.json();
         alert(data.error || "Ошибка");
@@ -116,23 +123,33 @@ export default function AdminUsersPage() {
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
-                <th className="px-6 py-4 font-medium text-gray-500">Пользователь</th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Пользователь
+                </th>
                 <th className="px-6 py-4 font-medium text-gray-500">Email</th>
                 <th className="px-6 py-4 font-medium text-gray-500">Роль</th>
                 <th className="px-6 py-4 font-medium text-gray-500">Статус</th>
-                <th className="px-6 py-4 font-medium text-gray-500">Действия</th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Действия
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Загрузка...
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Пользователи не найдены
                   </td>
                 </tr>
@@ -172,38 +189,48 @@ export default function AdminUsersPage() {
                     </td>
                     <td className="px-6 py-4">
                       {user.isBanned ? (
-                        <span className="text-red-600 font-medium">Заблокирован</span>
+                        <span className="text-red-600 font-medium">
+                          Заблокирован
+                        </span>
                       ) : (
-                        <span className="text-green-600 font-medium">Активен</span>
+                        <span className="text-green-600 font-medium">
+                          Активен
+                        </span>
                       )}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        {currentUserRole === "OWNER" && user.role !== "OWNER" && (
-                          <select
-                            className="text-xs border border-gray-200 rounded px-2 py-1"
-                            value={user.role}
-                            onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                          >
-                            <option value="USER">User</option>
-                            <option value="MODERATOR">Moderator</option>
-                            <option value="ADMIN">Admin</option>
-                            <option value="OWNER">Owner (Transfer)</option>
-                          </select>
-                        )}
-                        
-                        {user.role !== "OWNER" && (currentUserRole === "OWNER" || (currentUserRole === "ADMIN" && user.role !== "ADMIN")) && (
-                          <button
-                            onClick={() => handleBan(user.id, !user.isBanned)}
-                            className={`text-xs px-3 py-1 rounded border ${
-                              user.isBanned
-                                ? "border-green-200 text-green-700 hover:bg-green-50"
-                                : "border-red-200 text-red-700 hover:bg-red-50"
-                            }`}
-                          >
-                            {user.isBanned ? "Разблок." : "Блок."}
-                          </button>
-                        )}
+                        {currentUserRole === "OWNER" &&
+                          user.role !== "OWNER" && (
+                            <select
+                              className="text-xs border border-gray-200 rounded px-2 py-1"
+                              value={user.role}
+                              onChange={(e) =>
+                                handleRoleChange(user.id, e.target.value)
+                              }
+                            >
+                              <option value="USER">User</option>
+                              <option value="MODERATOR">Moderator</option>
+                              <option value="ADMIN">Admin</option>
+                              <option value="OWNER">Owner (Transfer)</option>
+                            </select>
+                          )}
+
+                        {user.role !== "OWNER" &&
+                          (currentUserRole === "OWNER" ||
+                            (currentUserRole === "ADMIN" &&
+                              user.role !== "ADMIN")) && (
+                            <button
+                              onClick={() => handleBan(user.id, !user.isBanned)}
+                              className={`text-xs px-3 py-1 rounded border ${
+                                user.isBanned
+                                  ? "border-green-200 text-green-700 hover:bg-green-50"
+                                  : "border-red-200 text-red-700 hover:bg-red-50"
+                              }`}
+                            >
+                              {user.isBanned ? "Разблок." : "Блок."}
+                            </button>
+                          )}
                       </div>
                     </td>
                   </tr>
