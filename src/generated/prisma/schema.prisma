@@ -61,9 +61,12 @@ model User {
   reports                Report[]
 
   // Media
-  music   Music[]
-  videos  Video[]
-  stories Story[]
+  music     Music[]
+  videos    Video[]
+  stories   Story[]
+  albums    Album[]
+  photos    Photo[]
+  photoTags PhotoTag[]
 
   // Communities
   communities CommunityMember[]
@@ -154,11 +157,67 @@ model Comment {
   content   String
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String?
+  photo     Photo?   @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId   String?
   likes     String[] // Array of usernames who liked
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Album model
+model Album {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  cover       String?
+  creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  creatorId   String
+  privacy     String   @default("PUBLIC") // PUBLIC, FRIENDS, ONLY_ME
+  isSystem    Boolean  @default(false)
+  photos      Photo[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Photo model
+model Photo {
+  id          String  @id @default(cuid())
+  url         String
+  description String?
+  uploader    User    @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  uploaderId  String
+  album       Album?  @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  albumId     String?
+
+  likes    String[]
+  comments Comment[]
+  tags     PhotoTag[]
+
+  isArchived Boolean @default(false)
+  isPinned   Boolean @default(false)
+  privacy    String  @default("PUBLIC")
+
+  width  Int?
+  height Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Photo Tag model
+model PhotoTag {
+  id        String   @id @default(cuid())
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId   String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  x         Float
+  y         Float
+  createdAt DateTime @default(now())
+
+  @@unique([photoId, userId])
 }
 
 // Message model

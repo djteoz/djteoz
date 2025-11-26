@@ -204,9 +204,47 @@ exports.Prisma.CommentScalarFieldEnum = {
   content: 'content',
   authorId: 'authorId',
   postId: 'postId',
+  photoId: 'photoId',
   likes: 'likes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AlbumScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  cover: 'cover',
+  creatorId: 'creatorId',
+  privacy: 'privacy',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PhotoScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  description: 'description',
+  uploaderId: 'uploaderId',
+  albumId: 'albumId',
+  likes: 'likes',
+  isArchived: 'isArchived',
+  isPinned: 'isPinned',
+  privacy: 'privacy',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PhotoTagScalarFieldEnum = {
+  id: 'id',
+  photoId: 'photoId',
+  userId: 'userId',
+  x: 'x',
+  y: 'y',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -300,6 +338,9 @@ exports.Prisma.ModelName = {
   Story: 'Story',
   Post: 'Post',
   Comment: 'Comment',
+  Album: 'Album',
+  Photo: 'Photo',
+  PhotoTag: 'PhotoTag',
   Message: 'Message',
   Notification: 'Notification',
   FriendRequest: 'FriendRequest',

@@ -262,73 +262,71 @@ export default function FriendsPage() {
             })}
           </div>
         )
+      ) : // Requests Tab
+      requests.length === 0 ? (
+        <div className="card text-center py-16">
+          <div className="text-6xl mb-4">📭</div>
+          <p className="text-gray-600 text-lg">Нет новых заявок в друзья</p>
+        </div>
       ) : (
-        // Requests Tab
-        requests.length === 0 ? (
-          <div className="card text-center py-16">
-            <div className="text-6xl mb-4">📭</div>
-            <p className="text-gray-600 text-lg">Нет новых заявок в друзья</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {requests.map((request) => {
-              const fullName =
-                [request.firstName, request.lastName].filter(Boolean).join(" ") ||
-                request.username;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {requests.map((request) => {
+            const fullName =
+              [request.firstName, request.lastName].filter(Boolean).join(" ") ||
+              request.username;
 
-              return (
-                <div
-                  key={request.id}
-                  className="card p-0 overflow-hidden group hover:shadow-xl transition-all duration-300 border-0"
-                >
-                  <div className="relative h-32 bg-gradient-to-r from-purple-400 to-indigo-400"></div>
-                  <div className="px-6 pb-6 relative">
-                    <div className="absolute -top-12 left-6 w-24 h-24 rounded-2xl border-4 border-white shadow-md overflow-hidden bg-white">
-                      <img
-                        src={
-                          request.avatar
-                            ? `/uploads/${request.avatar}`
-                            : "/default-avatar.png"
-                        }
-                        alt={fullName}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+            return (
+              <div
+                key={request.id}
+                className="card p-0 overflow-hidden group hover:shadow-xl transition-all duration-300 border-0"
+              >
+                <div className="relative h-32 bg-gradient-to-r from-purple-400 to-indigo-400"></div>
+                <div className="px-6 pb-6 relative">
+                  <div className="absolute -top-12 left-6 w-24 h-24 rounded-2xl border-4 border-white shadow-md overflow-hidden bg-white">
+                    <img
+                      src={
+                        request.avatar
+                          ? `/uploads/${request.avatar}`
+                          : "/default-avatar.png"
+                      }
+                      alt={fullName}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-                    <div className="mt-14">
-                      <Link
-                        href={`/profile/${request.username}`}
-                        className="block group-hover:text-indigo-600 transition-colors"
+                  <div className="mt-14">
+                    <Link
+                      href={`/profile/${request.username}`}
+                      className="block group-hover:text-indigo-600 transition-colors"
+                    >
+                      <h3 className="text-xl font-bold text-gray-800">
+                        {fullName}
+                      </h3>
+                    </Link>
+                    <p className="text-indigo-500 font-medium text-sm">
+                      @{request.username}
+                    </p>
+
+                    <div className="mt-6 flex gap-3">
+                      <button
+                        onClick={() => handleAcceptRequest(request.username)}
+                        className="flex-1 btn bg-indigo-600 text-white hover:bg-indigo-700 py-2 rounded-xl text-sm font-semibold transition-colors"
                       >
-                        <h3 className="text-xl font-bold text-gray-800">
-                          {fullName}
-                        </h3>
-                      </Link>
-                      <p className="text-indigo-500 font-medium text-sm">
-                        @{request.username}
-                      </p>
-
-                      <div className="mt-6 flex gap-3">
-                        <button
-                          onClick={() => handleAcceptRequest(request.username)}
-                          className="flex-1 btn bg-indigo-600 text-white hover:bg-indigo-700 py-2 rounded-xl text-sm font-semibold transition-colors"
-                        >
-                          Принять
-                        </button>
-                        <button
-                          onClick={() => handleRejectRequest(request.username)}
-                          className="flex-1 btn bg-gray-100 text-gray-700 hover:bg-gray-200 py-2 rounded-xl text-sm font-semibold transition-colors"
-                        >
-                          Отклонить
-                        </button>
-                      </div>
+                        Принять
+                      </button>
+                      <button
+                        onClick={() => handleRejectRequest(request.username)}
+                        className="flex-1 btn bg-gray-100 text-gray-700 hover:bg-gray-200 py-2 rounded-xl text-sm font-semibold transition-colors"
+                      >
+                        Отклонить
+                      </button>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        )
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );
