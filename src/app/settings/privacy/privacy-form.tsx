@@ -48,7 +48,10 @@ export default function PrivacySettingsForm() {
       });
   }, []);
 
-  const handleChange = async (key: keyof PrivacySettings, value: PrivacyLevel) => {
+  const handleChange = async (
+    key: keyof PrivacySettings,
+    value: PrivacyLevel
+  ) => {
     if (!settings) return;
 
     const newSettings = { ...settings, [key]: value };
@@ -72,16 +75,16 @@ export default function PrivacySettingsForm() {
     if (!settings) return;
     const isPrivate = settings.profileVisibility === "FRIENDS";
     const newValue = isPrivate ? "EVERYONE" : "FRIENDS";
-    
+
     // When enabling private profile, set everything to FRIENDS or ONLY_ME
     const newSettings = { ...settings };
-    
+
     if (!isPrivate) {
       // Enabling private mode
       Object.keys(newSettings).forEach((key) => {
         // Don't change ONLY_ME settings
         if (newSettings[key as keyof PrivacySettings] !== "ONLY_ME") {
-           newSettings[key as keyof PrivacySettings] = "FRIENDS";
+          newSettings[key as keyof PrivacySettings] = "FRIENDS";
         }
       });
     } else {
@@ -107,11 +110,17 @@ export default function PrivacySettingsForm() {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Загрузка настроек...</div>;
+    return (
+      <div className="p-8 text-center text-gray-500">Загрузка настроек...</div>
+    );
   }
 
   if (!settings) {
-    return <div className="p-8 text-center text-red-500">Ошибка загрузки настроек</div>;
+    return (
+      <div className="p-8 text-center text-red-500">
+        Ошибка загрузки настроек
+      </div>
+    );
   }
 
   const Select = ({
@@ -145,7 +154,9 @@ export default function PrivacySettingsForm() {
       <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-lg font-bold text-indigo-900">Закрытый профиль</h3>
+            <h3 className="text-lg font-bold text-indigo-900">
+              Закрытый профиль
+            </h3>
             <p className="text-sm text-indigo-700 mt-1">
               Ограничить доступ к вашей странице для всех, кроме друзей
             </p>
@@ -153,18 +164,25 @@ export default function PrivacySettingsForm() {
           <button
             onClick={togglePrivateProfile}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-              settings.profileVisibility === "FRIENDS" || settings.profileVisibility === "ONLY_ME" ? "bg-indigo-600" : "bg-gray-200"
+              settings.profileVisibility === "FRIENDS" ||
+              settings.profileVisibility === "ONLY_ME"
+                ? "bg-indigo-600"
+                : "bg-gray-200"
             }`}
           >
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                settings.profileVisibility === "FRIENDS" || settings.profileVisibility === "ONLY_ME" ? "translate-x-6" : "translate-x-1"
+                settings.profileVisibility === "FRIENDS" ||
+                settings.profileVisibility === "ONLY_ME"
+                  ? "translate-x-6"
+                  : "translate-x-1"
               }`}
             />
           </button>
         </div>
         <p className="text-xs text-indigo-600/80">
-          В закрытом профиле ваши записи и фото доступны только друзьям. Незнакомцы видят только имя и аватар.
+          В закрытом профиле ваши записи и фото доступны только друзьям.
+          Незнакомцы видят только имя и аватар.
         </p>
       </div>
 
@@ -190,7 +208,9 @@ export default function PrivacySettingsForm() {
 
       {/* Posts */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Записи на странице</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">
+          Записи на странице
+        </h3>
         <Select
           label="Кто видит чужие записи на моей странице"
           value={settings.postsVisibility}
@@ -252,7 +272,9 @@ export default function PrivacySettingsForm() {
       <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">Предварительный просмотр</span>
+            <span className="text-gray-700 font-medium">
+              Предварительный просмотр
+            </span>
             <Link
               href="/profile?viewAs=public"
               target="_blank"
@@ -263,7 +285,9 @@ export default function PrivacySettingsForm() {
           </div>
           <div className="h-px bg-gray-200" />
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">Юридическая информация</span>
+            <span className="text-gray-700 font-medium">
+              Юридическая информация
+            </span>
             <Link
               href="/legal/privacy"
               target="_blank"
