@@ -126,3 +126,35 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const payload = verifyAccessToken(token) as { username: string };
+    const user = await prisma.user.findUnique({
+      where: { username: payload.username },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    await prisma.story.deleteMany({
+      where: { authorId: user.id },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Delete all stories error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete stories" },
+      { status: 500 }
+    );
+  }
+}

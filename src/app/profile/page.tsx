@@ -46,10 +46,12 @@ export default function MyProfilePage() {
   const [activeTab, setActiveTab] = useState("all"); // all, my, archive
   const [isEditingStatus, setIsEditingStatus] = useState(false);
   const [statusText, setStatusText] = useState("");
-  
+
   // Stories
   const [userStories, setUserStories] = useState<any[]>([]);
-  const [viewingStoryIndex, setViewingStoryIndex] = useState<number | null>(null);
+  const [viewingStoryIndex, setViewingStoryIndex] = useState<number | null>(
+    null
+  );
   const [storyProgress, setStoryProgress] = useState(0);
   const storyTimerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -112,7 +114,9 @@ export default function MyProfilePage() {
       if (res.ok) {
         const data = await res.json();
         // Filter stories for this user
-        const userStoryGroup = data.find((group: any) => group.username === username);
+        const userStoryGroup = data.find(
+          (group: any) => group.username === username
+        );
         if (userStoryGroup) {
           setUserStories(userStoryGroup.items);
         } else {
@@ -160,14 +164,14 @@ export default function MyProfilePage() {
       return;
     }
 
-    const duration = currentStory.type === 'video' ? 30000 : 5000;
+    const duration = currentStory.type === "video" ? 30000 : 5000;
     const interval = 50;
     const step = 100 / (duration / interval);
 
     setStoryProgress(0);
 
     storyTimerRef.current = setInterval(() => {
-      setStoryProgress(prev => {
+      setStoryProgress((prev) => {
         if (prev >= 100) {
           handleNextStory();
           return 100;
@@ -185,7 +189,7 @@ export default function MyProfilePage() {
     if (viewingStoryIndex === null) return;
 
     if (viewingStoryIndex < userStories.length - 1) {
-      setViewingStoryIndex(prev => (prev !== null ? prev + 1 : null));
+      setViewingStoryIndex((prev) => (prev !== null ? prev + 1 : null));
       setStoryProgress(0);
     } else {
       closeStoryViewer();
@@ -196,7 +200,7 @@ export default function MyProfilePage() {
     if (viewingStoryIndex === null) return;
 
     if (viewingStoryIndex > 0) {
-      setViewingStoryIndex(prev => (prev !== null ? prev - 1 : null));
+      setViewingStoryIndex((prev) => (prev !== null ? prev - 1 : null));
       setStoryProgress(0);
     } else {
       setStoryProgress(0);
@@ -211,23 +215,47 @@ export default function MyProfilePage() {
 
   const handleDeleteStory = async (storyId: string) => {
     if (!confirm("Удалить эту историю?")) return;
-    
+
     try {
       const res = await fetch(`/api/stories/${storyId}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
-        const newStories = userStories.filter(s => s.id !== storyId);
+        const newStories = userStories.filter((s) => s.id !== storyId);
         setUserStories(newStories);
         if (newStories.length === 0) {
           closeStoryViewer();
-        } else if (viewingStoryIndex !== null && viewingStoryIndex >= newStories.length) {
+        } else if (
+          viewingStoryIndex !== null &&
+          viewingStoryIndex >= newStories.length
+        ) {
           setViewingStoryIndex(newStories.length - 1);
         }
       }
     } catch (e) {
       console.error("Failed to delete story", e);
+    }
+  };
+
+  const handleDeleteAllStories = async () => {
+    if (!confirm("Вы уверены, что хотите удалить ВСЕ свои истории?")) return;
+
+    try {
+      const res = await fetch("/api/stories", {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setUserStories([]);
+        closeStoryViewer();
+        setMessage("Все истории удалены");
+      } else {
+        setError("Не удалось удалить истории");
+      }
+    } catch (e) {
+      console.error("Failed to delete stories", e);
+      setError("Ошибка сети");
     }
   };
 
@@ -655,22 +683,41 @@ export default function MyProfilePage() {
       {/* Story Viewer Overlay */}
       {viewingStoryIndex !== null && userStories[viewingStoryIndex] && (
         <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center">
-          <button 
+          <button
             onClick={closeStoryViewer}
             className="absolute top-4 right-4 text-white z-20 p-2 hover:bg-white/10 rounded-full"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
 
           <div className="relative w-full max-w-md h-full md:h-[90vh] bg-black md:rounded-xl overflow-hidden flex flex-col">
             <div className="absolute top-0 left-0 right-0 z-20 p-2 flex gap-1">
               {userStories.map((item: any, idx: number) => (
-                <div key={item.id} className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden">
-                  <div 
+                <div
+                  key={item.id}
+                  className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden"
+                >
+                  <div
                     className="h-full bg-white transition-all duration-100 ease-linear"
-                    style={{ 
-                      width: idx < viewingStoryIndex ? '100%' : 
-                             idx === viewingStoryIndex ? `${storyProgress}%` : '0%' 
+                    style={{
+                      width:
+                        idx < viewingStoryIndex
+                          ? "100%"
+                          : idx === viewingStoryIndex
+                          ? `${storyProgress}%`
+                          : "0%",
                     }}
                   />
                 </div>
@@ -679,9 +726,9 @@ export default function MyProfilePage() {
 
             <div className="absolute top-4 left-0 right-0 z-20 px-4 pt-2 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <UserAvatar 
-                  avatar={profile.avatar} 
-                  name={fullName} 
+                <UserAvatar
+                  avatar={profile.avatar}
+                  name={fullName}
                   size={32}
                   className="border border-white/20"
                 />
@@ -690,11 +737,16 @@ export default function MyProfilePage() {
                     {fullName}
                   </span>
                   <span className="text-white/70 text-xs shadow-black drop-shadow-md">
-                    {new Date(userStories[viewingStoryIndex].createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    {new Date(
+                      userStories[viewingStoryIndex].createdAt
+                    ).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </span>
                 </div>
               </div>
-              
+
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -703,7 +755,19 @@ export default function MyProfilePage() {
                 className="text-white/70 hover:text-red-500 p-2 transition-colors"
                 title="Удалить историю"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
               </button>
             </div>
 
@@ -714,7 +778,7 @@ export default function MyProfilePage() {
             </div>
 
             <div className="flex-1 bg-black flex items-center justify-center relative">
-              {userStories[viewingStoryIndex].type === 'video' ? (
+              {userStories[viewingStoryIndex].type === "video" ? (
                 <video
                   src={userStories[viewingStoryIndex].mediaUrl}
                   className="w-full h-full object-contain"
@@ -767,9 +831,15 @@ export default function MyProfilePage() {
             {/* Avatar - Overlapping */}
             <div className="-mt-16 md:-mt-20 relative z-10 mr-6">
               <div className="relative group/avatar">
-                <div 
-                  className={`relative rounded-full p-1 ${userStories.length > 0 ? 'bg-gradient-to-tr from-yellow-400 to-purple-600 cursor-pointer' : 'bg-white'}`}
-                  onClick={() => userStories.length > 0 && setViewingStoryIndex(0)}
+                <div
+                  className={`relative rounded-full p-1 ${
+                    userStories.length > 0
+                      ? "bg-gradient-to-tr from-yellow-400 to-purple-600 cursor-pointer"
+                      : "bg-white"
+                  }`}
+                  onClick={() =>
+                    userStories.length > 0 && setViewingStoryIndex(0)
+                  }
                 >
                   <UserAvatar
                     avatar={profile.avatar}
@@ -777,7 +847,7 @@ export default function MyProfilePage() {
                     className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg text-4xl md:text-6xl"
                   />
                 </div>
-                
+
                 {/* Avatar Dropdown Menu */}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover/avatar:opacity-100 group-hover/avatar:visible transition-all z-20 overflow-hidden">
                   {userStories.length > 0 && (
@@ -789,7 +859,7 @@ export default function MyProfilePage() {
                     </button>
                   )}
                   <button
-                    onClick={() => router.push('/feed')} // Redirect to feed to create story for now
+                    onClick={() => router.push("/feed")} // Redirect to feed to create story for now
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
                   >
                     <span>➕</span> Новая история
@@ -802,11 +872,7 @@ export default function MyProfilePage() {
                   </button>
                   {userStories.length > 0 && (
                     <button
-                      onClick={() => {
-                        if(confirm("Удалить все истории?")) {
-                          // Logic to delete all stories would go here
-                        }
-                      }}
+                      onClick={handleDeleteAllStories}
                       className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 border-t border-gray-100"
                     >
                       <span>🗑️</span> Удалить истории
