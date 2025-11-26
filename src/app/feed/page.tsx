@@ -46,9 +46,143 @@ export default function FeedPage() {
   const [storyFile, setStoryFile] = useState<File | null>(null);
   const [storyPreview, setStoryPreview] = useState<string | null>(null);
   const [uploadingStory, setUploadingStory] = useState(false);
+  const [storyText, setStoryText] = useState("");
+  const [showTextInput, setShowTextInput] = useState(false);
+  const [textOverlays, setTextOverlays] = useState<
+    { id: number; text: string; x: number; y: number; color: string }[]
+  >([]);
+  const [stickers, setStickers] = useState<
+    { id: number; emoji: string; x: number; y: number }[]
+  >([]);
+  const [showStickerPicker, setShowStickerPicker] = useState(false);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  // Получить текущего пользователя
+  const bakeOverlays = async (
+    file: File,
+    overlays: typeof textOverlays,
+    stickersList: typeof stickers
+  ): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          reject(new Error("No context"));
+          return;
+        }
+
+        // Draw base image
+        ctx.drawImage(img, 0, 0);
+
+        // Draw stickers
+        stickersList.forEach((sticker) => {
+          const x = (sticker.x / 100) * canvas.width;
+          const y = (sticker.y / 100) * canvas.height;
+          ctx.font = `${canvas.width * 0.15}px serif`; // ~15% of width
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(sticker.emoji, x, y);
+        });
+
+        // Draw text
+        overlays.forEach((overlay) => {
+          const x = (overlay.x / 100) * canvas.width;
+          const y = (overlay.y / 100) * canvas.height;
+          ctx.fillStyle = overlay.color;
+          ctx.font = `bold ${canvas.width * 0.08}px sans-serif`; // ~8% of width
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          // Add shadow for visibility
+          ctx.shadowColor = "black";
+          ctx.shadowBlur = canvas.width * 0.01;
+          ctx.fillText(overlay.text, x, y);
+          ctx.shadowBlur = 0;
+        });
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(
+                new File([blob], "story-edited.jpg", { type: "image/jpeg" })
+              );
+            } else {
+              reject(new Error("Canvas to Blob failed"));
+            }
+          },
+          "image/jpeg",
+          0.9
+        );
+      };
+      img.onerror = reject;
+    });
+  };
+
+  const handleCreateStory = async () => {
+    if (!storyFile || uploadingStory) return;
+
+    setUploadingStory(true);
+    try {
+      let fileToUpload = storyFile;
+
+      // Bake overlays for images
+      if (
+        storyFile.type.startsWith("image/") &&
+        (textOverlays.length > 0 || stickers.length > 0)
+      ) {
+        try {
+          fileToUpload = await bakeOverlays(storyFile, textOverlays, stickers);
+        } catch (err) {
+          console.error("Failed to bake overlays:", err);
+          // Fallback to original file
+        }
+      }
+
+      // Upload file first
+      const formData = new FormData();
+      formData.append("file", fileToUpload);
+
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) throw new Error("Upload failed");
+      const { url } = await uploadRes.json();
+
+      // Create story
+      // Note: In a real app, we would merge the text/stickers onto the image/video on the server or client canvas
+      // For now, we just save the media.
+      // TODO: Implement canvas merging or save metadata for overlays
+      const res = await fetch("/api/stories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mediaUrl: url,
+          type: storyFile.type.startsWith("video/") ? "video" : "image",
+        }),
+      });
+
+      if (res.ok) {
+        setShowStoryModal(false);
+        setStoryFile(null);
+        setStoryPreview(null);
+        setTextOverlays([]);
+        setStickers([]);
+        // Refresh stories
+        const storiesRes = await fetch("/api/stories");
+        const storiesData = await storiesRes.json();
+        setStories(storiesData);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setUploadingStory(false);
+    }
+  };
   useEffect(() => {
     fetch("/api/profile", { credentials: "include" })
       .then((res) => {
@@ -158,9 +292,24 @@ export default function FeedPage() {
 
     setUploadingStory(true);
     try {
+      let fileToUpload = storyFile;
+
+      // Bake overlays for images
+      if (
+        storyFile.type.startsWith("image/") &&
+        (textOverlays.length > 0 || stickers.length > 0)
+      ) {
+        try {
+          fileToUpload = await bakeOverlays(storyFile, textOverlays, stickers);
+        } catch (err) {
+          console.error("Failed to bake overlays:", err);
+          // Fallback to original file
+        }
+      }
+
       // Upload file first
       const formData = new FormData();
-      formData.append("file", storyFile);
+      formData.append("file", fileToUpload);
 
       const uploadRes = await fetch("/api/upload", {
         method: "POST",
@@ -184,6 +333,8 @@ export default function FeedPage() {
         setShowStoryModal(false);
         setStoryFile(null);
         setStoryPreview(null);
+        setTextOverlays([]);
+        setStickers([]);
         // Refresh stories
         const storiesRes = await fetch("/api/stories");
         const storiesData = await storiesRes.json();
@@ -194,6 +345,38 @@ export default function FeedPage() {
     } finally {
       setUploadingStory(false);
     }
+  };
+
+  const handleAddText = () => {
+    if (!storyText.trim()) {
+      setShowTextInput(false);
+      return;
+    }
+    setTextOverlays([
+      ...textOverlays,
+      {
+        id: Date.now(),
+        text: storyText,
+        x: 50,
+        y: 50,
+        color: "white",
+      },
+    ]);
+    setStoryText("");
+    setShowTextInput(false);
+  };
+
+  const handleAddSticker = (emoji: string) => {
+    setStickers([
+      ...stickers,
+      {
+        id: Date.now(),
+        emoji,
+        x: 50,
+        y: 50,
+      },
+    ]);
+    setShowStickerPicker(false);
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -287,20 +470,93 @@ export default function FeedPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-[#222] w-full max-w-4xl h-[80vh] rounded-xl overflow-hidden flex shadow-2xl">
             {/* Preview Area */}
-            <div className="flex-1 bg-black flex items-center justify-center relative">
+            <div className="flex-1 bg-black flex items-center justify-center relative overflow-hidden">
               {storyPreview ? (
-                storyFile?.type.startsWith("video/") ? (
-                  <video
-                    src={storyPreview}
-                    className="max-h-full max-w-full"
-                    controls
-                  />
-                ) : (
-                  <img
-                    src={storyPreview}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                )
+                <>
+                  {storyFile?.type.startsWith("video/") ? (
+                    <video
+                      src={storyPreview}
+                      className="max-h-full max-w-full"
+                      controls={false}
+                      autoPlay
+                      loop
+                      muted
+                    />
+                  ) : (
+                    <img
+                      src={storyPreview}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  )}
+
+                  {/* Overlays */}
+                  {textOverlays.map((overlay) => (
+                    <div
+                      key={overlay.id}
+                      className="absolute text-2xl font-bold drop-shadow-md cursor-move select-none"
+                      style={{
+                        left: `${overlay.x}%`,
+                        top: `${overlay.y}%`,
+                        color: overlay.color,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                      draggable
+                      onDragEnd={(e) => {
+                        // Simple drag implementation (would need better logic for real app)
+                        // For now just static
+                      }}
+                    >
+                      {overlay.text}
+                    </div>
+                  ))}
+                  {stickers.map((sticker) => (
+                    <div
+                      key={sticker.id}
+                      className="absolute text-4xl cursor-move select-none"
+                      style={{
+                        left: `${sticker.x}%`,
+                        top: `${sticker.y}%`,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      {sticker.emoji}
+                    </div>
+                  ))}
+
+                  {/* Text Input Overlay */}
+                  {showTextInput && (
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                      <div className="w-full max-w-md px-4">
+                        <input
+                          autoFocus
+                          type="text"
+                          value={storyText}
+                          onChange={(e) => setStoryText(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") handleAddText();
+                            if (e.key === "Escape") setShowTextInput(false);
+                          }}
+                          placeholder="Введите текст..."
+                          className="w-full bg-transparent text-white text-center text-3xl font-bold border-b-2 border-white/50 focus:border-white outline-none placeholder-white/50 pb-2"
+                        />
+                        <div className="flex justify-center gap-2 mt-4">
+                          <button
+                            onClick={handleAddText}
+                            className="px-4 py-2 bg-white text-black rounded-full font-bold"
+                          >
+                            Готово
+                          </button>
+                          <button
+                            onClick={() => setShowTextInput(false)}
+                            className="px-4 py-2 bg-white/20 text-white rounded-full font-bold"
+                          >
+                            Отмена
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="text-center">
                   <div className="w-20 h-20 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -325,8 +581,10 @@ export default function FeedPage() {
                   onClick={() => {
                     setStoryFile(null);
                     setStoryPreview(null);
+                    setTextOverlays([]);
+                    setStickers([]);
                   }}
-                  className="absolute top-4 right-4 text-white/70 hover:text-white bg-black/50 rounded-full p-2"
+                  className="absolute top-4 right-4 text-white/70 hover:text-white bg-black/50 rounded-full p-2 z-10"
                 >
                   ✕
                 </button>
@@ -334,7 +592,7 @@ export default function FeedPage() {
             </div>
 
             {/* Sidebar */}
-            <div className="w-80 bg-[#333] p-6 flex flex-col">
+            <div className="w-80 bg-[#333] p-6 flex flex-col relative">
               <div className="flex justify-between items-center mb-8">
                 <h3 className="text-white font-medium">История</h3>
                 <button
@@ -346,15 +604,59 @@ export default function FeedPage() {
               </div>
 
               <div className="flex-1">
-                {/* Tools placeholder */}
+                {/* Tools */}
                 <div className="space-y-2">
-                  <button className="w-full text-left px-3 py-2 text-gray-300 hover:bg-white/10 rounded flex items-center gap-3">
+                  <button
+                    onClick={() => setShowTextInput(true)}
+                    disabled={!storyPreview}
+                    className="w-full text-left px-3 py-2 text-gray-300 hover:bg-white/10 rounded flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     <span>Aa</span> Текст
                   </button>
-                  <button className="w-full text-left px-3 py-2 text-gray-300 hover:bg-white/10 rounded flex items-center gap-3">
+                  <button
+                    onClick={() => setShowStickerPicker(!showStickerPicker)}
+                    disabled={!storyPreview}
+                    className="w-full text-left px-3 py-2 text-gray-300 hover:bg-white/10 rounded flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     <span>☺</span> Стикеры
                   </button>
                 </div>
+
+                {/* Sticker Picker */}
+                {showStickerPicker && (
+                  <div className="absolute left-0 right-0 bottom-20 bg-[#222] border-t border-gray-700 p-4 grid grid-cols-5 gap-2 h-48 overflow-y-auto animate-fade-in z-20">
+                    {[
+                      "😀",
+                      "😂",
+                      "😍",
+                      "😎",
+                      "😭",
+                      "😡",
+                      "👍",
+                      "👎",
+                      "🔥",
+                      "❤️",
+                      "🎉",
+                      "💩",
+                      "👻",
+                      "👽",
+                      "🤖",
+                      "🎃",
+                      "🎄",
+                      "🎁",
+                      "🎈",
+                      "🎵",
+                    ].map((emoji) => (
+                      <button
+                        key={emoji}
+                        onClick={() => handleAddSticker(emoji)}
+                        className="text-2xl hover:bg-white/10 rounded p-1"
+                      >
+                        {emoji}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="mt-auto">
