@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
 
       if (res.ok) {
         setMessage(
-          "Код восстановления отправлен на вашу почту (проверьте консоль сервера/ответ для теста)"
+          "Код восстановления отправлен на вашу почту. Проверьте папку 'Входящие' или 'Спам'."
         );
         // In a real app, we wouldn't show the code, but for dev:
         if (data.code) {
