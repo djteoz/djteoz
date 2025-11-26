@@ -448,13 +448,17 @@ export default function FeedPage() {
                         const container = e.currentTarget.parentElement;
                         if (container) {
                           const rect = container.getBoundingClientRect();
-                          const x = ((e.clientX - rect.left) / rect.width) * 100;
-                          const y = ((e.clientY - rect.top) / rect.height) * 100;
-                          
+                          const x =
+                            ((e.clientX - rect.left) / rect.width) * 100;
+                          const y =
+                            ((e.clientY - rect.top) / rect.height) * 100;
+
                           // Update overlay position
-                          setTextOverlays(prev => prev.map(o => 
-                            o.id === overlay.id ? { ...o, x, y } : o
-                          ));
+                          setTextOverlays((prev) =>
+                            prev.map((o) =>
+                              o.id === overlay.id ? { ...o, x, y } : o
+                            )
+                          );
                         }
                       }}
                     >
@@ -475,12 +479,16 @@ export default function FeedPage() {
                         const container = e.currentTarget.parentElement;
                         if (container) {
                           const rect = container.getBoundingClientRect();
-                          const x = ((e.clientX - rect.left) / rect.width) * 100;
-                          const y = ((e.clientY - rect.top) / rect.height) * 100;
-                          
-                          setStickers(prev => prev.map(s => 
-                            s.id === sticker.id ? { ...s, x, y } : s
-                          ));
+                          const x =
+                            ((e.clientX - rect.left) / rect.width) * 100;
+                          const y =
+                            ((e.clientY - rect.top) / rect.height) * 100;
+
+                          setStickers((prev) =>
+                            prev.map((s) =>
+                              s.id === sticker.id ? { ...s, x, y } : s
+                            )
+                          );
                         }
                       }}
                     >
@@ -505,7 +513,7 @@ export default function FeedPage() {
                           style={{ color: textColor, borderColor: textColor }}
                           className="w-full bg-transparent text-center text-3xl font-bold border-b-2 outline-none placeholder-white/50 pb-2"
                         />
-                        
+
                         {/* Color Picker */}
                         <div className="flex justify-center gap-3 mt-6">
                           {[

@@ -28,28 +28,12 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const ext = file.name.split(".").pop();
-    const filename = `${file.name.replace(
-      /\.[^/.]+$/,
-      ""
-    )}-${uniqueSuffix}.${ext}`;
+    // Convert to Base64 for Vercel deployment (since local filesystem is read-only/ephemeral)
+    const base64 = buffer.toString("base64");
+    const mimeType = file.type || "application/octet-stream";
+    const dataUrl = `data:${mimeType};base64,${base64}`;
 
-    // Save to public/uploads
-    const uploadDir = join(process.cwd(), "public", "uploads");
-
-    // Ensure directory exists
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (e) {
-      // Ignore if exists
-    }
-
-    const path = join(uploadDir, filename);
-    await writeFile(path, buffer);
-
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    return NextResponse.json({ url: dataUrl });
   } catch (error) {
     console.error("Upload failed:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
