@@ -17,6 +17,12 @@ interface Post {
   author: string;
   authorName: string;
   authorAvatar?: string;
+  community?: {
+    id: string;
+    name: string;
+    slug: string;
+    avatar?: string | null;
+  } | null;
   content: string;
   image_url?: string;
   likes: string[];
@@ -1074,6 +1080,7 @@ export default function FeedPage() {
                 id={post.id}
                 username={post.authorName || post.author}
                 avatar={post.authorAvatar}
+                community={post.community}
                 content={post.content}
                 image_url={post.image_url}
                 likes={post.likes.length}

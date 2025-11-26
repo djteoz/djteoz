@@ -18,6 +18,12 @@ export type PostProps = {
   id: string;
   username: string;
   avatar?: string;
+  community?: {
+    id: string;
+    name: string;
+    slug: string;
+    avatar?: string | null;
+  } | null;
   content: string;
   image_url?: string;
   created_at: string;
@@ -37,12 +43,14 @@ export type PostProps = {
   onEdit?: (newContent: string) => void;
   onLikeComment?: (commentId: string, isLiked: boolean) => void;
   onDeleteComment?: (commentId: string) => void;
+  onBookmark?: () => void;
 };
 
 export const Post: React.FC<PostProps> = ({
   id,
   username,
   avatar,
+  community,
   content = "",
   image_url,
   created_at,
@@ -62,6 +70,7 @@ export const Post: React.FC<PostProps> = ({
   onEdit,
   onLikeComment,
   onDeleteComment,
+  onBookmark,
 }) => {
   const [showComments, setShowComments] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -127,6 +136,32 @@ export const Post: React.FC<PostProps> = ({
     setIsEditing(false);
   };
 
+  const handleBookmark = async () => {
+    if (onBookmark) {
+      onBookmark();
+    } else {
+      try {
+        const res = await fetch("/api/bookmarks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ postId: id }),
+        });
+        if (res.ok) {
+          // Optional: Show toast
+          alert("Добавлено в закладки");
+        } else {
+          const data = await res.json();
+          if (data.error === "Already bookmarked") {
+            alert("Уже в закладках");
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    setShowMenu(false);
+  };
+
   const toggleComments = () => {
     setShowComments(!showComments);
   };
@@ -139,10 +174,16 @@ export const Post: React.FC<PostProps> = ({
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <Link href={`/profile/${username}`}>
+            <Link
+              href={
+                community
+                  ? `/communities/${community.slug}`
+                  : `/profile/${username}`
+              }
+            >
               <UserAvatar
-                avatar={avatar}
-                name={username}
+                avatar={community?.avatar || avatar}
+                name={community?.name || username}
                 size={40}
                 className="border border-gray-100"
               />
@@ -150,12 +191,27 @@ export const Post: React.FC<PostProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <Link
-                  href={`/profile/${username}`}
+                  href={
+                    community
+                      ? `/communities/${community.slug}`
+                      : `/profile/${username}`
+                  }
                   className="font-bold text-gray-900 hover:text-indigo-600 transition-colors"
                 >
-                  {username}
+                  {community ? community.name : username}
                 </Link>
-                {isFriend && (
+                {community && (
+                  <span className="text-gray-500 text-xs font-normal">
+                    от{" "}
+                    <Link
+                      href={`/profile/${username}`}
+                      className="hover:underline"
+                    >
+                      {username}
+                    </Link>
+                  </span>
+                )}
+                {isFriend && !community && (
                   <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded tracking-wide">
                     Друг
                   </span>
@@ -208,8 +264,11 @@ export const Post: React.FC<PostProps> = ({
                 )}
                 {!isOwner && (
                   <>
-                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                      <span>🔖</span> Сохранить
+                    <button
+                      onClick={handleBookmark}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                    >
+                      <span>🔖</span> В закладки
                     </button>
                     <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                       <span>⚠️</span> Пожаловаться

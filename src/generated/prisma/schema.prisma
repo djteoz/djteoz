@@ -58,6 +58,7 @@ model User {
   sentFriendRequests     FriendRequest[] @relation("SentFriendRequests")
   receivedFriendRequests FriendRequest[] @relation("ReceivedFriendRequests")
   bookmarks              Bookmark[]
+  bookmarkedBy           Bookmark[]      @relation("BookmarkedUser")
   reports                Report[]
 
   // Media
@@ -95,8 +96,9 @@ model Community {
   updatedAt DateTime @updatedAt
 
   // Relations
-  members CommunityMember[]
-  posts   Post[]
+  members   CommunityMember[]
+  posts     Post[]
+  bookmarks Bookmark[]
 }
 
 // Community Member model
@@ -191,9 +193,10 @@ model Photo {
   album       Album?  @relation(fields: [albumId], references: [id], onDelete: SetNull)
   albumId     String?
 
-  likes    String[]
-  comments Comment[]
-  tags     PhotoTag[]
+  likes     String[]
+  comments  Comment[]
+  tags      PhotoTag[]
+  bookmarks Bookmark[]
 
   isArchived Boolean @default(false)
   isPinned   Boolean @default(false)
@@ -223,15 +226,20 @@ model PhotoTag {
 
 // Message model
 model Message {
-  id         String   @id @default(cuid())
+  id         String  @id @default(cuid())
   content    String
-  sender     User     @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  sender     User    @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
   senderId   String
-  receiver   User     @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiver   User    @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
   receiverId String
-  read       Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  read       Boolean @default(false)
+
+  attachmentUrl  String?
+  attachmentType String? // 'image', 'video', 'audio', 'file'
+  attachmentName String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // Notification model
@@ -262,14 +270,36 @@ model FriendRequest {
 }
 
 model Bookmark {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // Content Types
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String?
+
+  community   Community? @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId String?
+
+  targetUser   User?   @relation("BookmarkedUser", fields: [targetUserId], references: [id], onDelete: Cascade)
+  targetUserId String?
+
+  photo   Photo?  @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId String?
+
+  video   Video?  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId String?
+
+  // Metadata
+  tags      String[] // Custom tags
+  isViewed  Boolean  @default(false)
   createdAt DateTime @default(now())
 
   @@unique([userId, postId])
+  @@unique([userId, communityId])
+  @@unique([userId, targetUserId])
+  @@unique([userId, photoId])
+  @@unique([userId, videoId])
 }
 
 model Report {
@@ -297,13 +327,14 @@ model Music {
 
 // Video model
 model Video {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String
   description String?
   url         String
   thumbnail   String?
-  views       Int      @default(0)
-  uploader    User     @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  views       Int        @default(0)
+  uploader    User       @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
   uploaderId  String
-  createdAt   DateTime @default(now())
+  bookmarks   Bookmark[]
+  createdAt   DateTime   @default(now())
 }

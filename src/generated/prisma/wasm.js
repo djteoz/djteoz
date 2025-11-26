@@ -254,6 +254,9 @@ exports.Prisma.MessageScalarFieldEnum = {
   senderId: 'senderId',
   receiverId: 'receiverId',
   read: 'read',
+  attachmentUrl: 'attachmentUrl',
+  attachmentType: 'attachmentType',
+  attachmentName: 'attachmentName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -283,6 +286,12 @@ exports.Prisma.BookmarkScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   postId: 'postId',
+  communityId: 'communityId',
+  targetUserId: 'targetUserId',
+  photoId: 'photoId',
+  videoId: 'videoId',
+  tags: 'tags',
+  isViewed: 'isViewed',
   createdAt: 'createdAt'
 };
 

@@ -100,11 +100,12 @@ export async function POST(req: NextRequest) {
     const payload = verifyAccessToken(token) as { username: string };
     const senderUsername = payload.username;
 
-    const { recipient, text } = await req.json();
+    const { recipient, text, attachmentUrl, attachmentType, attachmentName } =
+      await req.json();
 
-    if (!recipient || !text || text.trim().length === 0) {
+    if (!recipient || ((!text || text.trim().length === 0) && !attachmentUrl)) {
       return NextResponse.json(
-        { error: "Recipient and text are required" },
+        { error: "Recipient and content (text or attachment) are required" },
         { status: 400 }
       );
     }
@@ -131,9 +132,12 @@ export async function POST(req: NextRequest) {
     // Создать новое сообщение
     const message = await prisma.message.create({
       data: {
-        content: text.trim(),
+        content: text ? text.trim() : "",
         senderId: sender.id,
         receiverId: receiver.id,
+        attachmentUrl,
+        attachmentType,
+        attachmentName,
       },
       include: {
         sender: { select: { username: true } },
@@ -148,6 +152,9 @@ export async function POST(req: NextRequest) {
       sender: message.sender.username,
       recipient: message.receiver.username,
       text: message.content,
+      attachmentUrl: message.attachmentUrl,
+      attachmentType: message.attachmentType,
+      attachmentName: message.attachmentName,
       createdAt: message.createdAt.toISOString(),
       read: message.read,
     };

@@ -70,9 +70,18 @@ export async function GET(
         sender: msg.sender.username,
         recipient: msg.receiver.username,
         text: msg.content,
+        attachmentUrl: msg.attachmentUrl,
+        attachmentType: msg.attachmentType,
+        attachmentName: msg.attachmentName,
         createdAt: msg.createdAt,
         read: msg.read,
       })),
+      otherUser: {
+        username: otherUser.username,
+        firstName: otherUser.firstName,
+        lastName: otherUser.lastName,
+        avatar: otherUser.avatar,
+      },
     });
   } catch (error) {
     console.error("Get messages error:", error);

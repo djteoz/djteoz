@@ -2143,6 +2143,7 @@ export namespace Prisma {
     sentFriendRequests: number
     receivedFriendRequests: number
     bookmarks: number
+    bookmarkedBy: number
     reports: number
     music: number
     videos: number
@@ -2164,6 +2165,7 @@ export namespace Prisma {
     sentFriendRequests?: boolean | UserCountOutputTypeCountSentFriendRequestsArgs
     receivedFriendRequests?: boolean | UserCountOutputTypeCountReceivedFriendRequestsArgs
     bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
+    bookmarkedBy?: boolean | UserCountOutputTypeCountBookmarkedByArgs
     reports?: boolean | UserCountOutputTypeCountReportsArgs
     music?: boolean | UserCountOutputTypeCountMusicArgs
     videos?: boolean | UserCountOutputTypeCountVideosArgs
@@ -2258,6 +2260,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountBookmarkedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookmarkWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReportWhereInput
   }
@@ -2319,11 +2328,13 @@ export namespace Prisma {
   export type CommunityCountOutputType = {
     members: number
     posts: number
+    bookmarks: number
   }
 
   export type CommunityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | CommunityCountOutputTypeCountMembersArgs
     posts?: boolean | CommunityCountOutputTypeCountPostsArgs
+    bookmarks?: boolean | CommunityCountOutputTypeCountBookmarksArgs
   }
 
   // Custom InputTypes
@@ -2349,6 +2360,13 @@ export namespace Prisma {
    */
   export type CommunityCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountBookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookmarkWhereInput
   }
 
 
@@ -2448,11 +2466,13 @@ export namespace Prisma {
   export type PhotoCountOutputType = {
     comments: number
     tags: number
+    bookmarks: number
   }
 
   export type PhotoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | PhotoCountOutputTypeCountCommentsArgs
     tags?: boolean | PhotoCountOutputTypeCountTagsArgs
+    bookmarks?: boolean | PhotoCountOutputTypeCountBookmarksArgs
   }
 
   // Custom InputTypes
@@ -2478,6 +2498,44 @@ export namespace Prisma {
    */
   export type PhotoCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PhotoTagWhereInput
+  }
+
+  /**
+   * PhotoCountOutputType without action
+   */
+  export type PhotoCountOutputTypeCountBookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookmarkWhereInput
+  }
+
+
+  /**
+   * Count Type VideoCountOutputType
+   */
+
+  export type VideoCountOutputType = {
+    bookmarks: number
+  }
+
+  export type VideoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bookmarks?: boolean | VideoCountOutputTypeCountBookmarksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VideoCountOutputType without action
+   */
+  export type VideoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoCountOutputType
+     */
+    select?: VideoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VideoCountOutputType without action
+   */
+  export type VideoCountOutputTypeCountBookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookmarkWhereInput
   }
 
 
@@ -2861,6 +2919,7 @@ export namespace Prisma {
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
+    bookmarkedBy?: boolean | User$bookmarkedByArgs<ExtArgs>
     reports?: boolean | User$reportsArgs<ExtArgs>
     music?: boolean | User$musicArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
@@ -2941,6 +3000,7 @@ export namespace Prisma {
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
+    bookmarkedBy?: boolean | User$bookmarkedByArgs<ExtArgs>
     reports?: boolean | User$reportsArgs<ExtArgs>
     music?: boolean | User$musicArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
@@ -2966,6 +3026,7 @@ export namespace Prisma {
       sentFriendRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
       receivedFriendRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
       bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
+      bookmarkedBy: Prisma.$BookmarkPayload<ExtArgs>[]
       reports: Prisma.$ReportPayload<ExtArgs>[]
       music: Prisma.$MusicPayload<ExtArgs>[]
       videos: Prisma.$VideoPayload<ExtArgs>[]
@@ -3376,6 +3437,7 @@ export namespace Prisma {
     sentFriendRequests<T extends User$sentFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany"> | Null>
     receivedFriendRequests<T extends User$receivedFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany"> | Null>
     bookmarks<T extends User$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
+    bookmarkedBy<T extends User$bookmarkedByArgs<ExtArgs> = {}>(args?: Subset<T, User$bookmarkedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
     reports<T extends User$reportsArgs<ExtArgs> = {}>(args?: Subset<T, User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany"> | Null>
     music<T extends User$musicArgs<ExtArgs> = {}>(args?: Subset<T, User$musicArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MusicPayload<ExtArgs>, T, "findMany"> | Null>
     videos<T extends User$videosArgs<ExtArgs> = {}>(args?: Subset<T, User$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany"> | Null>
@@ -3953,6 +4015,26 @@ export namespace Prisma {
   }
 
   /**
+   * User.bookmarkedBy
+   */
+  export type User$bookmarkedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bookmark
+     */
+    select?: BookmarkSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookmarkInclude<ExtArgs> | null
+    where?: BookmarkWhereInput
+    orderBy?: BookmarkOrderByWithRelationInput | BookmarkOrderByWithRelationInput[]
+    cursor?: BookmarkWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookmarkScalarFieldEnum | BookmarkScalarFieldEnum[]
+  }
+
+  /**
    * User.reports
    */
   export type User$reportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4399,6 +4481,7 @@ export namespace Prisma {
     updatedAt?: boolean
     members?: boolean | Community$membersArgs<ExtArgs>
     posts?: boolean | Community$postsArgs<ExtArgs>
+    bookmarks?: boolean | Community$bookmarksArgs<ExtArgs>
     _count?: boolean | CommunityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["community"]>
 
@@ -4439,6 +4522,7 @@ export namespace Prisma {
   export type CommunityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | Community$membersArgs<ExtArgs>
     posts?: boolean | Community$postsArgs<ExtArgs>
+    bookmarks?: boolean | Community$bookmarksArgs<ExtArgs>
     _count?: boolean | CommunityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CommunityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4448,6 +4532,7 @@ export namespace Prisma {
     objects: {
       members: Prisma.$CommunityMemberPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4830,6 +4915,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     members<T extends Community$membersArgs<ExtArgs> = {}>(args?: Subset<T, Community$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityMemberPayload<ExtArgs>, T, "findMany"> | Null>
     posts<T extends Community$postsArgs<ExtArgs> = {}>(args?: Subset<T, Community$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany"> | Null>
+    bookmarks<T extends Community$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, Community$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5224,6 +5310,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Community.bookmarks
+   */
+  export type Community$bookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bookmark
+     */
+    select?: BookmarkSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookmarkInclude<ExtArgs> | null
+    where?: BookmarkWhereInput
+    orderBy?: BookmarkOrderByWithRelationInput | BookmarkOrderByWithRelationInput[]
+    cursor?: BookmarkWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookmarkScalarFieldEnum | BookmarkScalarFieldEnum[]
   }
 
   /**
@@ -10626,6 +10732,7 @@ export namespace Prisma {
     album?: boolean | Photo$albumArgs<ExtArgs>
     comments?: boolean | Photo$commentsArgs<ExtArgs>
     tags?: boolean | Photo$tagsArgs<ExtArgs>
+    bookmarks?: boolean | Photo$bookmarksArgs<ExtArgs>
     _count?: boolean | PhotoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["photo"]>
 
@@ -10670,6 +10777,7 @@ export namespace Prisma {
     album?: boolean | Photo$albumArgs<ExtArgs>
     comments?: boolean | Photo$commentsArgs<ExtArgs>
     tags?: boolean | Photo$tagsArgs<ExtArgs>
+    bookmarks?: boolean | Photo$bookmarksArgs<ExtArgs>
     _count?: boolean | PhotoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PhotoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10684,6 +10792,7 @@ export namespace Prisma {
       album: Prisma.$AlbumPayload<ExtArgs> | null
       comments: Prisma.$CommentPayload<ExtArgs>[]
       tags: Prisma.$PhotoTagPayload<ExtArgs>[]
+      bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11068,6 +11177,7 @@ export namespace Prisma {
     album<T extends Photo$albumArgs<ExtArgs> = {}>(args?: Subset<T, Photo$albumArgs<ExtArgs>>): Prisma__AlbumClient<$Result.GetResult<Prisma.$AlbumPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     comments<T extends Photo$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Photo$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany"> | Null>
     tags<T extends Photo$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Photo$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhotoTagPayload<ExtArgs>, T, "findMany"> | Null>
+    bookmarks<T extends Photo$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, Photo$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11481,6 +11591,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PhotoTagScalarFieldEnum | PhotoTagScalarFieldEnum[]
+  }
+
+  /**
+   * Photo.bookmarks
+   */
+  export type Photo$bookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bookmark
+     */
+    select?: BookmarkSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookmarkInclude<ExtArgs> | null
+    where?: BookmarkWhereInput
+    orderBy?: BookmarkOrderByWithRelationInput | BookmarkOrderByWithRelationInput[]
+    cursor?: BookmarkWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookmarkScalarFieldEnum | BookmarkScalarFieldEnum[]
   }
 
   /**
@@ -12503,6 +12633,9 @@ export namespace Prisma {
     senderId: string | null
     receiverId: string | null
     read: boolean | null
+    attachmentUrl: string | null
+    attachmentType: string | null
+    attachmentName: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12513,6 +12646,9 @@ export namespace Prisma {
     senderId: string | null
     receiverId: string | null
     read: boolean | null
+    attachmentUrl: string | null
+    attachmentType: string | null
+    attachmentName: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12523,6 +12659,9 @@ export namespace Prisma {
     senderId: number
     receiverId: number
     read: number
+    attachmentUrl: number
+    attachmentType: number
+    attachmentName: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12535,6 +12674,9 @@ export namespace Prisma {
     senderId?: true
     receiverId?: true
     read?: true
+    attachmentUrl?: true
+    attachmentType?: true
+    attachmentName?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12545,6 +12687,9 @@ export namespace Prisma {
     senderId?: true
     receiverId?: true
     read?: true
+    attachmentUrl?: true
+    attachmentType?: true
+    attachmentName?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12555,6 +12700,9 @@ export namespace Prisma {
     senderId?: true
     receiverId?: true
     read?: true
+    attachmentUrl?: true
+    attachmentType?: true
+    attachmentName?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12638,6 +12786,9 @@ export namespace Prisma {
     senderId: string
     receiverId: string
     read: boolean
+    attachmentUrl: string | null
+    attachmentType: string | null
+    attachmentName: string | null
     createdAt: Date
     updatedAt: Date
     _count: MessageCountAggregateOutputType | null
@@ -12665,6 +12816,9 @@ export namespace Prisma {
     senderId?: boolean
     receiverId?: boolean
     read?: boolean
+    attachmentUrl?: boolean
+    attachmentType?: boolean
+    attachmentName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
@@ -12677,6 +12831,9 @@ export namespace Prisma {
     senderId?: boolean
     receiverId?: boolean
     read?: boolean
+    attachmentUrl?: boolean
+    attachmentType?: boolean
+    attachmentName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
@@ -12689,6 +12846,9 @@ export namespace Prisma {
     senderId?: boolean
     receiverId?: boolean
     read?: boolean
+    attachmentUrl?: boolean
+    attachmentType?: boolean
+    attachmentName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -12714,6 +12874,9 @@ export namespace Prisma {
       senderId: string
       receiverId: string
       read: boolean
+      attachmentUrl: string | null
+      attachmentType: string | null
+      attachmentName: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["message"]>
@@ -13116,6 +13279,9 @@ export namespace Prisma {
     readonly senderId: FieldRef<"Message", 'String'>
     readonly receiverId: FieldRef<"Message", 'String'>
     readonly read: FieldRef<"Message", 'Boolean'>
+    readonly attachmentUrl: FieldRef<"Message", 'String'>
+    readonly attachmentType: FieldRef<"Message", 'String'>
+    readonly attachmentName: FieldRef<"Message", 'String'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
     readonly updatedAt: FieldRef<"Message", 'DateTime'>
   }
@@ -15396,6 +15562,11 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     postId: string | null
+    communityId: string | null
+    targetUserId: string | null
+    photoId: string | null
+    videoId: string | null
+    isViewed: boolean | null
     createdAt: Date | null
   }
 
@@ -15403,6 +15574,11 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     postId: string | null
+    communityId: string | null
+    targetUserId: string | null
+    photoId: string | null
+    videoId: string | null
+    isViewed: boolean | null
     createdAt: Date | null
   }
 
@@ -15410,6 +15586,12 @@ export namespace Prisma {
     id: number
     userId: number
     postId: number
+    communityId: number
+    targetUserId: number
+    photoId: number
+    videoId: number
+    tags: number
+    isViewed: number
     createdAt: number
     _all: number
   }
@@ -15419,6 +15601,11 @@ export namespace Prisma {
     id?: true
     userId?: true
     postId?: true
+    communityId?: true
+    targetUserId?: true
+    photoId?: true
+    videoId?: true
+    isViewed?: true
     createdAt?: true
   }
 
@@ -15426,6 +15613,11 @@ export namespace Prisma {
     id?: true
     userId?: true
     postId?: true
+    communityId?: true
+    targetUserId?: true
+    photoId?: true
+    videoId?: true
+    isViewed?: true
     createdAt?: true
   }
 
@@ -15433,6 +15625,12 @@ export namespace Prisma {
     id?: true
     userId?: true
     postId?: true
+    communityId?: true
+    targetUserId?: true
+    photoId?: true
+    videoId?: true
+    tags?: true
+    isViewed?: true
     createdAt?: true
     _all?: true
   }
@@ -15512,7 +15710,13 @@ export namespace Prisma {
   export type BookmarkGroupByOutputType = {
     id: string
     userId: string
-    postId: string
+    postId: string | null
+    communityId: string | null
+    targetUserId: string | null
+    photoId: string | null
+    videoId: string | null
+    tags: string[]
+    isViewed: boolean
     createdAt: Date
     _count: BookmarkCountAggregateOutputType | null
     _min: BookmarkMinAggregateOutputType | null
@@ -15537,46 +15741,90 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     postId?: boolean
+    communityId?: boolean
+    targetUserId?: boolean
+    photoId?: boolean
+    videoId?: boolean
+    tags?: boolean
+    isViewed?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    post?: boolean | PostDefaultArgs<ExtArgs>
+    post?: boolean | Bookmark$postArgs<ExtArgs>
+    community?: boolean | Bookmark$communityArgs<ExtArgs>
+    targetUser?: boolean | Bookmark$targetUserArgs<ExtArgs>
+    photo?: boolean | Bookmark$photoArgs<ExtArgs>
+    video?: boolean | Bookmark$videoArgs<ExtArgs>
   }, ExtArgs["result"]["bookmark"]>
 
   export type BookmarkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     postId?: boolean
+    communityId?: boolean
+    targetUserId?: boolean
+    photoId?: boolean
+    videoId?: boolean
+    tags?: boolean
+    isViewed?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    post?: boolean | PostDefaultArgs<ExtArgs>
+    post?: boolean | Bookmark$postArgs<ExtArgs>
+    community?: boolean | Bookmark$communityArgs<ExtArgs>
+    targetUser?: boolean | Bookmark$targetUserArgs<ExtArgs>
+    photo?: boolean | Bookmark$photoArgs<ExtArgs>
+    video?: boolean | Bookmark$videoArgs<ExtArgs>
   }, ExtArgs["result"]["bookmark"]>
 
   export type BookmarkSelectScalar = {
     id?: boolean
     userId?: boolean
     postId?: boolean
+    communityId?: boolean
+    targetUserId?: boolean
+    photoId?: boolean
+    videoId?: boolean
+    tags?: boolean
+    isViewed?: boolean
     createdAt?: boolean
   }
 
   export type BookmarkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    post?: boolean | PostDefaultArgs<ExtArgs>
+    post?: boolean | Bookmark$postArgs<ExtArgs>
+    community?: boolean | Bookmark$communityArgs<ExtArgs>
+    targetUser?: boolean | Bookmark$targetUserArgs<ExtArgs>
+    photo?: boolean | Bookmark$photoArgs<ExtArgs>
+    video?: boolean | Bookmark$videoArgs<ExtArgs>
   }
   export type BookmarkIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    post?: boolean | PostDefaultArgs<ExtArgs>
+    post?: boolean | Bookmark$postArgs<ExtArgs>
+    community?: boolean | Bookmark$communityArgs<ExtArgs>
+    targetUser?: boolean | Bookmark$targetUserArgs<ExtArgs>
+    photo?: boolean | Bookmark$photoArgs<ExtArgs>
+    video?: boolean | Bookmark$videoArgs<ExtArgs>
   }
 
   export type $BookmarkPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bookmark"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      post: Prisma.$PostPayload<ExtArgs>
+      post: Prisma.$PostPayload<ExtArgs> | null
+      community: Prisma.$CommunityPayload<ExtArgs> | null
+      targetUser: Prisma.$UserPayload<ExtArgs> | null
+      photo: Prisma.$PhotoPayload<ExtArgs> | null
+      video: Prisma.$VideoPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      postId: string
+      postId: string | null
+      communityId: string | null
+      targetUserId: string | null
+      photoId: string | null
+      videoId: string | null
+      tags: string[]
+      isViewed: boolean
       createdAt: Date
     }, ExtArgs["result"]["bookmark"]>
     composites: {}
@@ -15943,7 +16191,11 @@ export namespace Prisma {
   export interface Prisma__BookmarkClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    post<T extends Bookmark$postArgs<ExtArgs> = {}>(args?: Subset<T, Bookmark$postArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    community<T extends Bookmark$communityArgs<ExtArgs> = {}>(args?: Subset<T, Bookmark$communityArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    targetUser<T extends Bookmark$targetUserArgs<ExtArgs> = {}>(args?: Subset<T, Bookmark$targetUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    photo<T extends Bookmark$photoArgs<ExtArgs> = {}>(args?: Subset<T, Bookmark$photoArgs<ExtArgs>>): Prisma__PhotoClient<$Result.GetResult<Prisma.$PhotoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    video<T extends Bookmark$videoArgs<ExtArgs> = {}>(args?: Subset<T, Bookmark$videoArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15976,6 +16228,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Bookmark", 'String'>
     readonly userId: FieldRef<"Bookmark", 'String'>
     readonly postId: FieldRef<"Bookmark", 'String'>
+    readonly communityId: FieldRef<"Bookmark", 'String'>
+    readonly targetUserId: FieldRef<"Bookmark", 'String'>
+    readonly photoId: FieldRef<"Bookmark", 'String'>
+    readonly videoId: FieldRef<"Bookmark", 'String'>
+    readonly tags: FieldRef<"Bookmark", 'String[]'>
+    readonly isViewed: FieldRef<"Bookmark", 'Boolean'>
     readonly createdAt: FieldRef<"Bookmark", 'DateTime'>
   }
     
@@ -16292,6 +16550,81 @@ export namespace Prisma {
      * Filter which Bookmarks to delete
      */
     where?: BookmarkWhereInput
+  }
+
+  /**
+   * Bookmark.post
+   */
+  export type Bookmark$postArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+  }
+
+  /**
+   * Bookmark.community
+   */
+  export type Bookmark$communityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    where?: CommunityWhereInput
+  }
+
+  /**
+   * Bookmark.targetUser
+   */
+  export type Bookmark$targetUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Bookmark.photo
+   */
+  export type Bookmark$photoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Photo
+     */
+    select?: PhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhotoInclude<ExtArgs> | null
+    where?: PhotoWhereInput
+  }
+
+  /**
+   * Bookmark.video
+   */
+  export type Bookmark$videoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    where?: VideoWhereInput
   }
 
   /**
@@ -18474,6 +18807,8 @@ export namespace Prisma {
     uploaderId?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
+    bookmarks?: boolean | Video$bookmarksArgs<ExtArgs>
+    _count?: boolean | VideoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["video"]>
 
   export type VideoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18501,6 +18836,8 @@ export namespace Prisma {
 
   export type VideoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploader?: boolean | UserDefaultArgs<ExtArgs>
+    bookmarks?: boolean | Video$bookmarksArgs<ExtArgs>
+    _count?: boolean | VideoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VideoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploader?: boolean | UserDefaultArgs<ExtArgs>
@@ -18510,6 +18847,7 @@ export namespace Prisma {
     name: "Video"
     objects: {
       uploader: Prisma.$UserPayload<ExtArgs>
+      bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -18885,6 +19223,7 @@ export namespace Prisma {
   export interface Prisma__VideoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     uploader<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    bookmarks<T extends Video$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, Video$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19240,6 +19579,26 @@ export namespace Prisma {
   }
 
   /**
+   * Video.bookmarks
+   */
+  export type Video$bookmarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bookmark
+     */
+    select?: BookmarkSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookmarkInclude<ExtArgs> | null
+    where?: BookmarkWhereInput
+    orderBy?: BookmarkOrderByWithRelationInput | BookmarkOrderByWithRelationInput[]
+    cursor?: BookmarkWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookmarkScalarFieldEnum | BookmarkScalarFieldEnum[]
+  }
+
+  /**
    * Video without action
    */
   export type VideoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19427,6 +19786,9 @@ export namespace Prisma {
     senderId: 'senderId',
     receiverId: 'receiverId',
     read: 'read',
+    attachmentUrl: 'attachmentUrl',
+    attachmentType: 'attachmentType',
+    attachmentName: 'attachmentName',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19465,6 +19827,12 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     postId: 'postId',
+    communityId: 'communityId',
+    targetUserId: 'targetUserId',
+    photoId: 'photoId',
+    videoId: 'videoId',
+    tags: 'tags',
+    isViewed: 'isViewed',
     createdAt: 'createdAt'
   };
 
@@ -19645,6 +20013,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestListRelationFilter
     receivedFriendRequests?: FriendRequestListRelationFilter
     bookmarks?: BookmarkListRelationFilter
+    bookmarkedBy?: BookmarkListRelationFilter
     reports?: ReportListRelationFilter
     music?: MusicListRelationFilter
     videos?: VideoListRelationFilter
@@ -19692,6 +20061,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestOrderByRelationAggregateInput
     receivedFriendRequests?: FriendRequestOrderByRelationAggregateInput
     bookmarks?: BookmarkOrderByRelationAggregateInput
+    bookmarkedBy?: BookmarkOrderByRelationAggregateInput
     reports?: ReportOrderByRelationAggregateInput
     music?: MusicOrderByRelationAggregateInput
     videos?: VideoOrderByRelationAggregateInput
@@ -19742,6 +20112,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestListRelationFilter
     receivedFriendRequests?: FriendRequestListRelationFilter
     bookmarks?: BookmarkListRelationFilter
+    bookmarkedBy?: BookmarkListRelationFilter
     reports?: ReportListRelationFilter
     music?: MusicListRelationFilter
     videos?: VideoListRelationFilter
@@ -19838,6 +20209,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Community"> | Date | string
     members?: CommunityMemberListRelationFilter
     posts?: PostListRelationFilter
+    bookmarks?: BookmarkListRelationFilter
   }
 
   export type CommunityOrderByWithRelationInput = {
@@ -19857,6 +20229,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     members?: CommunityMemberOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    bookmarks?: BookmarkOrderByRelationAggregateInput
   }
 
   export type CommunityWhereUniqueInput = Prisma.AtLeast<{
@@ -19879,6 +20252,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Community"> | Date | string
     members?: CommunityMemberListRelationFilter
     posts?: PostListRelationFilter
+    bookmarks?: BookmarkListRelationFilter
   }, "id" | "slug">
 
   export type CommunityOrderByWithAggregationInput = {
@@ -20325,6 +20699,7 @@ export namespace Prisma {
     album?: XOR<AlbumNullableRelationFilter, AlbumWhereInput> | null
     comments?: CommentListRelationFilter
     tags?: PhotoTagListRelationFilter
+    bookmarks?: BookmarkListRelationFilter
   }
 
   export type PhotoOrderByWithRelationInput = {
@@ -20346,6 +20721,7 @@ export namespace Prisma {
     album?: AlbumOrderByWithRelationInput
     comments?: CommentOrderByRelationAggregateInput
     tags?: PhotoTagOrderByRelationAggregateInput
+    bookmarks?: BookmarkOrderByRelationAggregateInput
   }
 
   export type PhotoWhereUniqueInput = Prisma.AtLeast<{
@@ -20370,6 +20746,7 @@ export namespace Prisma {
     album?: XOR<AlbumNullableRelationFilter, AlbumWhereInput> | null
     comments?: CommentListRelationFilter
     tags?: PhotoTagListRelationFilter
+    bookmarks?: BookmarkListRelationFilter
   }, "id">
 
   export type PhotoOrderByWithAggregationInput = {
@@ -20489,6 +20866,9 @@ export namespace Prisma {
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
     read?: BoolFilter<"Message"> | boolean
+    attachmentUrl?: StringNullableFilter<"Message"> | string | null
+    attachmentType?: StringNullableFilter<"Message"> | string | null
+    attachmentName?: StringNullableFilter<"Message"> | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     sender?: XOR<UserRelationFilter, UserWhereInput>
@@ -20501,6 +20881,9 @@ export namespace Prisma {
     senderId?: SortOrder
     receiverId?: SortOrder
     read?: SortOrder
+    attachmentUrl?: SortOrderInput | SortOrder
+    attachmentType?: SortOrderInput | SortOrder
+    attachmentName?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sender?: UserOrderByWithRelationInput
@@ -20516,6 +20899,9 @@ export namespace Prisma {
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
     read?: BoolFilter<"Message"> | boolean
+    attachmentUrl?: StringNullableFilter<"Message"> | string | null
+    attachmentType?: StringNullableFilter<"Message"> | string | null
+    attachmentName?: StringNullableFilter<"Message"> | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     sender?: XOR<UserRelationFilter, UserWhereInput>
@@ -20528,6 +20914,9 @@ export namespace Prisma {
     senderId?: SortOrder
     receiverId?: SortOrder
     read?: SortOrder
+    attachmentUrl?: SortOrderInput | SortOrder
+    attachmentType?: SortOrderInput | SortOrder
+    attachmentName?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MessageCountOrderByAggregateInput
@@ -20544,6 +20933,9 @@ export namespace Prisma {
     senderId?: StringWithAggregatesFilter<"Message"> | string
     receiverId?: StringWithAggregatesFilter<"Message"> | string
     read?: BoolWithAggregatesFilter<"Message"> | boolean
+    attachmentUrl?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    attachmentType?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    attachmentName?: StringNullableWithAggregatesFilter<"Message"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
   }
@@ -20693,38 +21085,78 @@ export namespace Prisma {
     NOT?: BookmarkWhereInput | BookmarkWhereInput[]
     id?: StringFilter<"Bookmark"> | string
     userId?: StringFilter<"Bookmark"> | string
-    postId?: StringFilter<"Bookmark"> | string
+    postId?: StringNullableFilter<"Bookmark"> | string | null
+    communityId?: StringNullableFilter<"Bookmark"> | string | null
+    targetUserId?: StringNullableFilter<"Bookmark"> | string | null
+    photoId?: StringNullableFilter<"Bookmark"> | string | null
+    videoId?: StringNullableFilter<"Bookmark"> | string | null
+    tags?: StringNullableListFilter<"Bookmark">
+    isViewed?: BoolFilter<"Bookmark"> | boolean
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-    post?: XOR<PostRelationFilter, PostWhereInput>
+    post?: XOR<PostNullableRelationFilter, PostWhereInput> | null
+    community?: XOR<CommunityNullableRelationFilter, CommunityWhereInput> | null
+    targetUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    photo?: XOR<PhotoNullableRelationFilter, PhotoWhereInput> | null
+    video?: XOR<VideoNullableRelationFilter, VideoWhereInput> | null
   }
 
   export type BookmarkOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    postId?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    communityId?: SortOrderInput | SortOrder
+    targetUserId?: SortOrderInput | SortOrder
+    photoId?: SortOrderInput | SortOrder
+    videoId?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    isViewed?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
     post?: PostOrderByWithRelationInput
+    community?: CommunityOrderByWithRelationInput
+    targetUser?: UserOrderByWithRelationInput
+    photo?: PhotoOrderByWithRelationInput
+    video?: VideoOrderByWithRelationInput
   }
 
   export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId_postId?: BookmarkUserIdPostIdCompoundUniqueInput
+    userId_communityId?: BookmarkUserIdCommunityIdCompoundUniqueInput
+    userId_targetUserId?: BookmarkUserIdTargetUserIdCompoundUniqueInput
+    userId_photoId?: BookmarkUserIdPhotoIdCompoundUniqueInput
+    userId_videoId?: BookmarkUserIdVideoIdCompoundUniqueInput
     AND?: BookmarkWhereInput | BookmarkWhereInput[]
     OR?: BookmarkWhereInput[]
     NOT?: BookmarkWhereInput | BookmarkWhereInput[]
     userId?: StringFilter<"Bookmark"> | string
-    postId?: StringFilter<"Bookmark"> | string
+    postId?: StringNullableFilter<"Bookmark"> | string | null
+    communityId?: StringNullableFilter<"Bookmark"> | string | null
+    targetUserId?: StringNullableFilter<"Bookmark"> | string | null
+    photoId?: StringNullableFilter<"Bookmark"> | string | null
+    videoId?: StringNullableFilter<"Bookmark"> | string | null
+    tags?: StringNullableListFilter<"Bookmark">
+    isViewed?: BoolFilter<"Bookmark"> | boolean
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-    post?: XOR<PostRelationFilter, PostWhereInput>
-  }, "id" | "userId_postId">
+    post?: XOR<PostNullableRelationFilter, PostWhereInput> | null
+    community?: XOR<CommunityNullableRelationFilter, CommunityWhereInput> | null
+    targetUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    photo?: XOR<PhotoNullableRelationFilter, PhotoWhereInput> | null
+    video?: XOR<VideoNullableRelationFilter, VideoWhereInput> | null
+  }, "id" | "userId_postId" | "userId_communityId" | "userId_targetUserId" | "userId_photoId" | "userId_videoId">
 
   export type BookmarkOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    postId?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    communityId?: SortOrderInput | SortOrder
+    targetUserId?: SortOrderInput | SortOrder
+    photoId?: SortOrderInput | SortOrder
+    videoId?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    isViewed?: SortOrder
     createdAt?: SortOrder
     _count?: BookmarkCountOrderByAggregateInput
     _max?: BookmarkMaxOrderByAggregateInput
@@ -20737,7 +21169,13 @@ export namespace Prisma {
     NOT?: BookmarkScalarWhereWithAggregatesInput | BookmarkScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Bookmark"> | string
     userId?: StringWithAggregatesFilter<"Bookmark"> | string
-    postId?: StringWithAggregatesFilter<"Bookmark"> | string
+    postId?: StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+    communityId?: StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+    targetUserId?: StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+    photoId?: StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+    videoId?: StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+    tags?: StringNullableListFilter<"Bookmark">
+    isViewed?: BoolWithAggregatesFilter<"Bookmark"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Bookmark"> | Date | string
   }
 
@@ -20884,6 +21322,7 @@ export namespace Prisma {
     uploaderId?: StringFilter<"Video"> | string
     createdAt?: DateTimeFilter<"Video"> | Date | string
     uploader?: XOR<UserRelationFilter, UserWhereInput>
+    bookmarks?: BookmarkListRelationFilter
   }
 
   export type VideoOrderByWithRelationInput = {
@@ -20896,6 +21335,7 @@ export namespace Prisma {
     uploaderId?: SortOrder
     createdAt?: SortOrder
     uploader?: UserOrderByWithRelationInput
+    bookmarks?: BookmarkOrderByRelationAggregateInput
   }
 
   export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -20911,6 +21351,7 @@ export namespace Prisma {
     uploaderId?: StringFilter<"Video"> | string
     createdAt?: DateTimeFilter<"Video"> | Date | string
     uploader?: XOR<UserRelationFilter, UserWhereInput>
+    bookmarks?: BookmarkListRelationFilter
   }, "id">
 
   export type VideoOrderByWithAggregationInput = {
@@ -20980,6 +21421,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -21027,6 +21469,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -21074,6 +21517,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -21121,6 +21565,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -21235,6 +21680,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     members?: CommunityMemberCreateNestedManyWithoutCommunityInput
     posts?: PostCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityUncheckedCreateInput = {
@@ -21254,6 +21700,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     members?: CommunityMemberUncheckedCreateNestedManyWithoutCommunityInput
     posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityUpdateInput = {
@@ -21273,6 +21720,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: CommunityMemberUpdateManyWithoutCommunityNestedInput
     posts?: PostUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutCommunityNestedInput
   }
 
   export type CommunityUncheckedUpdateInput = {
@@ -21292,6 +21740,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: CommunityMemberUncheckedUpdateManyWithoutCommunityNestedInput
     posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutCommunityNestedInput
   }
 
   export type CommunityCreateManyInput = {
@@ -21750,6 +22199,7 @@ export namespace Prisma {
     album?: AlbumCreateNestedOneWithoutPhotosInput
     comments?: CommentCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUncheckedCreateInput = {
@@ -21769,6 +22219,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUpdateInput = {
@@ -21788,6 +22239,7 @@ export namespace Prisma {
     album?: AlbumUpdateOneWithoutPhotosNestedInput
     comments?: CommentUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateInput = {
@@ -21807,6 +22259,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoCreateManyInput = {
@@ -21923,6 +22376,9 @@ export namespace Prisma {
     id?: string
     content: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sender: UserCreateNestedOneWithoutSentMessagesInput
@@ -21935,6 +22391,9 @@ export namespace Prisma {
     senderId: string
     receiverId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21943,6 +22402,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
@@ -21955,6 +22417,9 @@ export namespace Prisma {
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21965,6 +22430,9 @@ export namespace Prisma {
     senderId: string
     receiverId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21973,6 +22441,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21983,6 +22454,9 @@ export namespace Prisma {
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22133,48 +22607,86 @@ export namespace Prisma {
 
   export type BookmarkCreateInput = {
     id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutBookmarksInput
-    post: PostCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
   }
 
   export type BookmarkUncheckedCreateInput = {
     id?: string
     userId: string
-    postId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
   export type BookmarkUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
-    post?: PostUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
   }
 
   export type BookmarkUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    postId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkCreateManyInput = {
     id?: string
     userId: string
-    postId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
   export type BookmarkUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    postId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -22317,6 +22829,7 @@ export namespace Prisma {
     views?: number
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutVideosInput
+    bookmarks?: BookmarkCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateInput = {
@@ -22328,6 +22841,7 @@ export namespace Prisma {
     views?: number
     uploaderId: string
     createdAt?: Date | string
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUpdateInput = {
@@ -22339,6 +22853,7 @@ export namespace Prisma {
     views?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutVideosNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateInput = {
@@ -22350,6 +22865,7 @@ export namespace Prisma {
     views?: IntFieldUpdateOperationsInput | number
     uploaderId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoCreateManyInput = {
@@ -23234,6 +23750,9 @@ export namespace Prisma {
     senderId?: SortOrder
     receiverId?: SortOrder
     read?: SortOrder
+    attachmentUrl?: SortOrder
+    attachmentType?: SortOrder
+    attachmentName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23244,6 +23763,9 @@ export namespace Prisma {
     senderId?: SortOrder
     receiverId?: SortOrder
     read?: SortOrder
+    attachmentUrl?: SortOrder
+    attachmentType?: SortOrder
+    attachmentName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23254,6 +23776,9 @@ export namespace Prisma {
     senderId?: SortOrder
     receiverId?: SortOrder
     read?: SortOrder
+    attachmentUrl?: SortOrder
+    attachmentType?: SortOrder
+    attachmentName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23326,9 +23851,14 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type PostRelationFilter = {
-    is?: PostWhereInput
-    isNot?: PostWhereInput
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type VideoNullableRelationFilter = {
+    is?: VideoWhereInput | null
+    isNot?: VideoWhereInput | null
   }
 
   export type BookmarkUserIdPostIdCompoundUniqueInput = {
@@ -23336,10 +23866,36 @@ export namespace Prisma {
     postId: string
   }
 
+  export type BookmarkUserIdCommunityIdCompoundUniqueInput = {
+    userId: string
+    communityId: string
+  }
+
+  export type BookmarkUserIdTargetUserIdCompoundUniqueInput = {
+    userId: string
+    targetUserId: string
+  }
+
+  export type BookmarkUserIdPhotoIdCompoundUniqueInput = {
+    userId: string
+    photoId: string
+  }
+
+  export type BookmarkUserIdVideoIdCompoundUniqueInput = {
+    userId: string
+    videoId: string
+  }
+
   export type BookmarkCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     postId?: SortOrder
+    communityId?: SortOrder
+    targetUserId?: SortOrder
+    photoId?: SortOrder
+    videoId?: SortOrder
+    tags?: SortOrder
+    isViewed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -23347,6 +23903,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     postId?: SortOrder
+    communityId?: SortOrder
+    targetUserId?: SortOrder
+    photoId?: SortOrder
+    videoId?: SortOrder
+    isViewed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -23354,7 +23915,17 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     postId?: SortOrder
+    communityId?: SortOrder
+    targetUserId?: SortOrder
+    photoId?: SortOrder
+    videoId?: SortOrder
+    isViewed?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type PostRelationFilter = {
+    is?: PostWhereInput
+    isNot?: PostWhereInput
   }
 
   export type ReportCountOrderByAggregateInput = {
@@ -23531,6 +24102,13 @@ export namespace Prisma {
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
+  export type BookmarkCreateNestedManyWithoutTargetUserInput = {
+    create?: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput> | BookmarkCreateWithoutTargetUserInput[] | BookmarkUncheckedCreateWithoutTargetUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutTargetUserInput | BookmarkCreateOrConnectWithoutTargetUserInput[]
+    createMany?: BookmarkCreateManyTargetUserInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
   export type ReportCreateNestedManyWithoutReporterInput = {
     create?: XOR<ReportCreateWithoutReporterInput, ReportUncheckedCreateWithoutReporterInput> | ReportCreateWithoutReporterInput[] | ReportUncheckedCreateWithoutReporterInput[]
     connectOrCreate?: ReportCreateOrConnectWithoutReporterInput | ReportCreateOrConnectWithoutReporterInput[]
@@ -23652,6 +24230,13 @@ export namespace Prisma {
     create?: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput> | BookmarkCreateWithoutUserInput[] | BookmarkUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookmarkCreateOrConnectWithoutUserInput | BookmarkCreateOrConnectWithoutUserInput[]
     createMany?: BookmarkCreateManyUserInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
+  export type BookmarkUncheckedCreateNestedManyWithoutTargetUserInput = {
+    create?: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput> | BookmarkCreateWithoutTargetUserInput[] | BookmarkUncheckedCreateWithoutTargetUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutTargetUserInput | BookmarkCreateOrConnectWithoutTargetUserInput[]
+    createMany?: BookmarkCreateManyTargetUserInputEnvelope
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
@@ -23874,6 +24459,20 @@ export namespace Prisma {
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     update?: BookmarkUpdateWithWhereUniqueWithoutUserInput | BookmarkUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: BookmarkUpdateManyWithWhereWithoutUserInput | BookmarkUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
+  }
+
+  export type BookmarkUpdateManyWithoutTargetUserNestedInput = {
+    create?: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput> | BookmarkCreateWithoutTargetUserInput[] | BookmarkUncheckedCreateWithoutTargetUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutTargetUserInput | BookmarkCreateOrConnectWithoutTargetUserInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutTargetUserInput | BookmarkUpsertWithWhereUniqueWithoutTargetUserInput[]
+    createMany?: BookmarkCreateManyTargetUserInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutTargetUserInput | BookmarkUpdateWithWhereUniqueWithoutTargetUserInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutTargetUserInput | BookmarkUpdateManyWithWhereWithoutTargetUserInput[]
     deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
@@ -24127,6 +24726,20 @@ export namespace Prisma {
     deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
+  export type BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput = {
+    create?: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput> | BookmarkCreateWithoutTargetUserInput[] | BookmarkUncheckedCreateWithoutTargetUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutTargetUserInput | BookmarkCreateOrConnectWithoutTargetUserInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutTargetUserInput | BookmarkUpsertWithWhereUniqueWithoutTargetUserInput[]
+    createMany?: BookmarkCreateManyTargetUserInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutTargetUserInput | BookmarkUpdateWithWhereUniqueWithoutTargetUserInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutTargetUserInput | BookmarkUpdateManyWithWhereWithoutTargetUserInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
+  }
+
   export type ReportUncheckedUpdateManyWithoutReporterNestedInput = {
     create?: XOR<ReportCreateWithoutReporterInput, ReportUncheckedCreateWithoutReporterInput> | ReportCreateWithoutReporterInput[] | ReportUncheckedCreateWithoutReporterInput[]
     connectOrCreate?: ReportCreateOrConnectWithoutReporterInput | ReportCreateOrConnectWithoutReporterInput[]
@@ -24253,6 +24866,13 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type BookmarkCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput> | BookmarkCreateWithoutCommunityInput[] | BookmarkUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutCommunityInput | BookmarkCreateOrConnectWithoutCommunityInput[]
+    createMany?: BookmarkCreateManyCommunityInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
   export type CommunityMemberUncheckedCreateNestedManyWithoutCommunityInput = {
     create?: XOR<CommunityMemberCreateWithoutCommunityInput, CommunityMemberUncheckedCreateWithoutCommunityInput> | CommunityMemberCreateWithoutCommunityInput[] | CommunityMemberUncheckedCreateWithoutCommunityInput[]
     connectOrCreate?: CommunityMemberCreateOrConnectWithoutCommunityInput | CommunityMemberCreateOrConnectWithoutCommunityInput[]
@@ -24265,6 +24885,13 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutCommunityInput | PostCreateOrConnectWithoutCommunityInput[]
     createMany?: PostCreateManyCommunityInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type BookmarkUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput> | BookmarkCreateWithoutCommunityInput[] | BookmarkUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutCommunityInput | BookmarkCreateOrConnectWithoutCommunityInput[]
+    createMany?: BookmarkCreateManyCommunityInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
   export type CommunityMemberUpdateManyWithoutCommunityNestedInput = {
@@ -24295,6 +24922,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type BookmarkUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput> | BookmarkCreateWithoutCommunityInput[] | BookmarkUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutCommunityInput | BookmarkCreateOrConnectWithoutCommunityInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutCommunityInput | BookmarkUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: BookmarkCreateManyCommunityInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutCommunityInput | BookmarkUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutCommunityInput | BookmarkUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
+  }
+
   export type CommunityMemberUncheckedUpdateManyWithoutCommunityNestedInput = {
     create?: XOR<CommunityMemberCreateWithoutCommunityInput, CommunityMemberUncheckedCreateWithoutCommunityInput> | CommunityMemberCreateWithoutCommunityInput[] | CommunityMemberUncheckedCreateWithoutCommunityInput[]
     connectOrCreate?: CommunityMemberCreateOrConnectWithoutCommunityInput | CommunityMemberCreateOrConnectWithoutCommunityInput[]
@@ -24321,6 +24962,20 @@ export namespace Prisma {
     update?: PostUpdateWithWhereUniqueWithoutCommunityInput | PostUpdateWithWhereUniqueWithoutCommunityInput[]
     updateMany?: PostUpdateManyWithWhereWithoutCommunityInput | PostUpdateManyWithWhereWithoutCommunityInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput> | BookmarkCreateWithoutCommunityInput[] | BookmarkUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutCommunityInput | BookmarkCreateOrConnectWithoutCommunityInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutCommunityInput | BookmarkUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: BookmarkCreateManyCommunityInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutCommunityInput | BookmarkUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutCommunityInput | BookmarkUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCommunitiesInput = {
@@ -24729,6 +25384,13 @@ export namespace Prisma {
     connect?: PhotoTagWhereUniqueInput | PhotoTagWhereUniqueInput[]
   }
 
+  export type BookmarkCreateNestedManyWithoutPhotoInput = {
+    create?: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput> | BookmarkCreateWithoutPhotoInput[] | BookmarkUncheckedCreateWithoutPhotoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutPhotoInput | BookmarkCreateOrConnectWithoutPhotoInput[]
+    createMany?: BookmarkCreateManyPhotoInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
   export type CommentUncheckedCreateNestedManyWithoutPhotoInput = {
     create?: XOR<CommentCreateWithoutPhotoInput, CommentUncheckedCreateWithoutPhotoInput> | CommentCreateWithoutPhotoInput[] | CommentUncheckedCreateWithoutPhotoInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPhotoInput | CommentCreateOrConnectWithoutPhotoInput[]
@@ -24741,6 +25403,13 @@ export namespace Prisma {
     connectOrCreate?: PhotoTagCreateOrConnectWithoutPhotoInput | PhotoTagCreateOrConnectWithoutPhotoInput[]
     createMany?: PhotoTagCreateManyPhotoInputEnvelope
     connect?: PhotoTagWhereUniqueInput | PhotoTagWhereUniqueInput[]
+  }
+
+  export type BookmarkUncheckedCreateNestedManyWithoutPhotoInput = {
+    create?: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput> | BookmarkCreateWithoutPhotoInput[] | BookmarkUncheckedCreateWithoutPhotoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutPhotoInput | BookmarkCreateOrConnectWithoutPhotoInput[]
+    createMany?: BookmarkCreateManyPhotoInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
   export type PhotoUpdatelikesInput = {
@@ -24802,6 +25471,20 @@ export namespace Prisma {
     deleteMany?: PhotoTagScalarWhereInput | PhotoTagScalarWhereInput[]
   }
 
+  export type BookmarkUpdateManyWithoutPhotoNestedInput = {
+    create?: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput> | BookmarkCreateWithoutPhotoInput[] | BookmarkUncheckedCreateWithoutPhotoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutPhotoInput | BookmarkCreateOrConnectWithoutPhotoInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutPhotoInput | BookmarkUpsertWithWhereUniqueWithoutPhotoInput[]
+    createMany?: BookmarkCreateManyPhotoInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutPhotoInput | BookmarkUpdateWithWhereUniqueWithoutPhotoInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutPhotoInput | BookmarkUpdateManyWithWhereWithoutPhotoInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
+  }
+
   export type CommentUncheckedUpdateManyWithoutPhotoNestedInput = {
     create?: XOR<CommentCreateWithoutPhotoInput, CommentUncheckedCreateWithoutPhotoInput> | CommentCreateWithoutPhotoInput[] | CommentUncheckedCreateWithoutPhotoInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPhotoInput | CommentCreateOrConnectWithoutPhotoInput[]
@@ -24828,6 +25511,20 @@ export namespace Prisma {
     update?: PhotoTagUpdateWithWhereUniqueWithoutPhotoInput | PhotoTagUpdateWithWhereUniqueWithoutPhotoInput[]
     updateMany?: PhotoTagUpdateManyWithWhereWithoutPhotoInput | PhotoTagUpdateManyWithWhereWithoutPhotoInput[]
     deleteMany?: PhotoTagScalarWhereInput | PhotoTagScalarWhereInput[]
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutPhotoNestedInput = {
+    create?: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput> | BookmarkCreateWithoutPhotoInput[] | BookmarkUncheckedCreateWithoutPhotoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutPhotoInput | BookmarkCreateOrConnectWithoutPhotoInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutPhotoInput | BookmarkUpsertWithWhereUniqueWithoutPhotoInput[]
+    createMany?: BookmarkCreateManyPhotoInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutPhotoInput | BookmarkUpdateWithWhereUniqueWithoutPhotoInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutPhotoInput | BookmarkUpdateManyWithWhereWithoutPhotoInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
   export type PhotoCreateNestedOneWithoutTagsInput = {
@@ -24936,6 +25633,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedFriendRequestsInput, UserUpdateWithoutReceivedFriendRequestsInput>, UserUncheckedUpdateWithoutReceivedFriendRequestsInput>
   }
 
+  export type BookmarkCreatetagsInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutBookmarksInput = {
     create?: XOR<UserCreateWithoutBookmarksInput, UserUncheckedCreateWithoutBookmarksInput>
     connectOrCreate?: UserCreateOrConnectWithoutBookmarksInput
@@ -24948,6 +25649,35 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput
   }
 
+  export type CommunityCreateNestedOneWithoutBookmarksInput = {
+    create?: XOR<CommunityCreateWithoutBookmarksInput, CommunityUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutBookmarksInput
+    connect?: CommunityWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutBookmarkedByInput = {
+    create?: XOR<UserCreateWithoutBookmarkedByInput, UserUncheckedCreateWithoutBookmarkedByInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBookmarkedByInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PhotoCreateNestedOneWithoutBookmarksInput = {
+    create?: XOR<PhotoCreateWithoutBookmarksInput, PhotoUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: PhotoCreateOrConnectWithoutBookmarksInput
+    connect?: PhotoWhereUniqueInput
+  }
+
+  export type VideoCreateNestedOneWithoutBookmarksInput = {
+    create?: XOR<VideoCreateWithoutBookmarksInput, VideoUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: VideoCreateOrConnectWithoutBookmarksInput
+    connect?: VideoWhereUniqueInput
+  }
+
+  export type BookmarkUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type UserUpdateOneRequiredWithoutBookmarksNestedInput = {
     create?: XOR<UserCreateWithoutBookmarksInput, UserUncheckedCreateWithoutBookmarksInput>
     connectOrCreate?: UserCreateOrConnectWithoutBookmarksInput
@@ -24956,12 +25686,54 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBookmarksInput, UserUpdateWithoutBookmarksInput>, UserUncheckedUpdateWithoutBookmarksInput>
   }
 
-  export type PostUpdateOneRequiredWithoutBookmarksNestedInput = {
+  export type PostUpdateOneWithoutBookmarksNestedInput = {
     create?: XOR<PostCreateWithoutBookmarksInput, PostUncheckedCreateWithoutBookmarksInput>
     connectOrCreate?: PostCreateOrConnectWithoutBookmarksInput
     upsert?: PostUpsertWithoutBookmarksInput
+    disconnect?: PostWhereInput | boolean
+    delete?: PostWhereInput | boolean
     connect?: PostWhereUniqueInput
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutBookmarksInput, PostUpdateWithoutBookmarksInput>, PostUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type CommunityUpdateOneWithoutBookmarksNestedInput = {
+    create?: XOR<CommunityCreateWithoutBookmarksInput, CommunityUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutBookmarksInput
+    upsert?: CommunityUpsertWithoutBookmarksInput
+    disconnect?: CommunityWhereInput | boolean
+    delete?: CommunityWhereInput | boolean
+    connect?: CommunityWhereUniqueInput
+    update?: XOR<XOR<CommunityUpdateToOneWithWhereWithoutBookmarksInput, CommunityUpdateWithoutBookmarksInput>, CommunityUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type UserUpdateOneWithoutBookmarkedByNestedInput = {
+    create?: XOR<UserCreateWithoutBookmarkedByInput, UserUncheckedCreateWithoutBookmarkedByInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBookmarkedByInput
+    upsert?: UserUpsertWithoutBookmarkedByInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBookmarkedByInput, UserUpdateWithoutBookmarkedByInput>, UserUncheckedUpdateWithoutBookmarkedByInput>
+  }
+
+  export type PhotoUpdateOneWithoutBookmarksNestedInput = {
+    create?: XOR<PhotoCreateWithoutBookmarksInput, PhotoUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: PhotoCreateOrConnectWithoutBookmarksInput
+    upsert?: PhotoUpsertWithoutBookmarksInput
+    disconnect?: PhotoWhereInput | boolean
+    delete?: PhotoWhereInput | boolean
+    connect?: PhotoWhereUniqueInput
+    update?: XOR<XOR<PhotoUpdateToOneWithWhereWithoutBookmarksInput, PhotoUpdateWithoutBookmarksInput>, PhotoUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type VideoUpdateOneWithoutBookmarksNestedInput = {
+    create?: XOR<VideoCreateWithoutBookmarksInput, VideoUncheckedCreateWithoutBookmarksInput>
+    connectOrCreate?: VideoCreateOrConnectWithoutBookmarksInput
+    upsert?: VideoUpsertWithoutBookmarksInput
+    disconnect?: VideoWhereInput | boolean
+    delete?: VideoWhereInput | boolean
+    connect?: VideoWhereUniqueInput
+    update?: XOR<XOR<VideoUpdateToOneWithWhereWithoutBookmarksInput, VideoUpdateWithoutBookmarksInput>, VideoUncheckedUpdateWithoutBookmarksInput>
   }
 
   export type UserCreateNestedOneWithoutReportsInput = {
@@ -25012,12 +25784,54 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type BookmarkCreateNestedManyWithoutVideoInput = {
+    create?: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput> | BookmarkCreateWithoutVideoInput[] | BookmarkUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutVideoInput | BookmarkCreateOrConnectWithoutVideoInput[]
+    createMany?: BookmarkCreateManyVideoInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
+  export type BookmarkUncheckedCreateNestedManyWithoutVideoInput = {
+    create?: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput> | BookmarkCreateWithoutVideoInput[] | BookmarkUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutVideoInput | BookmarkCreateOrConnectWithoutVideoInput[]
+    createMany?: BookmarkCreateManyVideoInputEnvelope
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutVideosNestedInput = {
     create?: XOR<UserCreateWithoutVideosInput, UserUncheckedCreateWithoutVideosInput>
     connectOrCreate?: UserCreateOrConnectWithoutVideosInput
     upsert?: UserUpsertWithoutVideosInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideosInput, UserUpdateWithoutVideosInput>, UserUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type BookmarkUpdateManyWithoutVideoNestedInput = {
+    create?: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput> | BookmarkCreateWithoutVideoInput[] | BookmarkUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutVideoInput | BookmarkCreateOrConnectWithoutVideoInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutVideoInput | BookmarkUpsertWithWhereUniqueWithoutVideoInput[]
+    createMany?: BookmarkCreateManyVideoInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutVideoInput | BookmarkUpdateWithWhereUniqueWithoutVideoInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutVideoInput | BookmarkUpdateManyWithWhereWithoutVideoInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutVideoNestedInput = {
+    create?: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput> | BookmarkCreateWithoutVideoInput[] | BookmarkUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutVideoInput | BookmarkCreateOrConnectWithoutVideoInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutVideoInput | BookmarkUpsertWithWhereUniqueWithoutVideoInput[]
+    createMany?: BookmarkCreateManyVideoInputEnvelope
+    set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutVideoInput | BookmarkUpdateWithWhereUniqueWithoutVideoInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutVideoInput | BookmarkUpdateManyWithWhereWithoutVideoInput[]
+    deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -25313,6 +26127,9 @@ export namespace Prisma {
     id?: string
     content: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     receiver: UserCreateNestedOneWithoutReceivedMessagesInput
@@ -25323,6 +26140,9 @@ export namespace Prisma {
     content: string
     receiverId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25341,6 +26161,9 @@ export namespace Prisma {
     id?: string
     content: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sender: UserCreateNestedOneWithoutSentMessagesInput
@@ -25351,6 +26174,9 @@ export namespace Prisma {
     content: string
     senderId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25433,6 +26259,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -25479,6 +26306,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -25530,6 +26358,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -25576,6 +26405,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -25645,13 +26475,25 @@ export namespace Prisma {
 
   export type BookmarkCreateWithoutUserInput = {
     id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
-    post: PostCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
   }
 
   export type BookmarkUncheckedCreateWithoutUserInput = {
     id?: string
-    postId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
@@ -25662,6 +26504,40 @@ export namespace Prisma {
 
   export type BookmarkCreateManyUserInputEnvelope = {
     data: BookmarkCreateManyUserInput | BookmarkCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BookmarkCreateWithoutTargetUserInput = {
+    id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
+  }
+
+  export type BookmarkUncheckedCreateWithoutTargetUserInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateOrConnectWithoutTargetUserInput = {
+    where: BookmarkWhereUniqueInput
+    create: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput>
+  }
+
+  export type BookmarkCreateManyTargetUserInputEnvelope = {
+    data: BookmarkCreateManyTargetUserInput | BookmarkCreateManyTargetUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -25727,6 +26603,7 @@ export namespace Prisma {
     thumbnail?: string | null
     views?: number
     createdAt?: Date | string
+    bookmarks?: BookmarkCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateWithoutUploaderInput = {
@@ -25737,6 +26614,7 @@ export namespace Prisma {
     thumbnail?: string | null
     views?: number
     createdAt?: Date | string
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoCreateOrConnectWithoutUploaderInput = {
@@ -25827,6 +26705,7 @@ export namespace Prisma {
     album?: AlbumCreateNestedOneWithoutPhotosInput
     comments?: CommentCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUncheckedCreateWithoutUploaderInput = {
@@ -25845,6 +26724,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoCreateOrConnectWithoutUploaderInput = {
@@ -25994,6 +26874,9 @@ export namespace Prisma {
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
     read?: BoolFilter<"Message"> | boolean
+    attachmentUrl?: StringNullableFilter<"Message"> | string | null
+    attachmentType?: StringNullableFilter<"Message"> | string | null
+    attachmentName?: StringNullableFilter<"Message"> | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
   }
@@ -26175,8 +27058,30 @@ export namespace Prisma {
     NOT?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
     id?: StringFilter<"Bookmark"> | string
     userId?: StringFilter<"Bookmark"> | string
-    postId?: StringFilter<"Bookmark"> | string
+    postId?: StringNullableFilter<"Bookmark"> | string | null
+    communityId?: StringNullableFilter<"Bookmark"> | string | null
+    targetUserId?: StringNullableFilter<"Bookmark"> | string | null
+    photoId?: StringNullableFilter<"Bookmark"> | string | null
+    videoId?: StringNullableFilter<"Bookmark"> | string | null
+    tags?: StringNullableListFilter<"Bookmark">
+    isViewed?: BoolFilter<"Bookmark"> | boolean
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
+  }
+
+  export type BookmarkUpsertWithWhereUniqueWithoutTargetUserInput = {
+    where: BookmarkWhereUniqueInput
+    update: XOR<BookmarkUpdateWithoutTargetUserInput, BookmarkUncheckedUpdateWithoutTargetUserInput>
+    create: XOR<BookmarkCreateWithoutTargetUserInput, BookmarkUncheckedCreateWithoutTargetUserInput>
+  }
+
+  export type BookmarkUpdateWithWhereUniqueWithoutTargetUserInput = {
+    where: BookmarkWhereUniqueInput
+    data: XOR<BookmarkUpdateWithoutTargetUserInput, BookmarkUncheckedUpdateWithoutTargetUserInput>
+  }
+
+  export type BookmarkUpdateManyWithWhereWithoutTargetUserInput = {
+    where: BookmarkScalarWhereInput
+    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutTargetUserInput>
   }
 
   export type ReportUpsertWithWhereUniqueWithoutReporterInput = {
@@ -26483,6 +27388,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BookmarkCreateWithoutCommunityInput = {
+    id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
+  }
+
+  export type BookmarkUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateOrConnectWithoutCommunityInput = {
+    where: BookmarkWhereUniqueInput
+    create: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type BookmarkCreateManyCommunityInputEnvelope = {
+    data: BookmarkCreateManyCommunityInput | BookmarkCreateManyCommunityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CommunityMemberUpsertWithWhereUniqueWithoutCommunityInput = {
     where: CommunityMemberWhereUniqueInput
     update: XOR<CommunityMemberUpdateWithoutCommunityInput, CommunityMemberUncheckedUpdateWithoutCommunityInput>
@@ -26513,6 +27452,22 @@ export namespace Prisma {
   export type PostUpdateManyWithWhereWithoutCommunityInput = {
     where: PostScalarWhereInput
     data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type BookmarkUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: BookmarkWhereUniqueInput
+    update: XOR<BookmarkUpdateWithoutCommunityInput, BookmarkUncheckedUpdateWithoutCommunityInput>
+    create: XOR<BookmarkCreateWithoutCommunityInput, BookmarkUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type BookmarkUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: BookmarkWhereUniqueInput
+    data: XOR<BookmarkUpdateWithoutCommunityInput, BookmarkUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type BookmarkUpdateManyWithWhereWithoutCommunityInput = {
+    where: BookmarkScalarWhereInput
+    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutCommunityInput>
   }
 
   export type UserCreateWithoutCommunitiesInput = {
@@ -26552,6 +27507,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -26598,6 +27554,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -26628,6 +27585,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     posts?: PostCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityUncheckedCreateWithoutMembersInput = {
@@ -26646,6 +27604,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityCreateOrConnectWithoutMembersInput = {
@@ -26701,6 +27660,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -26747,6 +27707,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -26783,6 +27744,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutCommunityNestedInput
   }
 
   export type CommunityUncheckedUpdateWithoutMembersInput = {
@@ -26801,6 +27763,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutCommunityNestedInput
   }
 
   export type UserCreateWithoutStoriesInput = {
@@ -26840,6 +27803,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -26886,6 +27850,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -26948,6 +27913,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -26994,6 +27960,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -27039,6 +28006,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -27085,6 +28053,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -27195,6 +28164,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: CommunityMemberCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityUncheckedCreateWithoutPostsInput = {
@@ -27213,6 +28183,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: CommunityMemberUncheckedCreateNestedManyWithoutCommunityInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutCommunityInput
   }
 
   export type CommunityCreateOrConnectWithoutPostsInput = {
@@ -27252,13 +28223,25 @@ export namespace Prisma {
 
   export type BookmarkCreateWithoutPostInput = {
     id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
   }
 
   export type BookmarkUncheckedCreateWithoutPostInput = {
     id?: string
     userId: string
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
@@ -27343,6 +28326,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -27389,6 +28373,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -27485,6 +28470,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: CommunityMemberUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutCommunityNestedInput
   }
 
   export type CommunityUncheckedUpdateWithoutPostsInput = {
@@ -27503,6 +28489,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: CommunityMemberUncheckedUpdateManyWithoutCommunityNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutCommunityNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -27589,6 +28576,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -27635,6 +28623,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -27703,6 +28692,7 @@ export namespace Prisma {
     uploader: UserCreateNestedOneWithoutPhotosInput
     album?: AlbumCreateNestedOneWithoutPhotosInput
     tags?: PhotoTagCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUncheckedCreateWithoutCommentsInput = {
@@ -27721,6 +28711,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoCreateOrConnectWithoutCommentsInput = {
@@ -27775,6 +28766,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -27821,6 +28813,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -27901,6 +28894,7 @@ export namespace Prisma {
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
     album?: AlbumUpdateOneWithoutPhotosNestedInput
     tags?: PhotoTagUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateWithoutCommentsInput = {
@@ -27919,6 +28913,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutPhotoNestedInput
   }
 
   export type UserCreateWithoutAlbumsInput = {
@@ -27958,6 +28953,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -28004,6 +29000,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -28034,6 +29031,7 @@ export namespace Prisma {
     uploader: UserCreateNestedOneWithoutPhotosInput
     comments?: CommentCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUncheckedCreateWithoutAlbumInput = {
@@ -28052,6 +29050,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
     tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoCreateOrConnectWithoutAlbumInput = {
@@ -28112,6 +29111,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -28158,6 +29158,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -28220,6 +29221,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -28266,6 +29268,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -28365,6 +29368,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BookmarkCreateWithoutPhotoInput = {
+    id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    video?: VideoCreateNestedOneWithoutBookmarksInput
+  }
+
+  export type BookmarkUncheckedCreateWithoutPhotoInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateOrConnectWithoutPhotoInput = {
+    where: BookmarkWhereUniqueInput
+    create: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput>
+  }
+
+  export type BookmarkCreateManyPhotoInputEnvelope = {
+    data: BookmarkCreateManyPhotoInput | BookmarkCreateManyPhotoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutPhotosInput = {
     update: XOR<UserUpdateWithoutPhotosInput, UserUncheckedUpdateWithoutPhotosInput>
     create: XOR<UserCreateWithoutPhotosInput, UserUncheckedCreateWithoutPhotosInput>
@@ -28413,6 +29450,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -28459,6 +29497,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -28535,6 +29574,22 @@ export namespace Prisma {
     data: XOR<PhotoTagUpdateManyMutationInput, PhotoTagUncheckedUpdateManyWithoutPhotoInput>
   }
 
+  export type BookmarkUpsertWithWhereUniqueWithoutPhotoInput = {
+    where: BookmarkWhereUniqueInput
+    update: XOR<BookmarkUpdateWithoutPhotoInput, BookmarkUncheckedUpdateWithoutPhotoInput>
+    create: XOR<BookmarkCreateWithoutPhotoInput, BookmarkUncheckedCreateWithoutPhotoInput>
+  }
+
+  export type BookmarkUpdateWithWhereUniqueWithoutPhotoInput = {
+    where: BookmarkWhereUniqueInput
+    data: XOR<BookmarkUpdateWithoutPhotoInput, BookmarkUncheckedUpdateWithoutPhotoInput>
+  }
+
+  export type BookmarkUpdateManyWithWhereWithoutPhotoInput = {
+    where: BookmarkScalarWhereInput
+    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutPhotoInput>
+  }
+
   export type PhotoCreateWithoutTagsInput = {
     id?: string
     url: string
@@ -28551,6 +29606,7 @@ export namespace Prisma {
     uploader: UserCreateNestedOneWithoutPhotosInput
     album?: AlbumCreateNestedOneWithoutPhotosInput
     comments?: CommentCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoUncheckedCreateWithoutTagsInput = {
@@ -28569,6 +29625,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutPhotoInput
   }
 
   export type PhotoCreateOrConnectWithoutTagsInput = {
@@ -28613,6 +29670,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -28659,6 +29717,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -28700,6 +29759,7 @@ export namespace Prisma {
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
     album?: AlbumUpdateOneWithoutPhotosNestedInput
     comments?: CommentUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateWithoutTagsInput = {
@@ -28718,6 +29778,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutPhotoNestedInput
   }
 
   export type UserUpsertWithoutPhotoTagsInput = {
@@ -28768,6 +29829,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -28814,6 +29876,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -28859,6 +29922,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -28905,6 +29969,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -28956,6 +30021,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -29002,6 +30068,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -29064,6 +30131,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -29110,6 +30178,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -29167,6 +30236,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -29213,6 +30283,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -29259,6 +30330,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -29305,6 +30377,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -29367,6 +30440,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -29413,6 +30487,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -29459,6 +30534,7 @@ export namespace Prisma {
     friendOf?: UserCreateNestedManyWithoutFriendsInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -29505,6 +30581,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -29556,6 +30633,7 @@ export namespace Prisma {
     friendOf?: UserCreateNestedManyWithoutFriendsInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -29602,6 +30680,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -29664,6 +30743,7 @@ export namespace Prisma {
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -29710,6 +30790,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -29767,6 +30848,7 @@ export namespace Prisma {
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -29813,6 +30895,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -29859,6 +30942,7 @@ export namespace Prisma {
     friendOf?: UserCreateNestedManyWithoutFriendsInput
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
@@ -29905,6 +30989,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
@@ -29957,6 +31042,218 @@ export namespace Prisma {
     create: XOR<PostCreateWithoutBookmarksInput, PostUncheckedCreateWithoutBookmarksInput>
   }
 
+  export type CommunityCreateWithoutBookmarksInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    avatar?: string | null
+    cover?: string | null
+    type?: string
+    category?: string | null
+    isVerified?: boolean
+    website?: string | null
+    location?: string | null
+    membersCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CommunityMemberCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutBookmarksInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    avatar?: string | null
+    cover?: string | null
+    type?: string
+    category?: string | null
+    isVerified?: boolean
+    website?: string | null
+    location?: string | null
+    membersCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CommunityMemberUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutBookmarksInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutBookmarksInput, CommunityUncheckedCreateWithoutBookmarksInput>
+  }
+
+  export type UserCreateWithoutBookmarkedByInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    friends?: UserCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserCreateNestedManyWithoutFriendsInput
+    sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    music?: MusicCreateNestedManyWithoutUploaderInput
+    videos?: VideoCreateNestedManyWithoutUploaderInput
+    stories?: StoryCreateNestedManyWithoutAuthorInput
+    albums?: AlbumCreateNestedManyWithoutCreatorInput
+    photos?: PhotoCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBookmarkedByInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    firstName?: string | null
+    lastName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    cover?: string | null
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    website?: string | null
+    birthday?: string | null
+    gender?: string | null
+    work?: string | null
+    education?: string | null
+    languages?: string | null
+    isPublic?: boolean
+    profileViews?: number
+    role?: string
+    isBanned?: boolean
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    friends?: UserUncheckedCreateNestedManyWithoutFriendOfInput
+    friendOf?: UserUncheckedCreateNestedManyWithoutFriendsInput
+    sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
+    stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
+    albums?: AlbumUncheckedCreateNestedManyWithoutCreatorInput
+    photos?: PhotoUncheckedCreateNestedManyWithoutUploaderInput
+    photoTags?: PhotoTagUncheckedCreateNestedManyWithoutUserInput
+    communities?: CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBookmarkedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBookmarkedByInput, UserUncheckedCreateWithoutBookmarkedByInput>
+  }
+
+  export type PhotoCreateWithoutBookmarksInput = {
+    id?: string
+    url: string
+    description?: string | null
+    likes?: PhotoCreatelikesInput | string[]
+    isArchived?: boolean
+    isPinned?: boolean
+    privacy?: string
+    width?: number | null
+    height?: number | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uploader: UserCreateNestedOneWithoutPhotosInput
+    album?: AlbumCreateNestedOneWithoutPhotosInput
+    comments?: CommentCreateNestedManyWithoutPhotoInput
+    tags?: PhotoTagCreateNestedManyWithoutPhotoInput
+  }
+
+  export type PhotoUncheckedCreateWithoutBookmarksInput = {
+    id?: string
+    url: string
+    description?: string | null
+    uploaderId: string
+    albumId?: string | null
+    likes?: PhotoCreatelikesInput | string[]
+    isArchived?: boolean
+    isPinned?: boolean
+    privacy?: string
+    width?: number | null
+    height?: number | null
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: CommentUncheckedCreateNestedManyWithoutPhotoInput
+    tags?: PhotoTagUncheckedCreateNestedManyWithoutPhotoInput
+  }
+
+  export type PhotoCreateOrConnectWithoutBookmarksInput = {
+    where: PhotoWhereUniqueInput
+    create: XOR<PhotoCreateWithoutBookmarksInput, PhotoUncheckedCreateWithoutBookmarksInput>
+  }
+
+  export type VideoCreateWithoutBookmarksInput = {
+    id?: string
+    title: string
+    description?: string | null
+    url: string
+    thumbnail?: string | null
+    views?: number
+    createdAt?: Date | string
+    uploader: UserCreateNestedOneWithoutVideosInput
+  }
+
+  export type VideoUncheckedCreateWithoutBookmarksInput = {
+    id?: string
+    title: string
+    description?: string | null
+    url: string
+    thumbnail?: string | null
+    views?: number
+    uploaderId: string
+    createdAt?: Date | string
+  }
+
+  export type VideoCreateOrConnectWithoutBookmarksInput = {
+    where: VideoWhereUniqueInput
+    create: XOR<VideoCreateWithoutBookmarksInput, VideoUncheckedCreateWithoutBookmarksInput>
+  }
+
   export type UserUpsertWithoutBookmarksInput = {
     update: XOR<UserUpdateWithoutBookmarksInput, UserUncheckedUpdateWithoutBookmarksInput>
     create: XOR<UserCreateWithoutBookmarksInput, UserUncheckedCreateWithoutBookmarksInput>
@@ -30004,6 +31301,7 @@ export namespace Prisma {
     friendOf?: UserUpdateManyWithoutFriendsNestedInput
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -30050,6 +31348,7 @@ export namespace Prisma {
     friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -30103,6 +31402,242 @@ export namespace Prisma {
     reports?: ReportUncheckedUpdateManyWithoutPostNestedInput
   }
 
+  export type CommunityUpsertWithoutBookmarksInput = {
+    update: XOR<CommunityUpdateWithoutBookmarksInput, CommunityUncheckedUpdateWithoutBookmarksInput>
+    create: XOR<CommunityCreateWithoutBookmarksInput, CommunityUncheckedCreateWithoutBookmarksInput>
+    where?: CommunityWhereInput
+  }
+
+  export type CommunityUpdateToOneWithWhereWithoutBookmarksInput = {
+    where?: CommunityWhereInput
+    data: XOR<CommunityUpdateWithoutBookmarksInput, CommunityUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type CommunityUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    membersCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CommunityMemberUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    membersCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CommunityMemberUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type UserUpsertWithoutBookmarkedByInput = {
+    update: XOR<UserUpdateWithoutBookmarkedByInput, UserUncheckedUpdateWithoutBookmarkedByInput>
+    create: XOR<UserCreateWithoutBookmarkedByInput, UserUncheckedCreateWithoutBookmarkedByInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBookmarkedByInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBookmarkedByInput, UserUncheckedUpdateWithoutBookmarkedByInput>
+  }
+
+  export type UserUpdateWithoutBookmarkedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    friends?: UserUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUpdateManyWithoutFriendsNestedInput
+    sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    music?: MusicUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBookmarkedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    cover?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    work?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    profileViews?: IntFieldUpdateOperationsInput | number
+    role?: StringFieldUpdateOperationsInput | string
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    friends?: UserUncheckedUpdateManyWithoutFriendOfNestedInput
+    friendOf?: UserUncheckedUpdateManyWithoutFriendsNestedInput
+    sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
+    albums?: AlbumUncheckedUpdateManyWithoutCreatorNestedInput
+    photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
+    photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
+    communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PhotoUpsertWithoutBookmarksInput = {
+    update: XOR<PhotoUpdateWithoutBookmarksInput, PhotoUncheckedUpdateWithoutBookmarksInput>
+    create: XOR<PhotoCreateWithoutBookmarksInput, PhotoUncheckedCreateWithoutBookmarksInput>
+    where?: PhotoWhereInput
+  }
+
+  export type PhotoUpdateToOneWithWhereWithoutBookmarksInput = {
+    where?: PhotoWhereInput
+    data: XOR<PhotoUpdateWithoutBookmarksInput, PhotoUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type PhotoUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    likes?: PhotoUpdatelikesInput | string[]
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    isPinned?: BoolFieldUpdateOperationsInput | boolean
+    privacy?: StringFieldUpdateOperationsInput | string
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
+    album?: AlbumUpdateOneWithoutPhotosNestedInput
+    comments?: CommentUpdateManyWithoutPhotoNestedInput
+    tags?: PhotoTagUpdateManyWithoutPhotoNestedInput
+  }
+
+  export type PhotoUncheckedUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploaderId?: StringFieldUpdateOperationsInput | string
+    albumId?: NullableStringFieldUpdateOperationsInput | string | null
+    likes?: PhotoUpdatelikesInput | string[]
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    isPinned?: BoolFieldUpdateOperationsInput | boolean
+    privacy?: StringFieldUpdateOperationsInput | string
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
+    tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
+  }
+
+  export type VideoUpsertWithoutBookmarksInput = {
+    update: XOR<VideoUpdateWithoutBookmarksInput, VideoUncheckedUpdateWithoutBookmarksInput>
+    create: XOR<VideoCreateWithoutBookmarksInput, VideoUncheckedCreateWithoutBookmarksInput>
+    where?: VideoWhereInput
+  }
+
+  export type VideoUpdateToOneWithWhereWithoutBookmarksInput = {
+    where?: VideoWhereInput
+    data: XOR<VideoUpdateWithoutBookmarksInput, VideoUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type VideoUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploader?: UserUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type VideoUncheckedUpdateWithoutBookmarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: IntFieldUpdateOperationsInput | number
+    uploaderId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutReportsInput = {
     id?: string
     username: string
@@ -30140,6 +31675,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
     stories?: StoryCreateNestedManyWithoutAuthorInput
@@ -30186,6 +31722,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
     stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
@@ -30285,6 +31822,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
     stories?: StoryUpdateManyWithoutAuthorNestedInput
@@ -30331,6 +31869,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
     stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
@@ -30420,6 +31959,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     videos?: VideoCreateNestedManyWithoutUploaderInput
     stories?: StoryCreateNestedManyWithoutAuthorInput
@@ -30466,6 +32006,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     videos?: VideoUncheckedCreateNestedManyWithoutUploaderInput
     stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
@@ -30528,6 +32069,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
     stories?: StoryUpdateManyWithoutAuthorNestedInput
@@ -30574,6 +32116,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
     stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
@@ -30620,6 +32163,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkCreateNestedManyWithoutTargetUserInput
     reports?: ReportCreateNestedManyWithoutReporterInput
     music?: MusicCreateNestedManyWithoutUploaderInput
     stories?: StoryCreateNestedManyWithoutAuthorInput
@@ -30666,6 +32210,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
     receivedFriendRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    bookmarkedBy?: BookmarkUncheckedCreateNestedManyWithoutTargetUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     music?: MusicUncheckedCreateNestedManyWithoutUploaderInput
     stories?: StoryUncheckedCreateNestedManyWithoutAuthorInput
@@ -30678,6 +32223,40 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutVideosInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutVideosInput, UserUncheckedCreateWithoutVideosInput>
+  }
+
+  export type BookmarkCreateWithoutVideoInput = {
+    id?: string
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBookmarksInput
+    post?: PostCreateNestedOneWithoutBookmarksInput
+    community?: CommunityCreateNestedOneWithoutBookmarksInput
+    targetUser?: UserCreateNestedOneWithoutBookmarkedByInput
+    photo?: PhotoCreateNestedOneWithoutBookmarksInput
+  }
+
+  export type BookmarkUncheckedCreateWithoutVideoInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateOrConnectWithoutVideoInput = {
+    where: BookmarkWhereUniqueInput
+    create: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput>
+  }
+
+  export type BookmarkCreateManyVideoInputEnvelope = {
+    data: BookmarkCreateManyVideoInput | BookmarkCreateManyVideoInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutVideosInput = {
@@ -30728,6 +32307,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     stories?: StoryUpdateManyWithoutAuthorNestedInput
@@ -30774,6 +32354,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     stories?: StoryUncheckedUpdateManyWithoutAuthorNestedInput
@@ -30781,6 +32362,22 @@ export namespace Prisma {
     photos?: PhotoUncheckedUpdateManyWithoutUploaderNestedInput
     photoTags?: PhotoTagUncheckedUpdateManyWithoutUserNestedInput
     communities?: CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type BookmarkUpsertWithWhereUniqueWithoutVideoInput = {
+    where: BookmarkWhereUniqueInput
+    update: XOR<BookmarkUpdateWithoutVideoInput, BookmarkUncheckedUpdateWithoutVideoInput>
+    create: XOR<BookmarkCreateWithoutVideoInput, BookmarkUncheckedCreateWithoutVideoInput>
+  }
+
+  export type BookmarkUpdateWithWhereUniqueWithoutVideoInput = {
+    where: BookmarkWhereUniqueInput
+    data: XOR<BookmarkUpdateWithoutVideoInput, BookmarkUncheckedUpdateWithoutVideoInput>
+  }
+
+  export type BookmarkUpdateManyWithWhereWithoutVideoInput = {
+    where: BookmarkScalarWhereInput
+    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutVideoInput>
   }
 
   export type PostCreateManyAuthorInput = {
@@ -30810,6 +32407,9 @@ export namespace Prisma {
     content: string
     receiverId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30819,6 +32419,9 @@ export namespace Prisma {
     content: string
     senderId: string
     read?: boolean
+    attachmentUrl?: string | null
+    attachmentType?: string | null
+    attachmentName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30852,7 +32455,25 @@ export namespace Prisma {
 
   export type BookmarkCreateManyUserInput = {
     id?: string
-    postId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateManyTargetUserInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
@@ -31012,6 +32633,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     receiver?: UserUpdateOneRequiredWithoutReceivedMessagesNestedInput
@@ -31022,6 +32646,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31031,6 +32658,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31039,6 +32669,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
@@ -31049,6 +32682,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31058,6 +32694,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentType?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31131,6 +32770,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -31177,6 +32817,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -31252,6 +32893,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUpdateManyWithoutReporterNestedInput
     music?: MusicUpdateManyWithoutUploaderNestedInput
     videos?: VideoUpdateManyWithoutUploaderNestedInput
@@ -31298,6 +32940,7 @@ export namespace Prisma {
     sentFriendRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
     receivedFriendRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    bookmarkedBy?: BookmarkUncheckedUpdateManyWithoutTargetUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     music?: MusicUncheckedUpdateManyWithoutUploaderNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUploaderNestedInput
@@ -31387,19 +33030,73 @@ export namespace Prisma {
 
   export type BookmarkUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    post?: PostUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
   }
 
   export type BookmarkUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    postId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    postId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkUpdateWithoutTargetUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
+  }
+
+  export type BookmarkUncheckedUpdateWithoutTargetUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutTargetUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31462,6 +33159,7 @@ export namespace Prisma {
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     views?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookmarks?: BookmarkUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateWithoutUploaderInput = {
@@ -31472,6 +33170,7 @@ export namespace Prisma {
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     views?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateManyWithoutUploaderInput = {
@@ -31562,6 +33261,7 @@ export namespace Prisma {
     album?: AlbumUpdateOneWithoutPhotosNestedInput
     comments?: CommentUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateWithoutUploaderInput = {
@@ -31580,6 +33280,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateManyWithoutUploaderInput = {
@@ -31662,6 +33363,18 @@ export namespace Prisma {
     originalPostId?: string | null
   }
 
+  export type BookmarkCreateManyCommunityInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
   export type CommunityMemberUpdateWithoutCommunityInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
@@ -31727,6 +33440,42 @@ export namespace Prisma {
     originalPostId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type BookmarkUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
+  }
+
+  export type BookmarkUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PostCreateManyOriginalPostInput = {
     id?: string
     content: string
@@ -31752,6 +33501,12 @@ export namespace Prisma {
   export type BookmarkCreateManyPostInput = {
     id?: string
     userId: string
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
@@ -31838,19 +33593,37 @@ export namespace Prisma {
 
   export type BookmarkUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
   }
 
   export type BookmarkUncheckedUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkUncheckedUpdateManyWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31907,6 +33680,7 @@ export namespace Prisma {
     uploader?: UserUpdateOneRequiredWithoutPhotosNestedInput
     comments?: CommentUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateWithoutAlbumInput = {
@@ -31925,6 +33699,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPhotoNestedInput
     tags?: PhotoTagUncheckedUpdateManyWithoutPhotoNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutPhotoNestedInput
   }
 
   export type PhotoUncheckedUpdateManyWithoutAlbumInput = {
@@ -31958,6 +33733,18 @@ export namespace Prisma {
     userId: string
     x: number
     y: number
+    createdAt?: Date | string
+  }
+
+  export type BookmarkCreateManyPhotoInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    videoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
     createdAt?: Date | string
   }
 
@@ -32015,6 +33802,90 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BookmarkUpdateWithoutPhotoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    video?: VideoUpdateOneWithoutBookmarksNestedInput
+  }
+
+  export type BookmarkUncheckedUpdateWithoutPhotoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutPhotoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkCreateManyVideoInput = {
+    id?: string
+    userId: string
+    postId?: string | null
+    communityId?: string | null
+    targetUserId?: string | null
+    photoId?: string | null
+    tags?: BookmarkCreatetagsInput | string[]
+    isViewed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BookmarkUpdateWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    post?: PostUpdateOneWithoutBookmarksNestedInput
+    community?: CommunityUpdateOneWithoutBookmarksNestedInput
+    targetUser?: UserUpdateOneWithoutBookmarkedByNestedInput
+    photo?: PhotoUpdateOneWithoutBookmarksNestedInput
+  }
+
+  export type BookmarkUncheckedUpdateWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookmarkUncheckedUpdateManyWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    communityId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    photoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: BookmarkUpdatetagsInput | string[]
+    isViewed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -32040,6 +33911,10 @@ export namespace Prisma {
      * @deprecated Use PhotoCountOutputTypeDefaultArgs instead
      */
     export type PhotoCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PhotoCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use VideoCountOutputTypeDefaultArgs instead
+     */
+    export type VideoCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VideoCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */

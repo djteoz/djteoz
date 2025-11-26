@@ -165,6 +165,8 @@ function ChatWindow({
   const [newMessage, setNewMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [otherUserData, setOtherUserData] = useState<any>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useState<HTMLInputElement | null>(null);
 
   useEffect(() => {
     fetchMessages();
@@ -201,26 +203,70 @@ function ChatWindow({
     return () => clearInterval(interval);
   }, [user]);
 
+  const uploadToCloudinary = async (file: File) => {
+    const signRes = await fetch("/api/cloudinary-sign", { method: "POST" });
+    if (!signRes.ok) throw new Error("Failed to get signature");
+    const { timestamp, folder, signature, api_key, cloud_name } =
+      await signRes.json();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("api_key", api_key);
+    formData.append("timestamp", timestamp.toString());
+    formData.append("signature", signature);
+    formData.append("folder", folder);
+
+    const uploadRes = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!uploadRes.ok) throw new Error("Cloudinary upload failed");
+    const data = await uploadRes.json();
+    return {
+      url: data.secure_url,
+      type: data.resource_type, // 'image', 'video', 'raw' (for files)
+      name: file.name,
+    };
+  };
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || sending) return;
+    if ((!newMessage.trim() && !selectedFile) || sending) return;
 
     setSending(true);
     try {
+      let attachmentData = null;
+
+      if (selectedFile) {
+        attachmentData = await uploadToCloudinary(selectedFile);
+      }
+
       const res = await fetch("/api/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ recipient: user, text: newMessage }),
+        body: JSON.stringify({
+          recipient: user,
+          text: newMessage,
+          attachmentUrl: attachmentData?.url,
+          attachmentType: attachmentData?.type,
+          attachmentName: attachmentData?.name,
+        }),
       });
 
       if (res.ok) {
         const data = await res.json();
         setMessages((prev) => [...prev, data.message]);
         setNewMessage("");
+        setSelectedFile(null);
       }
     } catch (err) {
       console.error("Failed to send message:", err);
+      alert("Ошибка отправки сообщения");
     } finally {
       setSending(false);
     }
@@ -245,7 +291,7 @@ function ChatWindow({
       <div className="p-4 border-b border-white/20 bg-white/40 backdrop-blur-md flex items-center gap-3 z-10">
         {otherUserData?.avatar ? (
           <img
-            src={`/uploads/${otherUserData.avatar}`}
+            src={otherUserData.avatar}
             alt={fullName}
             className="w-10 h-10 rounded-full object-cover border border-white shadow-sm"
           />
@@ -289,7 +335,40 @@ function ChatWindow({
                     : "bg-white text-gray-800 rounded-bl-none border border-white/50"
                 }`}
               >
-                <p className="break-words">{msg.text}</p>
+                {msg.attachmentUrl && (
+                  <div className="mb-2">
+                    {msg.attachmentType === "image" ? (
+                      <img
+                        src={msg.attachmentUrl}
+                        alt="Attachment"
+                        className="max-w-full rounded-lg max-h-64 object-cover"
+                      />
+                    ) : msg.attachmentType === "video" ? (
+                      <video
+                        src={msg.attachmentUrl}
+                        controls
+                        className="max-w-full rounded-lg max-h-64"
+                      />
+                    ) : (
+                      <a
+                        href={msg.attachmentUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-2 p-2 rounded-lg ${
+                          msg.sender === currentUser
+                            ? "bg-white/20 hover:bg-white/30"
+                            : "bg-gray-100 hover:bg-gray-200"
+                        }`}
+                      >
+                        <span className="text-2xl">📄</span>
+                        <span className="underline truncate max-w-[200px]">
+                          {msg.attachmentName || "Файл"}
+                        </span>
+                      </a>
+                    )}
+                  </div>
+                )}
+                {msg.text && <p className="break-words">{msg.text}</p>}
                 <p
                   className={`text-[10px] mt-1 text-right ${
                     msg.sender === currentUser
@@ -311,27 +390,53 @@ function ChatWindow({
       {/* Форма отправки */}
       <form
         onSubmit={handleSendMessage}
-        className="p-4 border-t border-white/20 bg-white/40 backdrop-blur-md flex gap-2"
+        className="p-4 border-t border-white/20 bg-white/40 backdrop-blur-md flex flex-col gap-2"
       >
-        <input
-          type="text"
-          className="input flex-1"
-          placeholder="Напишите сообщение..."
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          maxLength={5000}
-        />
-        <button
-          type="submit"
-          disabled={!newMessage.trim() || sending}
-          className="btn btn-primary px-6 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {sending ? (
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-          ) : (
-            "➤"
-          )}
-        </button>
+        {selectedFile && (
+          <div className="flex items-center gap-2 bg-indigo-50 p-2 rounded-lg self-start">
+            <span className="text-sm text-indigo-700 truncate max-w-[200px]">
+              {selectedFile.name}
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedFile(null)}
+              className="text-indigo-400 hover:text-indigo-600"
+            >
+              ✕
+            </button>
+          </div>
+        )}
+        <div className="flex gap-2 items-center">
+          <label className="cursor-pointer text-gray-500 hover:text-indigo-600 p-2 transition-colors">
+            📎
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => {
+                if (e.target.files?.[0]) setSelectedFile(e.target.files[0]);
+              }}
+            />
+          </label>
+          <input
+            type="text"
+            className="input flex-1"
+            placeholder="Напишите сообщение..."
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            maxLength={5000}
+          />
+          <button
+            type="submit"
+            disabled={(!newMessage.trim() && !selectedFile) || sending}
+            className="btn btn-primary px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {sending ? (
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+            ) : (
+              "➤"
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );

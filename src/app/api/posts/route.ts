@@ -17,6 +17,7 @@ export async function GET(req: NextRequest) {
 
     let whereClause: any = {};
     let currentUserFriends: string[] = [];
+    let currentUserCommunityIds: string[] = [];
     let currentUserId: string | null = null;
     let currentUserUsername: string | null = null;
 
@@ -30,11 +31,17 @@ export async function GET(req: NextRequest) {
         currentUserUsername = payload.username;
         const currentUser = await prisma.user.findUnique({
           where: { username: payload.username },
-          include: { friends: { select: { id: true } } },
+          include: {
+            friends: { select: { id: true } },
+            communities: { select: { communityId: true } },
+          },
         });
         if (currentUser) {
           currentUserId = currentUser.id;
           currentUserFriends = currentUser.friends.map((f: any) => f.id);
+          currentUserCommunityIds = currentUser.communities.map(
+            (c: any) => c.communityId
+          );
         }
       } catch (e) {
         // Ignore token error
@@ -54,8 +61,11 @@ export async function GET(req: NextRequest) {
     } else if (filter === "text") {
       whereClause.image = null;
     } else if (filter === "friends" && currentUserId) {
-      // Include own posts + friends posts
-      whereClause.authorId = { in: [...currentUserFriends, currentUserId] };
+      // Include own posts + friends posts + community posts
+      whereClause.OR = [
+        { authorId: { in: [...currentUserFriends, currentUserId] } },
+        { communityId: { in: currentUserCommunityIds } },
+      ];
     } else if (filter === "liked" && currentUserUsername) {
       whereClause.likes = { has: currentUserUsername };
     }
@@ -78,6 +88,14 @@ export async function GET(req: NextRequest) {
               username: true,
               firstName: true,
               lastName: true,
+              avatar: true,
+            },
+          },
+          community: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
               avatar: true,
             },
           },
@@ -118,6 +136,12 @@ export async function GET(req: NextRequest) {
           lastName: string | null;
           avatar: string | null;
         };
+        community: {
+          id: string;
+          name: string;
+          slug: string;
+          avatar: string | null;
+        } | null;
         likes: string[];
         comments: {
           id: string;
@@ -145,6 +169,14 @@ export async function GET(req: NextRequest) {
               post.author.lastName || ""
             }`.trim() || post.author.username,
           authorAvatar: post.author.avatar,
+          community: post.community
+            ? {
+                id: post.community.id,
+                name: post.community.name,
+                slug: post.community.slug,
+                avatar: post.community.avatar,
+              }
+            : null,
           likes: post.likes,
           views: post.views,
           isFriend: currentUserFriends.includes(post.author.id),
