@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const sidebar = [
   { href: "/profile", label: "Профиль", icon: "👤" },
@@ -20,12 +21,31 @@ const sidebar = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((res) => {
+        if (res.ok) return res.json();
+        return null;
+      })
+      .then((data) => {
+        if (data) setRole(data.role);
+      })
+      .catch(() => {});
+  }, []);
+
+  const menuItems = [...sidebar];
+  if (role === "ADMIN" || role === "OWNER") {
+    menuItems.unshift({ href: "/admin", label: "Админ-панель", icon: "🛡️" });
+  }
+
   return (
     <aside className="hidden lg:block w-64 shrink-0">
       <div className="sticky top-24 space-y-4">
         <nav className="card p-4 flex flex-col gap-1">
-          {sidebar.map((item) => {
-            const isActive = pathname === item.href;
+          {menuItems.map((item) => {
+            const isActive = pathname === item.href || (item.href === "/admin" && pathname.startsWith("/admin"));
             return (
               <Link
                 key={item.href}
