@@ -60,6 +60,32 @@ export default function MyProfilePage() {
   const postFileInput = useRef<HTMLInputElement>(null);
   const musicFileInput = useRef<HTMLInputElement>(null);
 
+  const uploadToCloudinary = async (file: File) => {
+    const signRes = await fetch("/api/cloudinary-sign", { method: "POST" });
+    if (!signRes.ok) throw new Error("Failed to get signature");
+    const { timestamp, folder, signature, api_key, cloud_name } =
+      await signRes.json();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("api_key", api_key);
+    formData.append("timestamp", timestamp.toString());
+    formData.append("signature", signature);
+    formData.append("folder", folder);
+
+    const uploadRes = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!uploadRes.ok) throw new Error("Cloudinary upload failed");
+    const data = await uploadRes.json();
+    return data.secure_url;
+  };
+
   const fetchPosts = async (username: string) => {
     try {
       const res = await fetch(`/api/posts?username=${username}&limit=20`);
@@ -290,21 +316,24 @@ export default function MyProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const formDataUpload = new FormData();
-    formDataUpload.append("avatar", file);
+    try {
+      const url = await uploadToCloudinary(file);
 
-    const res = await fetch("/api/upload-avatar", {
-      method: "POST",
-      credentials: "include",
-      body: formDataUpload,
-    });
+      const res = await fetch("/api/profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ ...profile, avatar: url }),
+      });
 
-    if (res.ok) {
-      const data = await res.json();
-      setProfile((prev) => (prev ? { ...prev, avatar: data.avatar } : null));
-      setFormData((prev) => ({ ...prev, avatar: data.avatar }));
-      setMessage("Аватар обновлен!");
-    } else {
+      if (res.ok) {
+        setProfile((prev) => (prev ? { ...prev, avatar: url } : null));
+        setFormData((prev) => ({ ...prev, avatar: url }));
+        setMessage("Аватар обновлен!");
+      } else {
+        setError("Ошибка при сохранении аватара");
+      }
+    } catch (err) {
       setError("Ошибка при загрузке аватара");
     }
   };
@@ -313,32 +342,21 @@ export default function MyProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const formDataUpload = new FormData();
-    formDataUpload.append("file", file);
-
     try {
-      const res = await fetch("/api/upload", {
+      const url = await uploadToCloudinary(file);
+
+      // Update profile with new cover URL
+      const updateRes = await fetch("/api/profile", {
         method: "POST",
-        body: formDataUpload,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...profile, cover: url }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        // Update profile with new cover URL
-        const updateRes = await fetch("/api/profile", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...profile, cover: data.url }),
-        });
-
-        if (updateRes.ok) {
-          setProfile((prev) => (prev ? { ...prev, cover: data.url } : null));
-          setMessage("Обложка обновлена!");
-        } else {
-          setError("Ошибка при сохранении обложки");
-        }
+      if (updateRes.ok) {
+        setProfile((prev) => (prev ? { ...prev, cover: url } : null));
+        setMessage("Обложка обновлена!");
       } else {
-        setError("Ошибка при загрузке обложки");
+        setError("Ошибка при сохранении обложки");
       }
     } catch (err) {
       setError("Ошибка сети при загрузке обложки");
@@ -371,21 +389,9 @@ export default function MyProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const formDataUpload = new FormData();
-    formDataUpload.append("file", file);
-
     try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formDataUpload,
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setNewPostImage(data.url);
-      } else {
-        setError("Ошибка при загрузке изображения");
-      }
+      const url = await uploadToCloudinary(file);
+      setNewPostImage(url);
     } catch (err) {
       setError("Ошибка сети при загрузке изображения");
     }
@@ -395,22 +401,10 @@ export default function MyProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const formDataUpload = new FormData();
-    formDataUpload.append("file", file);
-
     try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formDataUpload,
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setNewPostContent((prev) => `${prev}\n🎵 ${file.name}: ${data.url}`);
-        setMessage("Музыка добавлена к посту!");
-      } else {
-        setError("Ошибка при загрузке музыки");
-      }
+      const url = await uploadToCloudinary(file);
+      setNewPostContent((prev) => `${prev}\n🎵 ${file.name}: ${url}`);
+      setMessage("Музыка добавлена к посту!");
     } catch (err) {
       setError("Ошибка сети при загрузке музыки");
     }

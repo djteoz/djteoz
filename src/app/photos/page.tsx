@@ -74,24 +74,38 @@ export default function PhotosPage() {
       // Upload each file
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+
+        // 1. Get signature
+        const signRes = await fetch("/api/cloudinary-sign", { method: "POST" });
+        if (!signRes.ok) throw new Error("Failed to get signature");
+        const { timestamp, folder, signature, api_key, cloud_name } =
+          await signRes.json();
+
+        // 2. Upload to Cloudinary
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("api_key", api_key);
+        formData.append("timestamp", timestamp.toString());
+        formData.append("signature", signature);
+        formData.append("folder", folder);
 
-        // 1. Upload to get URL (using existing upload API)
-        const uploadRes = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
+        const uploadRes = await fetch(
+          `https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (uploadRes.ok) {
-          const { url } = await uploadRes.json();
+          const { secure_url } = await uploadRes.json();
 
-          // 2. Create Photo entry
+          // 3. Create Photo entry
           await fetch("/api/photos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              url,
+              url: secure_url,
               description: file.name,
               // albumId: currentAlbumId // TODO: Support uploading to specific album
             }),
