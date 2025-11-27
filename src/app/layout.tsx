@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { MobileNavigation } from "../components/MobileNavigation";
 import { ToastProvider } from "../components/Toast";
 import PageLoader from "../components/PageLoader";
 import { TokenRefreshProvider } from "../components/TokenRefreshProvider";
@@ -39,10 +40,11 @@ export default function RootLayout({
           <ToastProvider>
             <PageLoader />
             <Navbar />
-            <div className="max-w-7xl mx-auto flex gap-6 px-4">
+            <div className="max-w-7xl mx-auto flex gap-6 px-4 pb-20 lg:pb-0">
               <Sidebar />
               <main className="flex-1 min-w-0 py-6">{children}</main>
             </div>
+            <MobileNavigation />
           </ToastProvider>
         </TokenRefreshProvider>
       </body>

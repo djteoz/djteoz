@@ -37,7 +37,11 @@ export async function GET(req: NextRequest) {
             OR: [
               { title: { contains: query, mode: "insensitive" as const } },
               { artist: { contains: query, mode: "insensitive" as const } },
-              { uploader: { username: { contains: query, mode: "insensitive" as const } } },
+              {
+                uploader: {
+                  username: { contains: query, mode: "insensitive" as const },
+                },
+              },
             ],
           }
         : {};
@@ -68,8 +72,14 @@ export async function GET(req: NextRequest) {
         ? {
             OR: [
               { title: { contains: query, mode: "insensitive" as const } },
-              { description: { contains: query, mode: "insensitive" as const } },
-              { uploader: { username: { contains: query, mode: "insensitive" as const } } },
+              {
+                description: { contains: query, mode: "insensitive" as const },
+              },
+              {
+                uploader: {
+                  username: { contains: query, mode: "insensitive" as const },
+                },
+              },
             ],
           }
         : {};
@@ -101,7 +111,11 @@ export async function GET(req: NextRequest) {
         ? {
             OR: [
               { content: { contains: query, mode: "insensitive" as const } },
-              { author: { username: { contains: query, mode: "insensitive" as const } } },
+              {
+                author: {
+                  username: { contains: query, mode: "insensitive" as const },
+                },
+              },
             ],
           }
         : {};
@@ -138,6 +152,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ items, total, pages: Math.ceil(total / limit) });
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

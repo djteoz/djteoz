@@ -11,13 +11,15 @@ interface ContentItem {
   artist?: string; // Music
   description?: string; // Video
   createdAt: string;
-  author?: { // Post
+  author?: {
+    // Post
     username: string;
     firstName: string | null;
     lastName: string | null;
     avatar: string | null;
   };
-  uploader?: { // Music/Video
+  uploader?: {
+    // Music/Video
     username: string;
     firstName: string | null;
     lastName: string | null;
@@ -47,7 +49,9 @@ export default function AdminContentPage() {
   const fetchContent = async (query = "") => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/content?type=${activeTab}&q=${query}&page=${page}`);
+      const res = await fetch(
+        `/api/admin/content?type=${activeTab}&q=${query}&page=${page}`
+      );
       const data = await res.json();
       setItems(data.items || []);
       setTotalPages(data.pages || 1);
@@ -65,7 +69,12 @@ export default function AdminContentPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Вы уверены, что хотите удалить этот контент? Это действие необратимо.")) return;
+    if (
+      !confirm(
+        "Вы уверены, что хотите удалить этот контент? Это действие необратимо."
+      )
+    )
+      return;
 
     try {
       const res = await fetch(`/api/admin/content/${id}?type=${activeTab}`, {
@@ -87,7 +96,9 @@ export default function AdminContentPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Управление контентом</h1>
+        <h1 className="text-2xl font-bold text-gray-900">
+          Управление контентом
+        </h1>
         <form onSubmit={handleSearch} className="flex gap-2">
           <input
             type="text"
@@ -108,9 +119,14 @@ export default function AdminContentPage() {
       {/* Tabs */}
       <div className="flex gap-2 border-b border-gray-200">
         <button
-          onClick={() => { setActiveTab("posts"); setPage(1); }}
+          onClick={() => {
+            setActiveTab("posts");
+            setPage(1);
+          }}
           className={`px-4 py-2 font-medium text-sm transition-colors relative ${
-            activeTab === "posts" ? "text-indigo-600" : "text-gray-500 hover:text-gray-700"
+            activeTab === "posts"
+              ? "text-indigo-600"
+              : "text-gray-500 hover:text-gray-700"
           }`}
         >
           Посты
@@ -119,9 +135,14 @@ export default function AdminContentPage() {
           )}
         </button>
         <button
-          onClick={() => { setActiveTab("music"); setPage(1); }}
+          onClick={() => {
+            setActiveTab("music");
+            setPage(1);
+          }}
           className={`px-4 py-2 font-medium text-sm transition-colors relative ${
-            activeTab === "music" ? "text-indigo-600" : "text-gray-500 hover:text-gray-700"
+            activeTab === "music"
+              ? "text-indigo-600"
+              : "text-gray-500 hover:text-gray-700"
           }`}
         >
           Музыка
@@ -130,9 +151,14 @@ export default function AdminContentPage() {
           )}
         </button>
         <button
-          onClick={() => { setActiveTab("video"); setPage(1); }}
+          onClick={() => {
+            setActiveTab("video");
+            setPage(1);
+          }}
           className={`px-4 py-2 font-medium text-sm transition-colors relative ${
-            activeTab === "video" ? "text-indigo-600" : "text-gray-500 hover:text-gray-700"
+            activeTab === "video"
+              ? "text-indigo-600"
+              : "text-gray-500 hover:text-gray-700"
           }`}
         >
           Видео
@@ -148,22 +174,32 @@ export default function AdminContentPage() {
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
                 <th className="px-6 py-4 font-medium text-gray-500">Автор</th>
-                <th className="px-6 py-4 font-medium text-gray-500 w-1/2">Контент</th>
+                <th className="px-6 py-4 font-medium text-gray-500 w-1/2">
+                  Контент
+                </th>
                 <th className="px-6 py-4 font-medium text-gray-500">Инфо</th>
                 <th className="px-6 py-4 font-medium text-gray-500">Дата</th>
-                <th className="px-6 py-4 font-medium text-gray-500">Действия</th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Действия
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Загрузка...
                   </td>
                 </tr>
               ) : items.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Контент не найден
                   </td>
                 </tr>
@@ -184,35 +220,56 @@ export default function AdminContentPage() {
                               <div className="font-medium text-gray-900">
                                 {author.firstName} {author.lastName}
                               </div>
-                              <div className="text-gray-500">@{author.username}</div>
+                              <div className="text-gray-500">
+                                @{author.username}
+                              </div>
                             </div>
                           </div>
                         )}
                       </td>
                       <td className="px-6 py-4">
                         {activeTab === "posts" && (
-                          <p className="line-clamp-2 text-gray-600">{item.content}</p>
+                          <p className="line-clamp-2 text-gray-600">
+                            {item.content}
+                          </p>
                         )}
                         {activeTab === "music" && (
                           <div>
-                            <div className="font-medium text-gray-900">{item.title}</div>
-                            <div className="text-gray-500 text-xs">{item.artist}</div>
+                            <div className="font-medium text-gray-900">
+                              {item.title}
+                            </div>
+                            <div className="text-gray-500 text-xs">
+                              {item.artist}
+                            </div>
                           </div>
                         )}
                         {activeTab === "video" && (
                           <div>
-                            <div className="font-medium text-gray-900">{item.title}</div>
-                            <div className="text-gray-500 text-xs line-clamp-1">{item.description}</div>
+                            <div className="font-medium text-gray-900">
+                              {item.title}
+                            </div>
+                            <div className="text-gray-500 text-xs line-clamp-1">
+                              {item.description}
+                            </div>
                           </div>
                         )}
                       </td>
                       <td className="px-6 py-4">
                         {activeTab === "posts" && item._count && (
                           <div className="flex gap-3 text-xs text-gray-500">
-                            <span title="Лайки">❤️ {item.likes?.length || 0}</span>
-                            <span title="Комментарии">💬 {item._count.comments}</span>
+                            <span title="Лайки">
+                              ❤️ {item.likes?.length || 0}
+                            </span>
+                            <span title="Комментарии">
+                              💬 {item._count.comments}
+                            </span>
                             {item._count.reports > 0 && (
-                              <span title="Жалобы" className="text-red-600 font-bold">⚠️ {item._count.reports}</span>
+                              <span
+                                title="Жалобы"
+                                className="text-red-600 font-bold"
+                              >
+                                ⚠️ {item._count.reports}
+                              </span>
                             )}
                           </div>
                         )}
@@ -226,8 +283,8 @@ export default function AdminContentPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           {activeTab === "posts" && (
-                            <Link 
-                              href={`/feed?post=${item.id}`} 
+                            <Link
+                              href={`/feed?post=${item.id}`}
                               target="_blank"
                               className="text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:bg-gray-50"
                             >
@@ -249,13 +306,13 @@ export default function AdminContentPage() {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="px-6 py-4 border-t border-gray-100 flex justify-center gap-2">
             <button
               disabled={page === 1}
-              onClick={() => setPage(p => p - 1)}
+              onClick={() => setPage((p) => p - 1)}
               className="px-3 py-1 rounded border border-gray-200 disabled:opacity-50"
             >
               Назад
@@ -265,7 +322,7 @@ export default function AdminContentPage() {
             </span>
             <button
               disabled={page === totalPages}
-              onClick={() => setPage(p => p + 1)}
+              onClick={() => setPage((p) => p + 1)}
               className="px-3 py-1 rounded border border-gray-200 disabled:opacity-50"
             >
               Вперед
