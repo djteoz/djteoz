@@ -45,7 +45,9 @@ export default function Sidebar() {
       <div className="sticky top-24 space-y-4">
         <nav className="card p-4 flex flex-col gap-1">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href || (item.href === "/admin" && pathname.startsWith("/admin"));
+            const isActive =
+              pathname === item.href ||
+              (item.href === "/admin" && pathname.startsWith("/admin"));
             return (
               <Link
                 key={item.href}
