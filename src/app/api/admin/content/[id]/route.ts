@@ -25,13 +25,23 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    await prisma.post.delete({
-      where: { id },
-    });
+    const { searchParams } = new URL(req.url);
+    const type = searchParams.get("type") || "posts";
+
+    if (type === "music") {
+      await prisma.music.delete({ where: { id } });
+    } else if (type === "video") {
+      await prisma.video.delete({ where: { id } });
+    } else {
+      await prisma.post.delete({ where: { id } });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

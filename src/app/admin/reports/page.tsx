@@ -110,23 +110,37 @@ export default function AdminReportsPage() {
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
-                <th className="px-6 py-4 font-medium text-gray-500">Жалоба от</th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Жалоба от
+                </th>
                 <th className="px-6 py-4 font-medium text-gray-500">Причина</th>
-                <th className="px-6 py-4 font-medium text-gray-500 w-1/3">Контент</th>
-                <th className="px-6 py-4 font-medium text-gray-500">Автор контента</th>
-                <th className="px-6 py-4 font-medium text-gray-500">Действия</th>
+                <th className="px-6 py-4 font-medium text-gray-500 w-1/3">
+                  Контент
+                </th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Автор контента
+                </th>
+                <th className="px-6 py-4 font-medium text-gray-500">
+                  Действия
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Загрузка...
                   </td>
                 </tr>
               ) : reports.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     Жалоб нет
                   </td>
                 </tr>
@@ -140,7 +154,9 @@ export default function AdminReportsPage() {
                           name={report.reporter.username}
                           size={24}
                         />
-                        <span className="text-gray-900">@{report.reporter.username}</span>
+                        <span className="text-gray-900">
+                          @{report.reporter.username}
+                        </span>
                       </div>
                       <div className="text-xs text-gray-500 mt-1">
                         {new Date(report.createdAt).toLocaleDateString()}
@@ -152,9 +168,11 @@ export default function AdminReportsPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="line-clamp-3 text-gray-600 italic">"{report.post.content}"</p>
-                      <Link 
-                        href={`/feed?post=${report.post.id}`} 
+                      <p className="line-clamp-3 text-gray-600 italic">
+                        "{report.post.content}"
+                      </p>
+                      <Link
+                        href={`/feed?post=${report.post.id}`}
                         target="_blank"
                         className="text-xs text-indigo-600 hover:underline mt-1 block"
                       >
@@ -170,16 +188,21 @@ export default function AdminReportsPage() {
                         />
                         <div>
                           <div className="font-medium text-gray-900">
-                            {report.post.author.firstName} {report.post.author.lastName}
+                            {report.post.author.firstName}{" "}
+                            {report.post.author.lastName}
                           </div>
-                          <div className="text-xs text-gray-500">@{report.post.author.username}</div>
+                          <div className="text-xs text-gray-500">
+                            @{report.post.author.username}
+                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col gap-2">
                         <button
-                          onClick={() => handleDeletePost(report.post.id, report.id)}
+                          onClick={() =>
+                            handleDeletePost(report.post.id, report.id)
+                          }
                           className="text-xs px-3 py-1 rounded border border-red-200 text-red-700 hover:bg-red-50 text-center"
                         >
                           Удалить пост

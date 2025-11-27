@@ -23,46 +23,119 @@ export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const query = searchParams.get("q") || "";
+    const type = searchParams.get("type") || "posts";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = 20;
     const skip = (page - 1) * limit;
 
-    const where = query
-      ? {
-          OR: [
-            { content: { contains: query, mode: "insensitive" as const } },
-            { author: { username: { contains: query, mode: "insensitive" as const } } },
-          ],
-        }
-      : {};
+    let items = [];
+    let total = 0;
 
-    const [posts, total] = await Promise.all([
-      prisma.post.findMany({
-        where,
-        include: {
-          author: {
-            select: {
-              username: true,
-              firstName: true,
-              lastName: true,
-              avatar: true,
+    if (type === "music") {
+      const where = query
+        ? {
+            OR: [
+              { title: { contains: query, mode: "insensitive" as const } },
+              { artist: { contains: query, mode: "insensitive" as const } },
+              { uploader: { username: { contains: query, mode: "insensitive" as const } } },
+            ],
+          }
+        : {};
+
+      const [music, count] = await Promise.all([
+        prisma.music.findMany({
+          where,
+          include: {
+            uploader: {
+              select: {
+                username: true,
+                firstName: true,
+                lastName: true,
+                avatar: true,
+              },
             },
           },
-          _count: {
-            select: {
-              comments: true,
-              reports: true,
+          orderBy: { createdAt: "desc" },
+          skip,
+          take: limit,
+        }),
+        prisma.music.count({ where }),
+      ]);
+      items = music;
+      total = count;
+    } else if (type === "video") {
+      const where = query
+        ? {
+            OR: [
+              { title: { contains: query, mode: "insensitive" as const } },
+              { description: { contains: query, mode: "insensitive" as const } },
+              { uploader: { username: { contains: query, mode: "insensitive" as const } } },
+            ],
+          }
+        : {};
+
+      const [videos, count] = await Promise.all([
+        prisma.video.findMany({
+          where,
+          include: {
+            uploader: {
+              select: {
+                username: true,
+                firstName: true,
+                lastName: true,
+                avatar: true,
+              },
             },
           },
-        },
-        orderBy: { createdAt: "desc" },
-        skip,
-        take: limit,
-      }),
-      prisma.post.count({ where }),
-    ]);
+          orderBy: { createdAt: "desc" },
+          skip,
+          take: limit,
+        }),
+        prisma.video.count({ where }),
+      ]);
+      items = videos;
+      total = count;
+    } else {
+      // Posts (default)
+      const where = query
+        ? {
+            OR: [
+              { content: { contains: query, mode: "insensitive" as const } },
+              { author: { username: { contains: query, mode: "insensitive" as const } } },
+            ],
+          }
+        : {};
 
-    return NextResponse.json({ posts, total, pages: Math.ceil(total / limit) });
+      const [posts, count] = await Promise.all([
+        prisma.post.findMany({
+          where,
+          include: {
+            author: {
+              select: {
+                username: true,
+                firstName: true,
+                lastName: true,
+                avatar: true,
+              },
+            },
+            _count: {
+              select: {
+                comments: true,
+                reports: true,
+              },
+            },
+          },
+          orderBy: { createdAt: "desc" },
+          skip,
+          take: limit,
+        }),
+        prisma.post.count({ where }),
+      ]);
+      items = posts;
+      total = count;
+    }
+
+    return NextResponse.json({ items, total, pages: Math.ceil(total / limit) });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
