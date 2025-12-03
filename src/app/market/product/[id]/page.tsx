@@ -10,17 +10,22 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = await prisma.product.findUnique({
-    where: { id },
-    include: {
-      shop: true,
-      category: true,
-      reviews: {
-        include: { user: true },
-        orderBy: { createdAt: "desc" },
+  let product = null;
+  try {
+    product = await prisma.product.findUnique({
+      where: { id },
+      include: {
+        shop: true,
+        category: true,
+        reviews: {
+          include: { user: true },
+          orderBy: { createdAt: "desc" },
+        },
       },
-    },
-  });
+    });
+  } catch (error) {
+    console.error("Failed to fetch product:", error);
+  }
 
   if (!product) {
     notFound();
