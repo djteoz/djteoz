@@ -31,6 +31,8 @@ export default function CartClient({
 }: {
   initialCart: Cart | null;
 }) {
+  const router = useRouter();
+  const [cart, setCart] = useState<Cart | null>(initialCart);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutForm, setCheckoutForm] = useState({
     contactName: "",
