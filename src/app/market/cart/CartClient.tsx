@@ -31,9 +31,39 @@ export default function CartClient({
 }: {
   initialCart: Cart | null;
 }) {
-  const [cart, setCart] = useState<Cart | null>(initialCart);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutForm, setCheckoutForm] = useState({
+    contactName: "",
+    contactPhone: "",
+    address: "",
+    comment: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleCheckout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/market/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(checkoutForm),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        router.push("/market/orders");
+        router.refresh();
+      } else {
+        alert("Ошибка при оформлении заказа");
+      }
+    } catch (error) {
+      console.error("Checkout failed", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const updateQuantity = async (itemId: string, newQuantity: number) => {
     if (newQuantity < 1) return;
@@ -215,17 +245,94 @@ export default function CartClient({
           </div>
 
           <button
-            onClick={() => alert("Checkout functionality coming soon!")}
+            onClick={() => setIsCheckoutOpen(true)}
             className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200 dark:shadow-none"
           >
             Перейти к оформлению
           </button>
-
+          
           <div className="mt-4 text-xs text-gray-400 text-center">
             Нажимая кнопку, вы соглашаетесь с условиями использования сервиса
           </div>
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      {isCheckoutOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Оформление заказа</h2>
+            <form onSubmit={handleCheckout} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Имя получателя
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={checkoutForm.contactName}
+                  onChange={(e) => setCheckoutForm({ ...checkoutForm, contactName: e.target.value })}
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border-none rounded-xl focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Иван Иванов"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={checkoutForm.contactPhone}
+                  onChange={(e) => setCheckoutForm({ ...checkoutForm, contactPhone: e.target.value })}
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border-none rounded-xl focus:ring-2 focus:ring-indigo-500"
+                  placeholder="+7 (999) 000-00-00"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Адрес доставки
+                </label>
+                <textarea
+                  required
+                  value={checkoutForm.address}
+                  onChange={(e) => setCheckoutForm({ ...checkoutForm, address: e.target.value })}
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border-none rounded-xl focus:ring-2 focus:ring-indigo-500 h-20 resize-none"
+                  placeholder="Город, улица, дом, квартира"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Комментарий к заказу
+                </label>
+                <textarea
+                  value={checkoutForm.comment}
+                  onChange={(e) => setCheckoutForm({ ...checkoutForm, comment: e.target.value })}
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border-none rounded-xl focus:ring-2 focus:ring-indigo-500 h-20 resize-none"
+                  placeholder="Код домофона, этаж и т.д."
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsCheckoutOpen(false)}
+                  className="flex-1 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                >
+                  Отмена
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-colors disabled:opacity-50"
+                >
+                  {isSubmitting ? "Оформление..." : "Заказать"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

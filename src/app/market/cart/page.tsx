@@ -14,8 +14,12 @@ export default async function CartPage() {
     redirect("/login?redirect=/market/cart");
   }
 
-  const payload = verifyAccessToken(token) as { userId: string };
-  if (!payload) redirect("/login");
+  let payload: { userId: string };
+  try {
+    payload = verifyAccessToken(token) as { userId: string };
+  } catch (err) {
+    redirect("/login?redirect=/market/cart");
+  }
 
   const cart = await prisma.cart.findUnique({
     where: { userId: payload.userId },
