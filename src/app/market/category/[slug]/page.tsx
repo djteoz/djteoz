@@ -9,30 +9,39 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const category = await prisma.productCategory.findUnique({
-    where: { slug },
-    include: {
-      children: true,
-    },
-  });
+  let category = null;
+  let products: any[] = [];
+
+  try {
+    category = await prisma.productCategory.findUnique({
+      where: { slug },
+      include: {
+        children: true,
+      },
+    });
+
+    if (category) {
+      // Find products in this category OR its subcategories
+      const categoryIds = [category.id, ...category.children.map((c) => c.id)];
+
+      products = await prisma.product.findMany({
+        where: {
+          categoryId: { in: categoryIds },
+          isArchived: false,
+        },
+        include: {
+          shop: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+    }
+  } catch (error) {
+    console.error("Failed to fetch category data:", error);
+  }
 
   if (!category) {
     notFound();
   }
-
-  // Find products in this category OR its subcategories
-  const categoryIds = [category.id, ...category.children.map((c) => c.id)];
-
-  const products = await prisma.product.findMany({
-    where: {
-      categoryId: { in: categoryIds },
-      isArchived: false,
-    },
-    include: {
-      shop: true,
-    },
-    orderBy: { createdAt: "desc" },
-  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
