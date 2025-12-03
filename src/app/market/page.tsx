@@ -3,16 +3,23 @@ import Link from "next/link";
 import { ShoppingCart, Search, Package, Store } from "lucide-react";
 
 export default async function MarketPage() {
-  const categories = await prisma.productCategory.findMany({
-    where: { parentId: null },
-    include: { children: true },
-  });
+  let categories = [];
+  let featuredProducts = [];
 
-  const featuredProducts = await prisma.product.findMany({
-    take: 10,
-    orderBy: { soldCount: "desc" },
-    include: { shop: true },
-  });
+  try {
+    categories = await prisma.productCategory.findMany({
+      where: { parentId: null },
+      include: { children: true },
+    });
+
+    featuredProducts = await prisma.product.findMany({
+      take: 10,
+      orderBy: { soldCount: "desc" },
+      include: { shop: true },
+    });
+  } catch (error) {
+    console.error("Failed to fetch market data:", error);
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
