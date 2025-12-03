@@ -375,6 +375,100 @@ exports.Prisma.SupportMessageScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ShopScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  logo: 'logo',
+  cover: 'cover',
+  isVerified: 'isVerified',
+  rating: 'rating',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  image: 'image',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  price: 'price',
+  discountPrice: 'discountPrice',
+  images: 'images',
+  stock: 'stock',
+  soldCount: 'soldCount',
+  rating: 'rating',
+  specifications: 'specifications',
+  shopId: 'shopId',
+  categoryId: 'categoryId',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  text: 'text',
+  images: 'images',
+  userId: 'userId',
+  productId: 'productId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  productId: 'productId',
+  quantity: 'quantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  totalAmount: 'totalAmount',
+  contactName: 'contactName',
+  contactPhone: 'contactPhone',
+  address: 'address',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  shopId: 'shopId',
+  quantity: 'quantity',
+  price: 'price',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -422,7 +516,15 @@ exports.Prisma.ModelName = {
   HelpCategory: 'HelpCategory',
   HelpArticle: 'HelpArticle',
   SupportTicket: 'SupportTicket',
-  SupportMessage: 'SupportMessage'
+  SupportMessage: 'SupportMessage',
+  Shop: 'Shop',
+  ProductCategory: 'ProductCategory',
+  Product: 'Product',
+  ProductReview: 'ProductReview',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**

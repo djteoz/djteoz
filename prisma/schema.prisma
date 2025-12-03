@@ -69,6 +69,12 @@ model User {
   bookmarkedBy   Bookmark[] @relation("BookmarkedUser")
   reports        Report[]
   
+  // Market Relations
+  ownedShops     Shop[]
+  cart           Cart?
+  orders         Order[]
+  productReviews ProductReview[]
+  
   // Media
   music          Music[]
   videos         Video[]
@@ -409,3 +415,151 @@ model SupportMessage {
   
   createdAt DateTime      @default(now())
 }
+
+// Market Models
+
+model Shop {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  logo        String?
+  cover       String?
+  isVerified  Boolean  @default(false)
+  rating      Float    @default(0)
+  
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String
+
+  products    Product[]
+  orderItems  OrderItem[] // Relation to items sold by this shop
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProductCategory {
+  id          String            @id @default(cuid())
+  name        String
+  slug        String            @unique
+  image       String?
+  
+  parent      ProductCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  parentId    String?
+  children    ProductCategory[] @relation("CategoryHierarchy")
+  
+  products    Product[]
+  
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  title         String
+  description   String   
+  price         Float
+  discountPrice Float?
+  images        String[]
+  stock         Int      @default(0)
+  soldCount     Int      @default(0)
+  rating        Float    @default(0)
+  specifications Json?   
+  
+  shop          Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shopId        String
+  
+  category      ProductCategory @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  
+  reviews       ProductReview[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+  
+  isArchived    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ProductReview {
+  id        String   @id @default(cuid())
+  rating    Int      
+  text      String?
+  images    String[]
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String     @unique
+  
+  items     CartItem[]
+  
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    String
+  
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  
+  quantity  Int      @default(1)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  
+  status        String      @default("PENDING") 
+  totalAmount   Float
+  
+  contactName   String
+  contactPhone  String
+  address       String
+  comment       String?
+  
+  items         OrderItem[]
+  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  shopId    String
+  
+  quantity  Int
+  price     Float    
+  
+  status    String   @default("PENDING") 
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
