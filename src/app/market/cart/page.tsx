@@ -21,19 +21,24 @@ export default async function CartPage() {
     redirect("/login?redirect=/market/cart");
   }
 
-  const cart = await prisma.cart.findUnique({
-    where: { userId: payload.userId },
-    include: {
-      items: {
-        include: {
-          product: {
-            include: { shop: true },
+  let cart = null;
+  try {
+    cart = await prisma.cart.findUnique({
+      where: { userId: payload.userId },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: { shop: true }
+            }
           },
-        },
-        orderBy: { createdAt: "desc" },
-      },
-    },
-  });
+          orderBy: { createdAt: "desc" }
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Failed to fetch cart:", error);
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6">
